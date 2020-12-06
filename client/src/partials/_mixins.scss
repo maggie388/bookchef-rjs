@@ -35,5 +35,6 @@
     align-items: center;
     width: 100%;
     height: $mobile-nav-height;
-    background-color: color(global-White);
+    border-top: 1px solid color(primary-bg);
+    background-color: color(inverted-text);
 }

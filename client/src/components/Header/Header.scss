@@ -1,0 +1,17 @@
+@import '../../partials/variables.scss';
+
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // height: 115px;
+    padding: 1rem;
+    // border: 1px solid red;
+    background-color: color(primary-bg);
+
+    &__logo {
+        height: 2rem;
+        margin-bottom: 1rem;
+    }
+
+}
