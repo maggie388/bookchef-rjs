@@ -1,0 +1,11 @@
+$base-font-family: "";
+$mobile-nav-height: 80px;
+
+$color: (
+    global-black: #13182C,
+    global-white: #FFFFFF,
+);
+
+@function color($color-name) {
+    @return map-get($color, $color-name);
+}

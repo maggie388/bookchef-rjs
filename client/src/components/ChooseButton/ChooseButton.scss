@@ -1,0 +1,21 @@
+@import '../../partials/mixins.scss';
+
+.choose-button {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    // targets the UploadPreview component
+    &:first-child {
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/icons/add-circle-sharp.svg');
+        background-repeat: no-repeat;
+        background-size: 45px;
+        background-position: 50% 50%;
+    }
+
+    &__input {
+        display: none;
+    }
+}
