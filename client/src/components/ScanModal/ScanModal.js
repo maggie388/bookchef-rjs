@@ -18,11 +18,11 @@ class ScanModal extends Component {
     }
 
     handleFormSubmit = (e) => {
-        const { readText, addToState } = this.props;
+        const { readText, addToState, formatFn } = this.props;
         e.preventDefault();
         const formData = new FormData();
         formData.append('file', this.state.file);
-        readText(formData, addToState);
+        readText(formData, addToState, formatFn);
     }
 
     render() {

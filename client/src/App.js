@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/recipe" component={AddRecipe} />
+          <Route path="/add" component={AddRecipe} />
           <Route path="/profile" component={Profile} />
           <Route path="/filter" component={Filter} />
         </Switch>

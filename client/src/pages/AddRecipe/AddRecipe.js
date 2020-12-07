@@ -46,9 +46,20 @@ class AddRecipe extends Component {
         });
     }
 
-    readTextInImage = (formData, addToState) => {
+    formatIngredients = (string) => {
+        const ingredientsArr = string.split('\n');
+        return ingredientsArr;
+    }
+
+    formatInstructions = () => {
+        const instructionsArr = string.split('.\n');
+        return instructionsArr;
+    }
+
+    readTextInImage = (formData, addToState, formatFn) => {
         axios.post(API_URL + '/upload', formData)
             .then(response => {
+                formatFn(response.data);
                 addToState(response.data);
             })
             .catch(error => console.log(error));
@@ -81,6 +92,7 @@ class AddRecipe extends Component {
                 <ScanModal 
                     readText={this.readTextInImage}
                     addToState={this.addIngredientsToState}
+                    formatFn={this.formatIngredients}
                 />
             );
         }
@@ -90,6 +102,7 @@ class AddRecipe extends Component {
                 <ScanModal
                     readText={this.readTextInImage}
                     addToState={this.addInstructionsToState}
+                    formatFn={this.formatInstructions}
                 />
             );
         }
