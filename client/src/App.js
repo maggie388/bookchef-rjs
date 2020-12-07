@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // PAGES
 import Home from './pages/Home/Home';
-import UploadPage from './pages/UploadPage/UploadPage';
 import AddRecipe from './pages/AddRecipe/AddRecipe';
 
 
