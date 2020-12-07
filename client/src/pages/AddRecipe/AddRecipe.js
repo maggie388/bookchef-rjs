@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ContentEditable from 'react-contenteditable';
 import axios from 'axios';
 import './AddRecipe.scss';
 
@@ -14,23 +15,40 @@ import addIcon from '../../assets/icons/add-sharp.svg';
 const API_URL = process.env.REACT_APP_API_URL;
 
 class AddRecipe extends Component {
-    state = {
-        // form values
-        title: '',
-        cookbook: '',
-        page: '',
-        category: '',
-        ingredients: '',
-        instructions: '',
-        // modal rendering
-        scanIngredientsModal: false,
-        scanInstructionsModal: false
+    constructor() {
+        super();
+        this.editableIngredients = React.createRef();
+        this.editableInstructions = React.createRef();
+        this.state = {
+            // form values
+            title: '',
+            cookbook: '',
+            page: '',
+            category: '',
+            ingredientsHTML: '',
+            instructionsHTML: '',
+            // modal rendering
+            scanIngredientsModal: false,
+            scanInstructionsModal: false
+        };
     }
 
     handleChange = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
+        });
+    }
+
+    handleIngredientsChange = (e) => {
+        this.setState({
+            ingredientsHTML: e.target.value
+        });
+    }
+
+    handleInstructionsChange = (e) => {
+        this.setState({
+            instructionsHTML: e.target.value
         });
     }
 
@@ -48,12 +66,18 @@ class AddRecipe extends Component {
 
     formatIngredients = (string) => {
         const ingredientsArr = string.split('\n');
-        return ingredientsArr;
+        const ingredientsHTML = ingredientsArr.map(ingredient => `<li>${ingredient}</li>`).join('');
+        this.setState({
+            ingredientsHTML: ingredientsHTML
+        });
     }
 
-    formatInstructions = () => {
+    formatInstructions = (string) => {
         const instructionsArr = string.split('.\n');
-        return instructionsArr;
+        const instructionsHTML = instructionsArr.map(instructions => `<li>${instructions}</li>`).join('');
+        this.setState({
+            instructionsHTML: instructionsHTML
+        });
     }
 
     readTextInImage = (formData, addToState, formatFn) => {
@@ -66,7 +90,6 @@ class AddRecipe extends Component {
     }
 
     addIngredientsToState = (text) => {
-        console.log("Add Ingredients to State");
         this.setState({
             ingredients: text
         });
@@ -74,7 +97,6 @@ class AddRecipe extends Component {
     }
 
     addInstructionsToState = (text) => {
-        console.log("Add Instructions to State");
         this.setState({
             instructions: text
         });
@@ -159,12 +181,12 @@ class AddRecipe extends Component {
                             <img src={addIcon} alt='Add Ingredients' />
                         </span>
                     </div>
-                    <textarea 
-                        className='recipe-form__textarea'
-                        id='ingredients' 
-                        name='ingredients' 
-                        value={this.state.ingredients}
-                        onChange={this.handleChange}
+                    <ContentEditable 
+                        innerRef={this.editableIngredients}
+                        html={this.state.ingredientsHTML}
+                        disabled={false}
+                        onChange={this.handleIngredientsChange}
+                        tagName='ul'
                     />
                     <div className='recipe-form__label-div'>
                         <label 
@@ -176,12 +198,12 @@ class AddRecipe extends Component {
                             <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Instructions' />
                         </span>
                     </div>
-                    <textarea 
-                        className='recipe-form__textarea'
-                        id='instructions' 
-                        name='instructions' 
-                        value={this.state.instructions}
-                        onChange={this.handleChange}
+                    <ContentEditable 
+                        innerRef={this.editableInstructions}
+                        html={this.state.instructionsHTML}
+                        disabled={false}
+                        onChange={this.handleInstructionsChange}
+                        tagName='ul'
                     />
                     <nav>
                         <NavButton 
