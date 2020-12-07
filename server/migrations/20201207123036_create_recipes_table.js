@@ -8,12 +8,11 @@ exports.up = (knex) => {
         table.string('book').notNullable();
         table.string('page').notNullable();
         table.string('category').notNullable();
-        table.string('ingredients').notNullable();
-        table.string('instructions').notNullable();
+        table.json('ingredients').notNullable();
+        table.json('instructions').notNullable();
         table
             .integer('user_id')
             .unsigned()
-            .notNullable()
             .references('id')
             .inTable('users')
             .onUpdate('CASCADE')
