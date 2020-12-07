@@ -1,0 +1,53 @@
+@import '../../partials/mixins';
+@import '../../partials/variables';
+
+.recipe-header {
+    background-color: color(primary-bg);
+    height: 180px;
+}
+
+.recipe-form {
+    position: relative;
+    top: -20px;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    background-color: color(inverted-text);
+    border-radius: 20px;
+
+    &__title {
+        margin-bottom: 1rem;
+    }
+
+    &__label {
+        margin-bottom: .8rem;
+    }
+
+    &__text-input {
+        height: 2rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid black;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    &__textarea {
+        height: 100px;
+        padding: 0.5rem;
+        border-radius: 5px;
+        outline: none;
+        margin-bottom: 0.5rem;
+    }
+
+    &__label-div {
+        display: flex;
+        align-items: center;
+        // border: 1px solid red;
+        
+    }
+
+    &__label-icon {
+        width: 25px;
+        // border: 1px solid blue;
+    }
+}

@@ -6,9 +6,6 @@ import Header from '../../components/Header/Header';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import HomeNav from '../../components/HomeNav/HomeNav';
 
-// ASSETS
-
-
 class Home extends Component {
     render() {
         return (
