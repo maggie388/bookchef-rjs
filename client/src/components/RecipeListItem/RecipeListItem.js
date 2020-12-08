@@ -6,11 +6,13 @@ import './RecipeListItem.scss';
 import trashIcon from '../../assets/icons/trash-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
 
-const RecipeListItem = ({ recipe }) => {
+const RecipeListItem = ({ recipe, deleteRecipe }) => {
     // other avaiable value to deconstruct: id, image, ingredients, instructions
-    const { title, book, page, category } = recipe;
+    const { id, title, book, page, category } = recipe;
 
-    
+    const handleDelete = () => {
+        deleteRecipe(id);
+    }
 
     return (
         <div>
@@ -31,7 +33,12 @@ const RecipeListItem = ({ recipe }) => {
                         <Link to={`/recipe/edit/${recipe.id}`}>
                             <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
                         </Link>
-                        <img className='recipe-list-item__icon'src={trashIcon} alt='Delete' />
+                        <img 
+                            className='recipe-list-item__icon'
+                            onClick={handleDelete}
+                            src={trashIcon} 
+                            alt='Delete' 
+                        />
                     </div>
                 </div>
             </div>

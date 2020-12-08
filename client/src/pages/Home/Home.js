@@ -19,14 +19,22 @@ class Home extends Component {
 
     getRecipes = () => {
         axios.get(API_URL + '/recipes')
-        .then(response => {
-            // console.log(response.data);
-            this.setState({
-                recipes: response.data,
-                isLoading: false
-            });
-        })
-        .catch(error => console.log(error))
+            .then(response => {
+                // console.log(response.data);
+                this.setState({
+                    recipes: response.data,
+                    isLoading: false
+                });
+            })
+            .catch(error => console.log(error))
+    }
+
+    deleteRecipe = (recipeId) => {
+        axios.delete(API_URL + `/recipes/${recipeId}`)
+            .then(_response => {
+                this.getRecipes();
+            })
+            .catch(error => console.log(error));
     }
 
     componentDidMount() {
@@ -43,9 +51,9 @@ class Home extends Component {
                 <Header />
                 <main className='main'>
                     <h1 className='main__title'>Recent</h1>
-                    <RecipeListContainer recipes={this.state.recipes} />
+                    <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
                 </main>
-                <HomeNav />
+                {/* <HomeNav /> */}
             </>
         );
     }
