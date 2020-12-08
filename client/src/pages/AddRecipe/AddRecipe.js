@@ -21,12 +21,14 @@ class AddRecipe extends Component {
         this.editableInstructions = React.createRef();
         this.state = {
             // form values
+            userId: '3',
             title: '',
-            cookbook: '',
+            book: '',
             page: '',
             category: '',
             ingredientsHTML: '',
             instructionsHTML: '',
+            image: '',
             // modal rendering
             scanIngredientsModal: false,
             scanInstructionsModal: false
@@ -67,45 +69,63 @@ class AddRecipe extends Component {
     formatIngredients = (string) => {
         const ingredientsArr = string.split('\n');
         const ingredientsHTML = ingredientsArr.map(ingredient => `<li>${ingredient}</li>`).join('');
-        this.setState({
-            ingredientsHTML: ingredientsHTML
-        });
+        return ingredientsHTML;
     }
 
     formatInstructions = (string) => {
         const instructionsArr = string.split('.\n');
         const instructionsHTML = instructionsArr.map(instructions => `<li>${instructions}</li>`).join('');
-        this.setState({
-            instructionsHTML: instructionsHTML
-        });
+        return instructionsHTML;
     }
 
     readTextInImage = (formData, addToState, formatFn) => {
         axios.post(API_URL + '/upload', formData)
             .then(response => {
-                formatFn(response.data);
-                addToState(response.data);
+                addToState(formatFn(response.data));
             })
             .catch(error => console.log(error));
     }
 
-    addIngredientsToState = (text) => {
+    addIngredientsToState = (ingredientsHTML) => {
         this.setState({
-            ingredients: text
+            ingredientsHTML: ingredientsHTML
         });
         this.toggleScanIngredientsModal();
     }
 
-    addInstructionsToState = (text) => {
+    addInstructionsToState = (instructionsHTML) => {
         this.setState({
-            instructions: text
+            instructionsHTML: instructionsHTML
         });
         this.toggleScanInstructionsModal()
     }
 
+    buildRequestObject = () => {
+        const data = {
+            userId: this.state.userId,
+            title: this.state.title,
+            book: this.state.book,
+            page: this.state.page,
+            category: this.state.category,
+            ingredients: this.state.ingredientsHTML,
+            instructions: this.state.instructionsHTML,
+            image: this.state.image
+        }
+        return data;
+    }
+
+    goBack = () => {
+        this.props.history.goBack();
+    }
+
     handleSave = (e) => {
         e.preventDefault();
-        console.log('Form has been Saved');
+        const data = this.buildRequestObject();
+        axios.post(API_URL + '/recipes', data)
+            .then((_response) => {
+                this.goBack();
+            })
+            .catch((error) => console.log(error));
     }
 
     render() {
@@ -144,13 +164,13 @@ class AddRecipe extends Component {
                         value={this.state.title}
                         onChange={this.handleChange}
                     />
-                    <label className='recipe-form__label' htmlFor='cookbook'>Cookbook</label>
+                    <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
                     <input
                         className='recipe-form__text-input'
-                        id='cookbook'
-                        name='cookbook' 
+                        id='book'
+                        name='book' 
                         type='text' 
-                        value={this.state.cookbook}
+                        value={this.state.book}
                         onChange={this.handleChange}
                     />
                     <label className='recipe-form__label' htmlFor='page'>Page</label>
@@ -209,7 +229,7 @@ class AddRecipe extends Component {
                         <NavButton 
                             src={saveIcon} 
                             alt='Save' 
-                            type='Submit' 
+                            type='submit' 
                         />
                     </nav>
 
