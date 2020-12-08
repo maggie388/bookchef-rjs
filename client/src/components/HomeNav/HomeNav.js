@@ -14,7 +14,7 @@ const HomeNav = () => {
     return (
         <nav className="home-nav">
             <Link to="/"><NavButton src={userIcon} alt={"Profile"} /></Link>
-            <Link to="/add"><NavButton src={addIcon} alt={"Add Recipe"} /></Link>
+            <Link to="/recipe/add"><NavButton src={addIcon} alt={"Add Recipe"} /></Link>
             <Link to="/"><NavButton src={filterIcon} alt={"Filter"} /></Link>
         </nav>
     );

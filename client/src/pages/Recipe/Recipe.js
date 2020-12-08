@@ -65,7 +65,7 @@ class Recipe extends Component {
                             <img className='recipe__go-back' src={backIcon} alt='Go Back' />
                         </Link>
                         <h1 className='recipe__title'>{title}</h1>
-                        <Link to='/'>
+                        <Link to={`/recipe/edit/${this.state.recipeId}`}>
                             <img className='recipe__edit' src={editIcon} alt='Edit' />
                         </Link>
                     </div>

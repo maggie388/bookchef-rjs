@@ -131,7 +131,7 @@ class RecipeForm extends Component {
     }
 
     componentDidMount() {
-        if (this.props.recipe.id) {
+        if (this.props.recipe && this.props.recipe.id) {
             const { user_id, title, book, page, category, ingredients, instructions, image } = this.props.recipe;
             this.setState({
                 userId: user_id,
@@ -175,9 +175,12 @@ class RecipeForm extends Component {
                     </div>
                     <div className='recipe-form__bottom'>
                         <div className='recipe-form__title-div'>
-                            <Link to='/'>
-                                <img className='recipe-form__go-back' src={backIcon} alt='Go Back' />
-                            </Link>
+                            <img 
+                                className='recipe-form__go-back' 
+                                onClick={this.goBack}
+                                src={backIcon} 
+                                alt='Go Back' 
+                            />
                             <h1 className='recipe-form__title'>{this.props.h1Text}</h1>
                         </div>
                         <div className='recipe-form__details-div'>

@@ -34,7 +34,7 @@ class EditRecipe extends Component {
             return "Loading..."
         }
 
-        return <RecipeForm h1Text='Edit Recipe' recipe={this.state.recipe}/>
+        return <RecipeForm h1Text='Edit Recipe' history={this.props.history} recipe={this.state.recipe}/>
     }
 }
 
