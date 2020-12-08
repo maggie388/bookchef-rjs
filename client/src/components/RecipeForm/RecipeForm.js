@@ -131,9 +131,19 @@ class RecipeForm extends Component {
     }
 
     componentDidMount() {
-        // if there is an ID param
-        // make a get request for single recipe
-        // set state with those values
+        if (this.props.recipe.id) {
+            const { user_id, title, book, page, category, ingredients, instructions, image } = this.props.recipe;
+            this.setState({
+                userId: user_id,
+                title: title,
+                book: book,
+                page: page,
+                category: category,
+                ingredientsHTML: ingredients,
+                instructionsHTML: instructions,
+                image: image
+            });
+        }
 
     }
 

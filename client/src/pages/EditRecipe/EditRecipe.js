@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import './EditRecipe.scss';
 
 // COMPONENTS
 import RecipeForm from '../../components/RecipeForm/RecipeForm';
+
+// VARIABLES
+const API_URL = process.env.REACT_APP_API_URL;
 
 class EditRecipe extends Component {
     state = {
@@ -25,7 +30,11 @@ class EditRecipe extends Component {
     }
 
     render() {
-        return <RecipeForm h1Text='Edit Recipe'/>
+        if (this.state.isLoading) {
+            return "Loading..."
+        }
+
+        return <RecipeForm h1Text='Edit Recipe' recipe={this.state.recipe}/>
     }
 }
 
