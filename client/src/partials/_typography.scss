@@ -1,4 +1,19 @@
+@use './variables' as *; 
+
 @mixin m-h1 {
     font-size: 1.75rem;
     line-height: 2rem;
+    color: color(accent);
+}
+
+@mixin m-h2 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+@mixin form-label {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    text-transform: uppercase;
 }

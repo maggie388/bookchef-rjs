@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ContentEditable from 'react-contenteditable';
 import axios from 'axios';
 import './AddRecipe.scss';
@@ -10,6 +11,7 @@ import ScanModal from '../../components/ScanModal/ScanModal';
 // ASSETS
 import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
+import backIcon from '../../assets/icons/arrow-back-sharp.svg';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -150,91 +152,100 @@ class AddRecipe extends Component {
         }
 
         return (
-            <>
-                <header className='recipe-header'>
-                    <img src='' alt='' />
-                </header>
                 <form className='recipe-form' onSubmit={this.handleSave}>
-                    <label className='recipe-form__label' htmlFor='title'>Title</label>
-                    <input
-                        className='recipe-form__text-input'
-                        id='title'
-                        name='title' 
-                        type='text' 
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                    />
-                    <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
-                    <input
-                        className='recipe-form__text-input'
-                        id='book'
-                        name='book' 
-                        type='text' 
-                        value={this.state.book}
-                        onChange={this.handleChange}
-                    />
-                    <label className='recipe-form__label' htmlFor='page'>Page</label>
-                    <input
-                        className='recipe-form__text-input'
-                        id='page'
-                        name='page' 
-                        type='text' 
-                        value={this.state.page}
-                        onChange={this.handleChange}
-                    />
-                    <label className='recipe-form__label' htmlFor='page'>Category</label>
-                    <input
-                        className='recipe-form__text-input'
-                        id='category'
-                        name='category' 
-                        type='text' 
-                        value={this.state.category}
-                        onChange={this.handleChange}
-                    />
-                    <div className='recipe-form__label-div'>
-                        <label 
-                            className='recipe-form__label' 
-                            htmlFor='ingredients'>
-                                Ingredients
-                        </label> 
-                        <span className='recipe-form__label-icon' onClick={this.toggleScanIngredientsModal}>
-                            <img src={addIcon} alt='Add Ingredients' />
-                        </span>
+                    <div className='recipe-form__top'>
+                        <img className='recipe-form__pic' src='' alt='' />
                     </div>
-                    <ContentEditable 
-                        innerRef={this.editableIngredients}
-                        html={this.state.ingredientsHTML}
-                        disabled={false}
-                        onChange={this.handleIngredientsChange}
-                        tagName='ul'
-                    />
-                    <div className='recipe-form__label-div'>
-                        <label 
-                            className='recipe-form__label' 
-                            htmlFor='instructions'>
-                                Instructions
-                        </label> 
-                        <span className='recipe-form__label-icon' onClick={this.toggleScanInstructionsModal}>
-                            <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Instructions' />
-                        </span>
+                    <div className='recipe-form__bottom'>
+                        <div className='recipe-form__title-div'>
+                            <Link to='/'>
+                                <img className='recipe-form__go-back' src={backIcon} alt='Go Back' />
+                            </Link>
+                            <h1 className='recipe-form__title'>Add New Recipe</h1>
+                        </div>
+                        <div className='recipe-form__details-div'>
+                            <label className='recipe-form__label' htmlFor='title'>Title</label>
+                            <input
+                                className='recipe-form__text-input'
+                                id='title'
+                                name='title' 
+                                type='text' 
+                                value={this.state.title}
+                                onChange={this.handleChange}
+                            />
+                            <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
+                            <input
+                                className='recipe-form__text-input'
+                                id='book'
+                                name='book' 
+                                type='text' 
+                                value={this.state.book}
+                                onChange={this.handleChange}
+                            />
+                            <label className='recipe-form__label' htmlFor='page'>Page</label>
+                            <input
+                                className='recipe-form__text-input'
+                                id='page'
+                                name='page' 
+                                type='text' 
+                                value={this.state.page}
+                                onChange={this.handleChange}
+                            />
+                            <label className='recipe-form__label' htmlFor='page'>Category</label>
+                            <input
+                                className='recipe-form__text-input'
+                                id='category'
+                                name='category' 
+                                type='text' 
+                                value={this.state.category}
+                                onChange={this.handleChange}
+                            />
+                            <div className='recipe-form__label-div'>
+                                <label 
+                                    className='recipe-form__label' 
+                                    htmlFor='ingredients'>
+                                        Ingredients
+                                </label> 
+                                <div className='recipe-form__label-icon' onClick={this.toggleScanIngredientsModal}>
+                                    <img src={addIcon} alt='Add Ingredients' />
+                                </div>
+                            </div>
+                            <ContentEditable 
+                                className='recipe-form__dynamic recipe-form__dynamic--ingredients'
+                                innerRef={this.editableIngredients}
+                                html={this.state.ingredientsHTML}
+                                disabled={false}
+                                onChange={this.handleIngredientsChange}
+                                tagName='ul'
+                            />
+                            <div className='recipe-form__label-div'>
+                                <label 
+                                    className='recipe-form__label' 
+                                    htmlFor='instructions'>
+                                        Instructions
+                                </label> 
+                                <div className='recipe-form__label-icon' onClick={this.toggleScanInstructionsModal}>
+                                    <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Instructions' />
+                                </div>
+                            </div>
+                            <ContentEditable 
+                                className='recipe-form__dynamic recipe-form__dynamic--instructions'
+                                innerRef={this.editableInstructions}
+                                html={this.state.instructionsHTML}
+                                disabled={false}
+                                onChange={this.handleInstructionsChange}
+                                tagName='ul'
+                            />
+                            <nav>
+                                <NavButton 
+                                    src={saveIcon} 
+                                    alt='Save' 
+                                    type='submit' 
+                                />
+                            </nav>
+                        </div>
                     </div>
-                    <ContentEditable 
-                        innerRef={this.editableInstructions}
-                        html={this.state.instructionsHTML}
-                        disabled={false}
-                        onChange={this.handleInstructionsChange}
-                        tagName='ul'
-                    />
-                    <nav>
-                        <NavButton 
-                            src={saveIcon} 
-                            alt='Save' 
-                            type='submit' 
-                        />
-                    </nav>
-
                 </form>
-            </>
         );
     }
 }

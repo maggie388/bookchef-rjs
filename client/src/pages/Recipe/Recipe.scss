@@ -1,4 +1,5 @@
 @import '../../partials/mixins'; 
+@import '../../partials/typography';
 @import '../../partials/variables'; 
 
 .recipe {
@@ -10,43 +11,32 @@
      }
      
      &__pic {
-        width: 100%;
-        height: 100%; 
-        object-fit: cover;
+        @include containedPic;
      }
 
      &__bottom {
-        position: relative;
-        top: -30px;
+        @include overlapTopDiv;
         padding: 1.5rem 2rem 1.5rem 1rem;
-        background-color: #FFF;
-        border-radius: 30px;
      }
 
      &__title-div {
-         display: flex;
-         margin-bottom: 1rem;
+        display: flex;
+        margin-bottom: 1rem;
      }
 
      &__go-back {
-         height: 1.75rem;
-         margin-top: 0.25rem;
-         margin-right: 0.5rem;
-         fill: #91C11E;
+        @include backIcon;
      }
 
      &__title {
-        // use mixin here
+        @include m-h1;
         margin-right: auto;
-        font-size: 1.75rem;
-        line-height: 2rem;
-        color: color(accent);
      }
 
      &__edit {
-         height: 1.5rem;
-         margin-top: 0.3rem;
-         opacity: .4;
+        height: 1.5rem;
+        margin-top: 0.3rem;
+        opacity: .4;
      }
 
      &__details-div {
@@ -71,18 +61,19 @@
      }
 
      &__subtitle {
-         margin-bottom: 0.5rem;
-         font-size: 1.25rem;
+        @include m-h2;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
      }
 
      &__list {
-         padding-left: 1rem;
-         margin-bottom: 1rem;
-         font-size: 0.85rem;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
 
-         &--ingredients {
-            list-style-type: circle;
-         }
+        &--ingredients {
+           list-style-type: circle;
+        }
 
          &--instructions {
             list-style-type: decimal;

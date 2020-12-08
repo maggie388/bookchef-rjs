@@ -24,7 +24,7 @@ class Recipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axios.get(API_URL + `/recipes/${this.state.recipeId}`)
+        axios.get(API_URL + `/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
             const { image, title, book, page, category, ingredients, instructions } = response.data;
             this.setState({
@@ -42,6 +42,7 @@ class Recipe extends Component {
     }
 
     componentDidMount = () => {
+        console.log('making Request');
         this.getSingleRecipe();
     }
 
@@ -49,6 +50,7 @@ class Recipe extends Component {
         const {title, book, page, category, ingredients, instructions} = this.state;
 
         if (this.state.isLoading) {
+            console.log(this.props.match.params.recipeId);
             return "Loading...";
         }
 
