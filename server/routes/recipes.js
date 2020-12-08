@@ -62,4 +62,14 @@ router.put('/:recipeId', (req, res) => {
         .catch(error => console.log(error))
 });
 
+router.delete('/:recipeId', (req, res) => {
+    Recipes
+        .where({ id: req.params.recipeId })
+        .destroy()
+        .then(() => {
+            res.status(204).send();
+        })
+        .catch(error => console.log(error));
+});
+
 module.exports = router;
