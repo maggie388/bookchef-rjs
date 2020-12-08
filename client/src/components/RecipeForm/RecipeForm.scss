@@ -17,10 +17,12 @@
     &__bottom {
         @include overlapTopDiv;
         padding: 1.5rem 1rem;
+        padding-right: 2rem;
     }
 
     &__title-div {
         display: flex;
+        align-items: center;
         margin-bottom: 1rem;
     }
 
@@ -30,13 +32,24 @@
 
     &__title {
         @include m-h1;
+        margin-right: auto;
+    }
+
+    &__button {
+        border: none;
+        background-color: transparent;
+    }
+
+    &__save {
+        height: 1.5rem;
+        margin-top: 0.25rem;
+        opacity: .4;
     }
 
     &__details-div {
         display: flex;
         flex-direction: column;
         padding-left: 2.25rem;
-        padding-right: 1.5rem;
     }
 
     &__label {

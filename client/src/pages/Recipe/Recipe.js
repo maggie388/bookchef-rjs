@@ -42,7 +42,6 @@ class Recipe extends Component {
     }
 
     componentDidMount = () => {
-        console.log('making Request');
         this.getSingleRecipe();
     }
 
@@ -50,7 +49,6 @@ class Recipe extends Component {
         const {title, book, page, category, ingredients, instructions} = this.state;
 
         if (this.state.isLoading) {
-            console.log(this.props.match.params.recipeId);
             return "Loading...";
         }
 
