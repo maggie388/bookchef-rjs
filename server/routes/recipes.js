@@ -11,6 +11,15 @@ router.get('/', (_req,res) => {
         });
 });
 
+router.get('/:recipeId', (req, res) => {
+    Recipes
+        .where({ id: req.params.recipeId })
+        .fetch()
+        .then(recipe => {
+            res.status(200).json(recipe);
+        })
+});
+
 router.post('/', (req, res) => {
     new Recipes({
         user_id: req.body.userId,
