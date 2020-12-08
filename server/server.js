@@ -19,6 +19,8 @@ app.use('/upload', uploadRouter);
 app.use('/recipes', recipesRouter);
 app.use('/users', usersRouter);
 
+app.use(express.static('uploads/images'));
+
 // START LISTENING
 const PORT = process.env.PORT;
 

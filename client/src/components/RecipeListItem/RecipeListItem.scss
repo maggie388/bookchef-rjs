@@ -9,9 +9,16 @@
     border-radius: 5px;
     margin-bottom: 0.5rem;
 
-    &__pic {
-        border-radius: 5px;
+    &__pic-div {
+        width: 100px;
+        height: 100px;
         margin-right: 0.5rem;
+    }
+
+    &__pic {
+        @include containedPic;
+        border-radius: 5px;
+        
     }
 
     &__details-div {

@@ -6,20 +6,25 @@ import './RecipeListItem.scss';
 import trashIcon from '../../assets/icons/trash-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
 
+// VARIABLES
+const API_URL = process.env.REACT_APP_API_URL
+
 const RecipeListItem = ({ recipe, deleteRecipe }) => {
-    // other avaiable value to deconstruct: id, image, ingredients, instructions
-    const { id, title, book, page, category } = recipe;
+    // other avaiable value to deconstruct: ingredients, instructions
+    const { id, title, book, page, category, image } = recipe;
 
     const handleDelete = () => {
         deleteRecipe(id);
     }
+
+    const imageSrc = image ? `${API_URL}/${image}` : 'https://via.placeholder.com/100';
 
     return (
         <div>
             <div className='recipe-list-item'>
                 <Link to={`/recipe/${recipe.id}`}>
                     <div className='recipe-list-item__pic-div'>
-                        <img className='recipe-list-item__pic' src='https://via.placeholder.com/100' alt='' />
+                        <img className='recipe-list-item__pic' src={imageSrc} alt={title} />
                     </div>
                 </Link>
                 <div className='recipe-list-item__details-div'>

@@ -8,7 +8,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (_req, _file, cb) {
-        cb(null, './uploads')
+        cb(null, './uploads/temp')
     }, 
     filename: function (_req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname);
@@ -24,7 +24,7 @@ const client = new vision.ImageAnnotatorClient();
 // try documetnTextDetection https://cloud.google.com/vision/docs/pdf
 router.post('/', upload.single('file'), async (req, res) => {
     const filename = req.file.filename;
-    const [ result ] = await client.textDetection(`./uploads/${filename}`);
+    const [ result ] = await client.textDetection(`./uploads/temp/${filename}`);
     const detections = result.textAnnotations;
     console.log('Text:');
     console.log(detections[0].description);
