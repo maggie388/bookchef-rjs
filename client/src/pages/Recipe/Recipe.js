@@ -24,18 +24,30 @@ class Recipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axios.get(API_URL + `/recipes/${this.props.recipe.id}`)
+        axios.get(API_URL + `/recipes/${this.state.recipeId}`)
         .then((response) => {
-            console.log(response.data);
+            const { image, title, book, page, category, ingredients, instructions } = response.data;
+            this.setState({
+                isLoading: false,
+                image: image,
+                title: title,
+                book: book,
+                page: page,
+                category: category,
+                ingredients: ingredients,
+                instructions: instructions
+            })
         })
         .catch((error) => console.log(error));
     }
 
     componentDidMount = () => {
-
+        this.getSingleRecipe();
     }
 
     render() {
+        const {title, book, page, category, ingredients, instructions} = this.state;
+
         if (this.state.isLoading) {
             return "Loading...";
         }
@@ -50,27 +62,23 @@ class Recipe extends Component {
                         <Link to='/'>
                             <img className='recipe__go-back' src={backIcon} alt='Go Back' />
                         </Link>
-                        <h1 className='recipe__title'>Garlic Mashed Cauliflower</h1>
+                        <h1 className='recipe__title'>{title}</h1>
                         <Link to='/'>
                             <img className='recipe__edit' src={editIcon} alt='Edit' />
                         </Link>
                     </div>
                     <div className='recipe__details-div'>
-                        <h3 className='recipe__category'>Side Dish</h3>
-                        <p className='recipe__source'> Love and Lemons Everyday, page 25</p>
+                        <h3 className='recipe__category'>{category}</h3>
+                        <p className='recipe__source'>{book}, page {page}</p>
                         <h2 className='recipe__subtitle'>Ingredients</h2>
-                        <ul className='recipe__list recipe__list--ingredients'>
-                            <li className='recipe__list-item'>1 medium head cauliflower, 2 pounds, chopped</li>
-                            <li className='recipe__list-item'>2 tbsp melted butter or vegan butter</li>
-                            <li className='recipe__list-item'>7 cloves roasted garlic</li>
-                            <li className='recipe__list-item'>1/8 to 1/4 tsp Dijon mustard</li> <li>1/4 to 1/2 tsp sea salt</li>
-                            <li className='recipe__list-item'>Freshly ground black pepper</li>
-                            <li className='recipe__list-item'>Chives, for garnish, optional</li>
+                        <ul 
+                            className='recipe__list recipe__list--ingredients' 
+                            dangerouslySetInnerHTML={{ __html: ingredients }}>
                         </ul>
                         <h2 className='recipe__subtitle'>Instructions</h2>
-                        <ul className='recipe__list recipe__list--instructions'>
-                            <li  className='recipe__list-item'>Bring a large pot of salted water to a boil. Add the cauliflower and boil until knife-tender, about 10 minutes. Drain and transfer to a food processor.</li>
-                            <li  className='recipe__list-item'>Puree the cauliflower with the butter, garlic, mustard, salt, and pepper. Season to taste and garnish with chives, if desired.</li>
+                        <ul 
+                            className='recipe__list recipe__list--instructions'
+                            dangerouslySetInnerHTML={{ __html: instructions }}>
                         </ul>
                     </div>
                 </div>

@@ -85,10 +85,10 @@
          &--instructions {
             list-style-type: decimal;
          }
-     }
 
-     &__list-item {
-         margin-bottom: 0.75rem;
+         // targets list items inserted with dangerouslySetHTML attribute
+         > li {
+            margin-bottom: 0.75rem;
+         }
      }
-     
 }
