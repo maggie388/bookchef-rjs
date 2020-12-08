@@ -1,4 +1,5 @@
 @use '../../partials/variables' as *;
+@import '../../partials/mixins';
 
 .recipe-list-item {
     display: flex;
@@ -13,6 +14,13 @@
         margin-right: 0.5rem;
     }
 
+    &__details-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+    }
+
     &__title {
         font-size: .8rem;
         margin-bottom: .5rem;
@@ -25,4 +33,24 @@
     &__page {
         font-size: .8rem;
     }
+
+    &__icon-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    &__category {
+        @include category;
+        margin-right: auto;
+    }
+
+    &__icon {
+        width: 1.25rem;
+        margin-left: 0.75rem;
+        opacity: 0.4;
+    }
+
+    
 }

@@ -44,13 +44,8 @@
      }
 
      &__category {
-        width: fit-content;
-        padding: 0.25rem 0.75rem;
-        border-radius: 10px;
+        @include category;
         margin-bottom: 1rem;
-        color: #FFFFFF;
-        background-color: color(accent);
-        font-size: .75rem;
      }
 
      &__source {
