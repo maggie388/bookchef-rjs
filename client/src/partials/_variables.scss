@@ -2,14 +2,15 @@ $base-font-family: "";
 $mobile-nav-height: 80px;
 
 $color: (
-    global-black: #13182C, // delete this
+    global-black: #222629, // delete this
     global-white: #FFFFFF, // delete this
     body-text: #13182C,
     inverted-text: #f7fff7, // mint cream
     heading-text: #1a535c, // midnight green eagle green
     subheading-text: #4ecdc4, // medium turquoise
     primary-bg: #ffe66d, // naples yellow
-    secondary-bg: #ff6b6b // bittersweet
+    secondary-bg: #ff6b6b, // bittersweet
+    accent: #659A41
 );
 
 @function color($color-name) {
