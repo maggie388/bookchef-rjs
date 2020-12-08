@@ -37,6 +37,7 @@
 
      &__title {
         // use mixin here
+        margin-right: auto;
         font-size: 1.75rem;
         line-height: 2rem;
         color: color(accent);
@@ -44,6 +45,7 @@
 
      &__edit {
          height: 1.5rem;
+         margin-top: 0.3rem;
          opacity: .4;
      }
 
