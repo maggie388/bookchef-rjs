@@ -1,29 +1,33 @@
 @import '../../partials/variables.scss';
 
 .header {
-    display: flex;
-    flex-direction: column;
     width: 100%;
     padding: 1rem;
-    padding-bottom: 0.5rem;
     background-color: color(accent);
 
     &__top-row {
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    &__logo {
+        height: 2rem;
     }
 
     &__menu {
         width: 2.5rem;
     }
-    &__logo {
-        height: 2rem;
-        margin-bottom: 1rem;
-    }
 
-    // targets the search bar component
-    & > :nth-child(2) {
-        margin-bottom: 0.5rem;
+    &__bottom-row {
+        display: flex;
+        align-items: center;
+
+        // targets SearBar component
+        > :first-child {
+            margin-right: 1rem;
+        }
     }
 
 }

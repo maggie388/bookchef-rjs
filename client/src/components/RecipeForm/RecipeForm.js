@@ -184,7 +184,7 @@ class RecipeForm extends Component {
         return (
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 <div className='recipe-form__top'>
-                    <img className='recipe-form__pic' src='' alt='' />
+                    {this.state.image && <img className='recipe-form__pic' src={this.state.image} alt='' />} 
                 </div>
                 <div className='recipe-form__bottom'>
                     <div className='recipe-form__title-div'>

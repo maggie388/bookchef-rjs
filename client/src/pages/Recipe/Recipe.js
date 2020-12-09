@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Recipe.scss';
 
+// COMPONENTS
+import Header from '../../components/Header/Header';
+
 // ASSETS
 import backIcon from '../../assets/icons/arrow-back-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -53,7 +56,7 @@ class Recipe extends Component {
         }
 
         return (
-            <div className='recipe'>
+            <main className='recipe'>
                 <div className='recipe__top'>
                     <img className='recipe__pic' src='https://baconmockup.com/300/200' alt='' />
                 </div>
@@ -82,7 +85,7 @@ class Recipe extends Component {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </main>
         );
     }
 }

@@ -3,10 +3,7 @@ import axios from 'axios';
 import './Home.scss';
 
 // COMPONENTS
-import Header from '../../components/Header/Header';
-// import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
-import HomeNav from '../../components/HomeNav/HomeNav';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -47,14 +44,10 @@ class Home extends Component {
         }
 
         return (
-            <>
-                <Header />
-                <main className='main'>
-                    <h1 className='main__title'>Recent</h1>
-                    <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
-                </main>
-                {/* <HomeNav /> */}
-            </>
+            <main className='main'>
+                <h1 className='main__title'>Recent</h1>
+                <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
+            </main>
         );
     }
 }
