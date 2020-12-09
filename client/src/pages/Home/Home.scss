@@ -1,13 +1,13 @@
 @import '../../partials/resets';
+@import '../../partials/typography';
 @import '../../partials/variables';
 
 .main {
     padding: 1rem;
 
     &__title {
-        font-size: 1.5rem;
-        color: color(heading-text);
-        margin-bottom: 0.5rem;
+        @include m-h1;
+        margin-bottom: 1rem;
     }
 }
 

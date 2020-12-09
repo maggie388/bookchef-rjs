@@ -1,18 +1,19 @@
 @use '../../partials/variables' as *;
+@import '../../partials/typography';
 @import '../../partials/mixins';
 
 .recipe-list-item {
     display: flex;
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid grey;
+    border: 1px solid color(border);
     border-radius: 5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 
     &__pic-div {
         width: 100px;
         height: 100px;
-        margin-right: 0.5rem;
+        margin-right: 0.75rem;
     }
 
     &__pic {
@@ -29,16 +30,11 @@
     }
 
     &__title {
-        font-size: .8rem;
-        margin-bottom: .5rem;
+        @include m-h3;
     }
 
-    &__book {
-        font-size: .8rem;
-    }
-
-    &__page {
-        font-size: .8rem;
+    &__source {
+        @include book-details;
     }
 
     &__icon-group {

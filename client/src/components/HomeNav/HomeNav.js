@@ -7,15 +7,18 @@ import userIcon from '../../assets/icons/person-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
 import filterIcon from '../../assets/icons/filter-sharp.svg';
 
-// COMPONENTS
-import NavButton from '../NavButton/NavButton'
-
 const HomeNav = () => {
     return (
-        <nav className="home-nav">
-            <Link to="/"><NavButton src={userIcon} alt={"Profile"} /></Link>
-            <Link to="/recipe/add"><NavButton src={addIcon} alt={"Add Recipe"} /></Link>
-            <Link to="/"><NavButton src={filterIcon} alt={"Filter"} /></Link>
+        <nav className='home-nav'>
+            <Link className='home-nav__link' to='/filter'>
+                <img className='home-nav__icon' src={filterIcon} alt='Filter' />
+            </Link>
+            <Link className='home-nav__link' to='/recipe/add'>
+                <img className='home-nav__icon home-nav__icon--bigger' src={addIcon} alt='Add Recipe' />
+            </Link>
+            <Link className='home-nav__link' to='/profile'>
+                <img className='home-nav__icon' src={userIcon} alt='Profile' />
+            </Link>
         </nav>
     );
 };

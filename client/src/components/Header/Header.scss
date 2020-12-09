@@ -4,14 +4,26 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    // height: 115px;
     padding: 1rem;
-    // border: 1px solid red;
-    background-color: color(primary-bg);
+    padding-bottom: 0.5rem;
+    background-color: color(accent);
 
+    &__top-row {
+        display: flex;
+        align-items: center;
+    }
+
+    &__menu {
+        width: 2.5rem;
+    }
     &__logo {
         height: 2rem;
         margin-bottom: 1rem;
+    }
+
+    // targets the search bar component
+    & > :nth-child(2) {
+        margin-bottom: 0.5rem;
     }
 
 }

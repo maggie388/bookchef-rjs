@@ -11,6 +11,17 @@
     line-height: 1.5rem;
 }
 
+@mixin m-h3 {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+}
+
+@mixin book-details {
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.6;
+}
+
 @mixin form-label {
     margin-bottom: 0.25rem;
     font-size: 0.9rem;

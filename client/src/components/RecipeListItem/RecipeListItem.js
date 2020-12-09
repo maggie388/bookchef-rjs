@@ -30,8 +30,7 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
                 <div className='recipe-list-item__details-div'>
                     <Link to={`/recipe/${recipe.id}`}>
                         <h2 className='recipe-list-item__title'>{title}</h2>
-                        <p className='recipe-list-item__book'>Book: {book}</p>
-                        <p className='recipe-list-item__page'>Page: {page}</p>
+                        <p className='recipe-list-item__source'>{`${book}, page ${page}`}</p>
                     </Link>
                     <div className='recipe-list-item__icon-group'>
                         <h3 className='recipe-list-item__category'>{category}</h3>
