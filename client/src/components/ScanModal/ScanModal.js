@@ -17,8 +17,10 @@ class ScanModal extends PureComponent {
         src: null,
         crop: {
             unit: '%',
-            width: 30,
-            height: 30,
+            width: 50,
+            height: 50,
+            x: 25,
+            y: 25
         }
     }
 
@@ -44,7 +46,7 @@ class ScanModal extends PureComponent {
     }
 
     onCropChange = (crop, percentCrop) => {
-        this.setState({ crop })
+        this.setState({ crop: percentCrop })
     }
 
     async makeClientCrop(crop) {
@@ -54,7 +56,6 @@ class ScanModal extends PureComponent {
                 crop,
                 'newFile.jpeg'
             );
-            console.log(croppedImageUrl);
             this.setState({ croppedImageUrl })
         }
     }

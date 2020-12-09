@@ -21,7 +21,7 @@ class RecipeForm extends Component {
         this.editableInstructions = React.createRef();
         this.state = {
             // form values
-            userId: '5',
+            userId: '9',
             title: '',
             book: '',
             page: '',
@@ -119,8 +119,10 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
+        console.log('handle add function');
         axios.post(API_URL + '/recipes', data)
             .then((_response) => {
+                console.log('response from post request');
                 this.goBack();
             })
             .catch((error) => console.log(error));
@@ -135,6 +137,7 @@ class RecipeForm extends Component {
     }
 
     handleSubmit = (e) => {
+        console.log('handle submit function');
         e.preventDefault();
         const data = this.buildRequestObject();
         if (this.props.recipe) {

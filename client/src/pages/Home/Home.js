@@ -14,12 +14,17 @@ class Home extends Component {
         recipes: []
     }
 
+    // add a -1
+    sortByDate = (obj1, obj2) => {
+        return new Date(obj2.created_at) - new Date(obj1.created_at);
+    }
+
     getRecipes = () => {
         axios.get(API_URL + '/recipes')
             .then(response => {
-                // console.log(response.data);
+                const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
-                    recipes: response.data,
+                    recipes: sortedRecipes,
                     isLoading: false
                 });
             })
@@ -45,7 +50,7 @@ class Home extends Component {
 
         return (
             <main className='main'>
-                <h1 className='main__title'>Recent</h1>
+                <h1 className='main__title'>Recent Recipes</h1>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>
         );
