@@ -81,6 +81,7 @@
     &__dynamic {
         @include input-field;
         padding-left: 2rem;
+        padding-bottom: 0;
 
         &--ingredients {
             list-style-type: circle;

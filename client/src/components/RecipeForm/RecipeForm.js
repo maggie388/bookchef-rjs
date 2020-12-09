@@ -26,8 +26,8 @@ class RecipeForm extends Component {
             book: '',
             page: '',
             category: '',
-            ingredientsHTML: '',
-            instructionsHTML: '',
+            ingredientsHTML: '<li></li>',
+            instructionsHTML: '<li></li>',
             image: '',
             // modal rendering
             scanIngredientsModal: false,

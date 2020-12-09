@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Recipe.scss';
 
-// COMPONENTS
-import Header from '../../components/Header/Header';
-
 // ASSETS
 import backIcon from '../../assets/icons/arrow-back-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';

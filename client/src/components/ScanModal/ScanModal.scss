@@ -2,6 +2,7 @@
     position: absolute;
     top: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -13,5 +14,24 @@
         top: 1rem;
         right: 1rem;
         width: 2rem;
+        opacity: .4;
+    }
+
+    &__button {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        width: 3rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__continue {
+        width: 100%
     }
 }

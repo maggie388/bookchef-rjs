@@ -3,7 +3,6 @@ import './AddRecipe.scss';
 
 // COMPONENTS
 import RecipeForm from '../../components/RecipeForm/RecipeForm';
-import Header from '../../components/Header/Header';
 
 const AddRecipe = ({ history }) => {
     return (
