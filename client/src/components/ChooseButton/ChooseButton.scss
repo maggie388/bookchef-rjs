@@ -1,7 +1,10 @@
 @import '../../partials/mixins.scss';
 
 .choose-button {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 90%;
     cursor: pointer;
 
     &__icon {

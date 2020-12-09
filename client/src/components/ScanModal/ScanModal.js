@@ -13,6 +13,7 @@ import ChooseButton from '../../components/ChooseButton/ChooseButton';
 class ScanModal extends PureComponent {
     state = {
         file: '',
+        file2: '',
         src: null,
         crop: {
             unit: '%',
@@ -53,6 +54,7 @@ class ScanModal extends PureComponent {
                 crop,
                 'newFile.jpeg'
             );
+            console.log(croppedImageUrl);
             this.setState({ croppedImageUrl })
         }
     }
@@ -84,10 +86,14 @@ class ScanModal extends PureComponent {
                     return;
                 }
                 blob.name = fileName;
+                blob.lastModifiedDate = new Date();
+                this.setState({
+                    file2: blob
+                });
                 window.URL.revokeObjectURL(this.fileUrl);
                 this.fileUrl = window.URL.createObjectURL(blob);
                 resolve(this.fileUrl);
-            }, 'image/jpeg');
+            }, 'image/png', 1);
         });
     }
 
@@ -95,7 +101,7 @@ class ScanModal extends PureComponent {
         e.preventDefault();
         const { readText, addToState, formatFn } = this.props;
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        formData.append('file', this.state.file2);
         readText(formData, addToState, formatFn);
         
     }
@@ -107,17 +113,22 @@ class ScanModal extends PureComponent {
     renderCropView = () => {
         return (
             <>
+                <div className='scan-modal__crop-div'>
                 <ReactCrop 
+                    className='scan-modal__crop-view'
                     src={this.state.src}
                     crop={this.state.crop}
                     ruleOfThirds
                     onImageLoaded={this.onImageLoaded}
                     onComplete={this.onCropComplete}
                     onChange={this.onCropChange}
-                />
-                <button className='scan-modal__button' type='submit'>
-                    <img className='scan-modal__continue' src={forwardIcon} alt='Continue' />
-                </button>
+                /> 
+                </div>
+                <div className='scan-modal__bottom'>
+                    <button className='scan-modal__button' type='submit'>
+                        <img className='scan-modal__continue' src={forwardIcon} alt='Continue' />
+                    </button>
+                </div>
             </>
         );
     }
@@ -125,7 +136,10 @@ class ScanModal extends PureComponent {
     render() {
         return (
             <form className='scan-modal' onSubmit={this.handleFormSubmit}>
-                <img className='scan-modal__close' onClick={this.handleClose} src={closeIcon} alt='' />
+                <div className='scan-modal__top'>
+                    <p>Crop your image for best results.</p>
+                    <img className='scan-modal__close' onClick={this.handleClose} src={closeIcon} alt='Close' />
+                </div>
                 {this.state.src ? this.renderCropView() : <ChooseButton handleFileUpload={this.handleFileUpload} />}
             </form>
         );
