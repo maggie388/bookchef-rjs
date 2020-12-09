@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 // COMPONENTS
@@ -14,7 +15,9 @@ const Header = () => {
     return (
         <header className='header'>
             <div className='header__top-row'>
-                <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
+                <Link to='/'>
+                    <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
+                </Link>
                 <img className='header__menu' src={menuIcon} alt='Expand Menu' />
             </div>
             <div className='header__bottom-row'>

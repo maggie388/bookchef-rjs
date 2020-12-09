@@ -2,12 +2,12 @@ import React from 'react';
 import './ChooseButton.scss';
 
 // ASSETS
-import UploadPreview from '../../components/UploadPreview/UploadPreview';
+import scanIcon from '../../assets/icons/scan-outline.svg';
 
-const ChooseButton = ({ handleFileUpload, imageURL }) => {
+const ChooseButton = ({ handleFileUpload }) => {
     return (
             <label className='choose-button'>
-                <UploadPreview imageURL={imageURL} /> 
+                <img className='choose-button__icon' src={scanIcon} alt='Choose Image' />
                 <input 
                     className='choose-button__input' 
                     name='image' 

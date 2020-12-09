@@ -1,0 +1,17 @@
+.scan-modal {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFF;
+
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+    }
+}

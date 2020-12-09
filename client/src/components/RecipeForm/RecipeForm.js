@@ -167,6 +167,7 @@ class RecipeForm extends Component {
                     readText={this.readTextInImage}
                     addToState={this.addIngredientsToState}
                     formatFn={this.formatIngredients}
+                    close={this.toggleScanIngredientsModal}
                 />
             );
         }
@@ -177,6 +178,7 @@ class RecipeForm extends Component {
                     readText={this.readTextInImage}
                     addToState={this.addInstructionsToState}
                     formatFn={this.formatInstructions}
+                    close={this.toggleScanInstructionsModal}
                 />
             );
         }
