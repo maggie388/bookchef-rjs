@@ -1,9 +1,6 @@
 import React from 'react';
 import './ChooseButton.scss';
 
-// ASSETS
-import scanIcon from '../../assets/icons/scan-outline.svg';
-
 const ChooseButton = ({ icon, handleFileUpload }) => {
     return (
             <label className='choose-button'>

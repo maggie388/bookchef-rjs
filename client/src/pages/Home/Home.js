@@ -24,7 +24,9 @@ class Home extends Component {
                     isLoginError: false, 
                     errorMessage: ''
                 });
-                console.log('authToken from session storage ::', sessionStorage.getItem('authToken'));
+            })
+            .then(() => {
+                this.getRecipes();
             })
             .catch(error => {
                 this.setState({
@@ -43,8 +45,9 @@ class Home extends Component {
             .then(response => {
                 const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
-                    recipes: sortedRecipes,
-                    isLoading: false
+                    isLoggedIn: true,
+                    isLoading: false,
+                    recipes: sortedRecipes
                 });
             })
             .catch(error => console.log(error))
@@ -58,7 +61,7 @@ class Home extends Component {
             .catch(error => console.log(error));
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getRecipes();
     }
 
@@ -74,7 +77,7 @@ class Home extends Component {
         if (this.state.isLoading) {
             return (
                 <main className='main'>
-                    <p>"Loading..."</p>
+                    <p>Loading...</p>
                 </main>
             );
         }
