@@ -6,6 +6,7 @@ import './ScanModal.scss';
 // ASSETS
 import closeIcon from '../../assets/icons/close-sharp.svg';
 import forwardIcon from '../../assets/icons/arrow-forward-sharp.svg';
+import scanIcon from '../../assets/icons/scan-outline.svg';
 
 // COMPONENTS
 import ChooseButton from '../../components/ChooseButton/ChooseButton';
@@ -17,10 +18,10 @@ class ScanModal extends PureComponent {
         src: null,
         crop: {
             unit: '%',
-            width: 50,
-            height: 50,
-            x: 25,
-            y: 25
+            width: 80,
+            height: 80,
+            x: 30,
+            y: 30
         }
     }
 
@@ -141,7 +142,7 @@ class ScanModal extends PureComponent {
                     <p>Crop your image for best results.</p>
                     <img className='scan-modal__close' onClick={this.handleClose} src={closeIcon} alt='Close' />
                 </div>
-                {this.state.src ? this.renderCropView() : <ChooseButton handleFileUpload={this.handleFileUpload} />}
+                {this.state.src ? this.renderCropView() : <ChooseButton icon={scanIcon} handleFileUpload={this.handleFileUpload} />}
             </form>
         );
     }

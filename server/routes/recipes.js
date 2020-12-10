@@ -3,6 +3,21 @@ const router = express.Router();
 
 const Recipes = require('../models/recipes');
 
+// MULTER CONFIG
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (_req, _file, cb) {
+        cb(null, './uploads/images')
+    }, 
+    filename: function (_req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// ROUTES
 router.get('/', (_req,res) => {
     Recipes
         .fetchAll()
@@ -20,7 +35,7 @@ router.get('/:recipeId', (req, res) => {
         })
 });
 
-router.post('/', (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
     new Recipes({
         user_id: req.body.userId,
         title: req.body.title,
@@ -29,7 +44,7 @@ router.post('/', (req, res) => {
         category: req.body.category,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
-        image: ''
+        image: req.file.filename
     })
         .save()
         .then(newRecipe => {
@@ -37,7 +52,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/:recipeId', (req, res) => {
+router.put('/:recipeId', upload.single('image'), (req, res) => {
     Recipes
         .where({ id: req.params.recipeId })
         .fetch()

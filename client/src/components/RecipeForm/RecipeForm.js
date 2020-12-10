@@ -5,11 +5,13 @@ import './RecipeForm.scss';
 
 // COMPONENTS
 import ScanModal from '../../components/ScanModal/ScanModal';
+import ChooseButton from '../../components/ChooseButton/ChooseButton';
 
 // ASSETS
 import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
 import backIcon from '../../assets/icons/arrow-back-sharp.svg';
+import cameraIcon from '../../assets/icons/camera-sharp.svg'
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -29,10 +31,18 @@ class RecipeForm extends Component {
             ingredientsHTML: '<li></li>',
             instructionsHTML: '<li></li>',
             image: '',
+            file: '',
             // modal rendering
             scanIngredientsModal: false,
             scanInstructionsModal: false
         };
+    }
+
+    handleFileUpload = (e) => {
+        this.setState({
+            image: URL.createObjectURL(e.target.files[0]),
+            file: e.target.files[0]
+        })
     }
 
     handleChange = (e) => {
@@ -109,7 +119,7 @@ class RecipeForm extends Component {
             category: this.state.category,
             ingredients: this.state.ingredientsHTML,
             instructions: this.state.instructionsHTML,
-            image: this.state.image
+            image: this.state.file
         }
         return data;
     }
@@ -119,10 +129,8 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
-        console.log('handle add function');
         axios.post(API_URL + '/recipes', data)
             .then((_response) => {
-                console.log('response from post request');
                 this.goBack();
             })
             .catch((error) => console.log(error));
@@ -137,9 +145,13 @@ class RecipeForm extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log('handle submit function');
         e.preventDefault();
-        const data = this.buildRequestObject();
+        // const data = this.buildRequestObject();
+        const data = new FormData(e.target);
+        data.append('image', this.state.file);
+        data.append('userId', this.state.userId);
+        data.append('ingredients', this.state.ingredientsHTML);
+        data.append('instructions', this.state.instructionsHTML);
         if (this.props.recipe) {
             this.handleEdit(data);
             return;
@@ -189,7 +201,10 @@ class RecipeForm extends Component {
         return (
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 <div className='recipe-form__top'>
-                    {this.state.image && <img className='recipe-form__pic' src={this.state.image} alt='' />} 
+                    {this.state.image ?
+                        <img className='recipe-form__pic' src={this.state.image} alt='' /> :
+                        <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
+
                 </div>
                 <div className='recipe-form__bottom'>
                     <div className='recipe-form__title-div'>

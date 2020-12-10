@@ -4,10 +4,10 @@ import './ChooseButton.scss';
 // ASSETS
 import scanIcon from '../../assets/icons/scan-outline.svg';
 
-const ChooseButton = ({ handleFileUpload }) => {
+const ChooseButton = ({ icon, handleFileUpload }) => {
     return (
             <label className='choose-button'>
-                <img className='choose-button__icon' src={scanIcon} alt='Choose' />
+                <img className='choose-button__icon' src={icon} alt='Choose' />
                 <input 
                     className='choose-button__input' 
                     name='image' 

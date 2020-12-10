@@ -46,16 +46,16 @@ class Recipe extends Component {
     }
 
     render() {
-        const {title, book, page, category, ingredients, instructions} = this.state;
+        const {title, book, page, category, ingredients, instructions, image} = this.state;
 
         if (this.state.isLoading) {
             return "Loading...";
         }
-
+        const imageSrc = image ? `${API_URL}/${image}` : 'https://baconmockup.com/300/200';
         return (
             <main className='recipe'>
                 <div className='recipe__top'>
-                    <img className='recipe__pic' src='https://baconmockup.com/300/200' alt='' />
+                    <img className='recipe__pic' src={imageSrc} alt='' />
                 </div>
                 <div className='recipe__bottom'>
                     <div className='recipe__title-div'>
