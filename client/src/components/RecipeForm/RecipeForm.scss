@@ -6,9 +6,7 @@
     width: 100%;
 
     &__top {
-        background-color: color(accent);
-        opacity: .4;
-        height: 225px;
+        @include recipePicDiv;
     }
 
     &__pic {

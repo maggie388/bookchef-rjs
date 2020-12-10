@@ -205,7 +205,6 @@ class RecipeForm extends Component {
                     {this.state.image ?
                         <img className='recipe-form__pic' src={this.state.image} alt='' /> :
                         <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
-
                 </div>
                 <div className='recipe-form__bottom'>
                     <BodyHeader goBack={this.goBack} h1Text={this.props.h1Text} icon={saveIcon} />
