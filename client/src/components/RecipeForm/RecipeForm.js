@@ -108,17 +108,12 @@ class RecipeForm extends Component {
         this.toggleScanInstructionsModal()
     }
 
-    buildRequestObject = () => {
-        const data = {
-            userId: this.state.userId,
-            title: this.state.title,
-            book: this.state.book,
-            page: this.state.page,
-            category: this.state.category,
-            ingredients: this.state.ingredientsHTML,
-            instructions: this.state.instructionsHTML,
-            image: this.state.file
-        }
+    buildRequestObject = (e) => {
+        const data = new FormData(e.target);
+        data.append('image', this.state.file);
+        data.append('userId', this.state.userId);
+        data.append('ingredients', this.state.ingredientsHTML);
+        data.append('instructions', this.state.instructionsHTML);
         return data;
     }
 
@@ -144,12 +139,7 @@ class RecipeForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // const data = this.buildRequestObject();
-        const data = new FormData(e.target);
-        data.append('image', this.state.file);
-        data.append('userId', this.state.userId);
-        data.append('ingredients', this.state.ingredientsHTML);
-        data.append('instructions', this.state.instructionsHTML);
+        const data = this.buildRequestObject(e);
         if (this.props.recipe) {
             this.handleEdit(data);
             return;
