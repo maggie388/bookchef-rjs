@@ -21,7 +21,6 @@ class RecipeForm extends Component {
         this.editableInstructions = React.createRef();
         this.state = {
             // form values
-            userId: '1',
             title: '',
             book: '',
             page: '',

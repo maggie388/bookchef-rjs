@@ -65,9 +65,9 @@ router.get('/:recipeId', authorize, (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', authorize, upload.single('image'), (req, res) => {
     new Recipes({
-        user_id: req.body.userId,
+        user_id: req.userId,
         title: req.body.title,
         book: req.body.book,
         page: req.body.page,
