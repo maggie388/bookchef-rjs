@@ -9,6 +9,7 @@ import RecipeForm from '../../components/RecipeForm/RecipeForm';
 class EditRecipe extends Component {
     state = {
         isLoading: true,
+        notFound: false,
         recipe: {}
     }
 
@@ -20,7 +21,13 @@ class EditRecipe extends Component {
                 recipe: response.data
             })
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            this.setState({
+                isLoading: false, 
+                notFound: true
+            });
+            console.log(error)
+        });
     }
 
     componentDidMount() {
@@ -30,6 +37,10 @@ class EditRecipe extends Component {
     render() {
         if (this.state.isLoading) {
             return "Loading..."
+        }
+
+        if (this.state.notFound) {
+            return '404 Recipe Not Found';
         }
 
         return <RecipeForm h1Text='Edit Recipe' history={this.props.history} recipe={this.state.recipe}/>
