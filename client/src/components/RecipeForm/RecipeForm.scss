@@ -7,10 +7,6 @@
 
     &__top {
         background-color: color(accent);
-        // background-image: url('../../assets/icons/camera-sharp.svg');
-        // background-repeat: no-repeat;
-        // background-position: 50% 50%;
-        // background-size: 15%;
         opacity: .4;
         height: 225px;
     }
@@ -23,32 +19,6 @@
         @include overlapTopDiv;
         padding: 1.5rem 1rem;
         padding-right: 2rem;
-    }
-
-    &__title-div {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    &__go-back {
-        @include backIcon;
-    }
-
-    &__title {
-        @include m-h1;
-        margin-right: auto;
-    }
-
-    &__button {
-        border: none;
-        background-color: transparent;
-    }
-
-    &__save {
-        height: 1.5rem;
-        margin-top: 0.25rem;
-        opacity: .4;
     }
 
     &__details-div {

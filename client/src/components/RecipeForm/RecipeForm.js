@@ -5,12 +5,13 @@ import './RecipeForm.scss';
 
 // COMPONENTS
 import ScanModal from '../../components/ScanModal/ScanModal';
+import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import ChooseButton from '../../components/ChooseButton/ChooseButton';
 
 // ASSETS
 import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
-import backIcon from '../../assets/icons/arrow-back-sharp.svg';
+
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
 
 // VARIABLES
@@ -207,22 +208,7 @@ class RecipeForm extends Component {
 
                 </div>
                 <div className='recipe-form__bottom'>
-                    <div className='recipe-form__title-div'>
-                        <img 
-                            className='recipe-form__go-back' 
-                            onClick={this.goBack}
-                            src={backIcon} 
-                            alt='Go Back' 
-                        />
-                        <h1 className='recipe-form__title'>{this.props.h1Text}</h1>
-                        <button className='recipe-form__button' type='submit'>
-                            <img 
-                                className='recipe-form__save' 
-                                src={saveIcon} 
-                                alt='Go Back' 
-                            />
-                        </button>
-                    </div>
+                    <BodyHeader goBack={this.goBack} h1Text={this.props.h1Text} icon={saveIcon} />
                     <div className='recipe-form__details-div'>
                         <label className='recipe-form__label' htmlFor='title'>Title</label>
                         <input

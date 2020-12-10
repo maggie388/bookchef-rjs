@@ -1,0 +1,29 @@
+@import '../../partials/mixins';
+@import '../../partials/typography';
+@import '../../partials/variables';
+
+.body-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &__go-back {
+        @include backIcon;
+    }
+
+    &__title {
+        @include m-h1;
+        margin-right: auto;
+    }
+
+    &__button {
+        border: none;
+        background-color: transparent;
+    }
+
+    &__icon {
+        height: 2rem;
+        margin-top: 0.25rem;
+        opacity: .4;
+    }
+}

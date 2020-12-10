@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Recipe.scss';
 
+// COMPONENTS
+import BodyHeader from '../../components/BodyHeader/BodyHeader';
+
 // ASSETS
-import backIcon from '../../assets/icons/arrow-back-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
+
 
 class Recipe extends Component {
     state = {
@@ -46,27 +48,26 @@ class Recipe extends Component {
     }
 
     render() {
-        const {title, book, page, category, ingredients, instructions, image} = this.state;
+        const {isLoading, title, book, page, category, ingredients, instructions, image} = this.state;
 
-        if (this.state.isLoading) {
+        if (isLoading) {
             return "Loading...";
         }
-        const imageSrc = image ? `${API_URL}/${image}` : 'https://baconmockup.com/300/200';
+
+        const recipePic = image && <img className='recipe__pic' src={`${API_URL}/${image}`} alt={title} />;
+
         return (
             <main className='recipe'>
                 <div className='recipe__top'>
-                    <img className='recipe__pic' src={imageSrc} alt='' />
+                    {image && recipePic}
                 </div>
                 <div className='recipe__bottom'>
-                    <div className='recipe__title-div'>
-                        <Link to='/'>
-                            <img className='recipe__go-back' src={backIcon} alt='Go Back' />
-                        </Link>
-                        <h1 className='recipe__title'>{title}</h1>
-                        <Link to={`/recipe/edit/${this.state.recipeId}`}>
-                            <img className='recipe__edit' src={editIcon} alt='Edit' />
-                        </Link>
-                    </div>
+                    <BodyHeader 
+                        goBack={this.props.history.goBack}
+                        h1Text={title}
+                        icon={editIcon}
+                        recipeId={this.state.recipeId}
+                    />
                     <div className='recipe__details-div'>
                         <h3 className='recipe__category'>{category}</h3>
                         <p className='recipe__source'>{book}, page {page}</p>

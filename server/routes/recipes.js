@@ -44,7 +44,7 @@ router.post('/', upload.single('image'), (req, res) => {
         category: req.body.category,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
-        image: req.file.filename
+        image: req.file ? req.file.filename : ''
     })
         .save()
         .then(newRecipe => {
@@ -57,7 +57,7 @@ router.put('/:recipeId', upload.single('image'), (req, res) => {
         .where({ id: req.params.recipeId })
         .fetch()
         .then(recipe => {
-            const { userId, title, book, page, category, ingredients, instructions, image } = req.body;
+            const { userId, title, book, page, category, ingredients, instructions } = req.body;
             recipe
                 .save({
                     user_id: userId ? userId : recipe.user_id,
@@ -67,7 +67,7 @@ router.put('/:recipeId', upload.single('image'), (req, res) => {
                     category: category ? category : recipe.category,
                     ingredients: ingredients ? ingredients : recipe.ingredients,
                     instructions: instructions ? instructions : recipe.instructions,
-                    image: image ? image : recipe.image
+                    image: req.file ? req.file.filename : recipe.image
                 })
                 .then(newRecipe => {
                     res.status(201).json(newRecipe)
