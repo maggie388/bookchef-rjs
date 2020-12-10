@@ -24,7 +24,6 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 function authorize(req, res, next) {
-    // console.log('authorization header', req.headers.authorization)
     if (!req.headers.authorization) {
         return res.status(403).json({ error: 'This endpoint requires Auth Header' });
     }
@@ -53,11 +52,14 @@ router.get('/', authorize, (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.get('/:recipeId', (req, res) => {
+router.get('/:recipeId', authorize, (req, res) => {
     Recipes
-        .where({ id: req.params.recipeId })
-        .fetch()
+        .where({ id: req.params.recipeId, user_id: req.userId })
+        .fetch({ require: false })
         .then(recipe => {
+            if (!recipe) {
+                return res.status(404).json({error: 'Recipe Not Found.'})
+            }
             res.status(200).json(recipe);
         })
         .catch(error => console.log(error));

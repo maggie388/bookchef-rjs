@@ -15,6 +15,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 class Recipe extends Component {
     state = {
         isLoading: true,
+        notFound: false,
         recipeId: this.props.match.params.recipeId,
         image: '',
         title: '',
@@ -40,7 +41,13 @@ class Recipe extends Component {
                 instructions: instructions
             })
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            this.setState({
+                isLoading: false,
+                notFound: true,
+            });
+            console.log(error);
+        });
     }
 
     componentDidMount = () => {
@@ -48,10 +55,14 @@ class Recipe extends Component {
     }
 
     render() {
-        const {isLoading, title, book, page, category, ingredients, instructions, image} = this.state;
+        const {isLoading, notFound, title, book, page, category, ingredients, instructions, image} = this.state;
 
         if (isLoading) {
-            return "Loading...";
+            return 'Loading...';
+        }
+
+        if (notFound) {
+            return '404 Recipe Not Found';
         }
 
         const recipePic = image && <img className='recipe__pic' src={`${API_URL}/${image}`} alt={title} />;
