@@ -1,0 +1,48 @@
+@import '../../partials/mixins';
+@import '../../partials/variables';
+
+.login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 1px solid color(accent);
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 1px rgba(color(accent), .2);
+    margin: 2rem auto;
+
+    &__label {
+        margin-bottom: 0.5rem;
+    }
+
+    &__input {
+        @include input-field;
+        margin-bottom: 1.5rem;
+    }
+
+    &__small-text {
+        align-self: center;
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+
+        > a {
+            color: color(accent);
+            text-decoration: underline;
+            transition: filter .5s ease;
+
+            &:visited {
+                color: color(accent);
+            }
+
+            &:hover {
+                filter: hue-rotate(90deg);
+            }
+        }
+    }
+
+    &__button {
+        @include block-button;
+        align-self: center;
+    }
+}

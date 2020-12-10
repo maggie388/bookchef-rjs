@@ -12,7 +12,7 @@ import Recipe from './pages/Recipe/Recipe';
 
 
 const Profile = () => 'this is the profile page';
-const Filter = () => 'this is the filter page';
+const SignUp = () => 'this is the Sign Up page';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Route path='/recipe/edit/:recipeId' component={EditRecipe} />
           <Route path='/recipe/:recipeId' component={Recipe} />
           <Route path='/profile' component={Profile} />
-          <Route path='/filter' component={Filter} />
+          <Route path='/signup' component={SignUp} />
         </Switch>
       </Router>
     </div>

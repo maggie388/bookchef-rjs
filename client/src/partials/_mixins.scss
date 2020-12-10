@@ -89,3 +89,21 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+@mixin block-button {
+    width: fit-content;
+    padding: .75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #FFF;
+    background-color: color(accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: filter .5s ease;
+
+    &:hover {
+        filter: hue-rotate(90deg);
+    }
+}

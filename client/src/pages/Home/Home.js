@@ -4,9 +4,11 @@ import './Home.scss';
 
 // COMPONENTS
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
+import Login from '../Login/Login';
 
 class Home extends Component {
     state = {
+        isLoggedIn: false,
         isLoading: true,
         recipes: []
     }
@@ -40,8 +42,20 @@ class Home extends Component {
     }
 
     render() {
+        if (!this.state.isLoggedIn) {
+            return (
+                <main className='main'>
+                    <Login />
+                </main>
+            )
+        }
+
         if (this.state.isLoading) {
-            return "Loading...";
+            return (
+                <main className='main'>
+                    <p>"Loading..."</p>
+                </main>
+            );
         }
 
         return (
