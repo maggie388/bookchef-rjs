@@ -17,14 +17,14 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
         deleteRecipe(id);
     }
 
-    const imageSrc = image ? `${API_URL}/${image}` : 'https://via.placeholder.com/100';
+    const recipePic = image && <img className='recipe-list-item__pic' src={`${API_URL}/${image}`} alt={title} />;
 
     return (
         <div>
             <div className='recipe-list-item'>
                 <Link to={`/recipe/${recipe.id}`}>
                     <div className='recipe-list-item__pic-div'>
-                        <img className='recipe-list-item__pic' src={imageSrc} alt={title} />
+                        {image && recipePic}
                     </div>
                 </Link>
                 <div className='recipe-list-item__details-div'>
