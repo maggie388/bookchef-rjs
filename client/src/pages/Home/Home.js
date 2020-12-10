@@ -17,25 +17,21 @@ class Home extends Component {
 
     login = (username, password) => {
         axiosInstance.post('/login', { username, password })
-            .then(({ data: { error, token }}) => {
-                if (error) {
-                    console.log('login error');
-                    this.setState({
-                        isLoginError: true,
-                        errorMessage: error.message
-                    });
-                    return;
-                }
+            .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token)
-                console.log('token received');
                 this.setState({
                     isLoggedIn: true,
                     isLoginError: false, 
                     errorMessage: ''
                 });
-                
+                console.log('authToken from session storage ::', sessionStorage.getItem('authToken'));
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                this.setState({
+                    isLoginError: true,
+                    errorMessage: 'Login failed'
+                });
+            });
     }
 
     sortByDate = (obj1, obj2) => {

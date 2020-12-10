@@ -6,23 +6,30 @@ const Users = require('../models/users');
 // OTHER PACKAGES
 require('dotenv').config();
 const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post('/', (req, res) => {
     const { username, password } = req.body;
     Users
         .where({ username })
-        .fetch()
+        .fetch({require: false})
         .then(user => {
             if (!user) {
-                return res.status(403).json({error: 'User not found.'})
+                // the json object is being ignored
+                // once the client sees the 403 status response it enters the catch statement on the front end
+                // error.message is not the one i'm sending here
+                // also tried error.data and error.data.error and error.error
+                return res.status(403).json({ error: 'User not found.' })
             }
-            if (user.password !== password) {
+            const { attributes } = user;
+            if (attributes.password !== password) {
+                // same as above happening here
                 return res.status(403).json({ error: 'Incorrect password.' })
             }
             // token expires after 20s for testing purposes
             const token = jwt.sign({
                 username,
+                userId: attributes.id,
                 exp: Date.now() + 20000
             }, JWT_SECRET);
             return res.status(200).json({ success: true, token })
