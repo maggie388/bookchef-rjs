@@ -7,4 +7,4 @@ const Users = bookshelf.model('Users', {
     }
 });
 
-module.exports = Warehouse;
+module.exports = Users;

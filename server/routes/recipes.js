@@ -23,7 +23,8 @@ router.get('/', (_req,res) => {
         .fetchAll()
         .then(recipes => {
             res.status(200).json(recipes);
-        });
+        })
+        .catch(error => console.log(error));
 });
 
 router.get('/:recipeId', (req, res) => {
@@ -33,6 +34,7 @@ router.get('/:recipeId', (req, res) => {
         .then(recipe => {
             res.status(200).json(recipe);
         })
+        .catch(error => console.log(error));
 });
 
 router.post('/', upload.single('image'), (req, res) => {
@@ -49,7 +51,8 @@ router.post('/', upload.single('image'), (req, res) => {
         .save()
         .then(newRecipe => {
             res.status(201).json({newRecipe});
-        });
+        })
+        .catch(error => console.log(error));
 });
 
 router.put('/:recipeId', upload.single('image'), (req, res) => {
