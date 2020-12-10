@@ -8,12 +8,24 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET;
 
+// BCRYPT CONFIG
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const plaintextPassword1 = 'password1';
+const plaintextPassword2 = 'password2';
+
+const createHashPassword = (plaintext) => {
+    bcrypt.hash(plaintextPassword1, saltRounds, function(_err, hash) {
+        console.log('hash :: ', hash);
+    });
+};
+
 router.post('/', (req, res) => {
     const { username, password } = req.body;
     Users
         .where({ username })
         .fetch({require: false})
-        .then(user => {
+        .then(async user => {
             if (!user) {
                 // the json object is being ignored
                 // once the client sees the 403 status response it enters the catch statement on the front end
@@ -22,17 +34,19 @@ router.post('/', (req, res) => {
                 return res.status(403).json({ error: 'User not found.' })
             }
             const { attributes } = user;
-            if (attributes.password !== password) {
+            bcrypt.compare(password, attributes.password, function(err, isValid) {
+                if (isValid) {
+                    // token expires after 20s for testing purposes
+                    const token = jwt.sign({
+                        username,
+                        userId: attributes.id,
+                        exp: Date.now() + 20000
+                    }, JWT_SECRET);
+                    return res.status(200).json({ success: true, token })
+                }
                 // same as above happening here
                 return res.status(403).json({ error: 'Incorrect password.' })
-            }
-            // token expires after 20s for testing purposes
-            const token = jwt.sign({
-                username,
-                userId: attributes.id,
-                exp: Date.now() + 20000
-            }, JWT_SECRET);
-            return res.status(200).json({ success: true, token })
+            })
         })
         .catch(error => console.log(error));
 });
