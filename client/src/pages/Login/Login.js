@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.scss';
 
-const Login = () => {
+const Login = ({ login }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const { username: { value: username }, password: { value: password } } = e.target;
+        login(username, password);
+        e.target.reset();
     }
 
     return (

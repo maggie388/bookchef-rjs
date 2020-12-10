@@ -10,7 +10,32 @@ class Home extends Component {
     state = {
         isLoggedIn: false,
         isLoading: true,
+        isLoginError: false,
+        errorMessage: '',
         recipes: []
+    }
+
+    login = (username, password) => {
+        axiosInstance.post('/login', { username, password })
+            .then(({ data: { error, token }}) => {
+                if (error) {
+                    console.log('login error');
+                    this.setState({
+                        isLoginError: true,
+                        errorMessage: error.message
+                    });
+                    return;
+                }
+                sessionStorage.setItem('authToken', token)
+                console.log('token received');
+                this.setState({
+                    isLoggedIn: true,
+                    isLoginError: false, 
+                    errorMessage: ''
+                });
+                
+            })
+            .catch(error => console.log(error));
     }
 
     sortByDate = (obj1, obj2) => {
@@ -45,7 +70,7 @@ class Home extends Component {
         if (!this.state.isLoggedIn) {
             return (
                 <main className='main'>
-                    <Login />
+                    <Login login={this.login} />
                 </main>
             )
         }
