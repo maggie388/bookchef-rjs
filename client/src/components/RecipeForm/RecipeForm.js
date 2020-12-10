@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable';
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import './RecipeForm.scss';
 
 // COMPONENTS
@@ -11,11 +11,8 @@ import ChooseButton from '../../components/ChooseButton/ChooseButton';
 // ASSETS
 import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
-
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
 
-// VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
 
 class RecipeForm extends Component {
     constructor() {
@@ -90,7 +87,7 @@ class RecipeForm extends Component {
     }
 
     readTextInImage = (formData, addToState, formatFn) => {
-        axios.post(API_URL + '/upload', formData)
+        axiosInstance.post('/upload', formData)
             .then(response => {
                 addToState(formatFn(response.data));
             })
@@ -130,7 +127,7 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
-        axios.post(API_URL + '/recipes', data)
+        axiosInstance.post('/recipes', data)
             .then((_response) => {
                 this.goBack();
             })
@@ -138,7 +135,7 @@ class RecipeForm extends Component {
     }
 
     handleEdit = (data) => {
-        axios.put(API_URL + `/recipes/${this.props.recipe.id}`, data)
+        axiosInstance.put(`/recipes/${this.props.recipe.id}`, data)
             .then((_response) => {
                 this.goBack();
             })

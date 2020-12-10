@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import './EditRecipe.scss';
 
 // COMPONENTS
 import RecipeForm from '../../components/RecipeForm/RecipeForm';
 
-// VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
 
 class EditRecipe extends Component {
     state = {
@@ -15,7 +13,7 @@ class EditRecipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axios.get(API_URL + `/recipes/${this.props.match.params.recipeId}`)
+        axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
             this.setState({
                 isLoading: false,

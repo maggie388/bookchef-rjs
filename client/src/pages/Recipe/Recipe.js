@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import './Recipe.scss';
 
 // COMPONENTS
@@ -26,7 +26,7 @@ class Recipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axios.get(API_URL + `/recipes/${this.props.match.params.recipeId}`)
+        axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
             const { image, title, book, page, category, ingredients, instructions } = response.data;
             this.setState({
