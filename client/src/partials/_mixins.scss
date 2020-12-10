@@ -54,8 +54,7 @@
 @mixin recipePicDiv {
     width: 100%;
     height: 225px;
-    background-color: color(accent);
-    opacity: 0.4;
+    background-color: rgba(color(accent), .4);
 }
 
 @mixin containedPic {
