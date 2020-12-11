@@ -13,6 +13,8 @@ import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 class RecipeForm extends Component {
     constructor() {
@@ -189,7 +191,7 @@ class RecipeForm extends Component {
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 <div className='recipe-form__top'>
                     {this.state.image ?
-                        <img className='recipe-form__pic' src={this.state.image} alt='' /> :
+                        <img className='recipe-form__pic' src={`${API_URL}/${this.state.image}`} alt='' /> :
                         <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
                 </div>
                 <div className='recipe-form__bottom'>
