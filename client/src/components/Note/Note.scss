@@ -1,0 +1,29 @@
+@import '../../partials/typography';
+@import '../../partials/variables';
+
+.note {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+
+    &__text {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+
+    &__date {
+        @include book-details;
+    }
+
+    &:nth-child(odd) {
+        background-color: rgba(color(accent), .1);
+    }
+
+    &:nth-child(even) {
+        background-color: rgba(color(accent), .3);
+    }
+}

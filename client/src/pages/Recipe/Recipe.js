@@ -5,6 +5,7 @@ import './Recipe.scss';
 // COMPONENTS
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import Loading from '../../components/Loading/Loading';
+import NoteList from '../../components/NoteList/NoteList';
 
 // ASSETS
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -24,14 +25,14 @@ class Recipe extends Component {
         page: '',
         category: '',
         ingredients: '',
-        instructions: ''
+        instructions: '', 
+        notes: ''
     }
 
     getSingleRecipe = () => {
         axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
-            console.log(response.data.notes);
-            const { image, title, book, page, category, ingredients, instructions } = response.data;
+            const { image, title, book, page, category, ingredients, instructions, notes } = response.data;
             this.setState({
                 isLoading: false,
                 image: image,
@@ -40,7 +41,8 @@ class Recipe extends Component {
                 page: page,
                 category: category,
                 ingredients: ingredients,
-                instructions: instructions
+                instructions: instructions,
+                notes: notes
             })
         })
         .catch((error) => {
@@ -94,6 +96,8 @@ class Recipe extends Component {
                             className='recipe__list recipe__list--instructions'
                             dangerouslySetInnerHTML={{ __html: instructions }}>
                         </ul>
+                        <h2 className='recipe__subtitle'>Notes</h2>
+                        <NoteList notes={this.state.notes} />
                     </div>
                 </div>
             </main>

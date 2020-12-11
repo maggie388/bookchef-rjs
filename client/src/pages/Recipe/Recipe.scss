@@ -20,26 +20,6 @@
         padding: 1.5rem 2rem 1.5rem 1rem;
      }
 
-     &__title-div {
-        display: flex;
-        margin-bottom: 1rem;
-     }
-
-     &__go-back {
-        @include backIcon;
-     }
-
-     &__title {
-        @include m-h1;
-        margin-right: auto;
-     }
-
-     &__edit {
-        height: 2rem;
-        margin-top: 0.3rem;
-        opacity: .4;
-     }
-
      &__details-div {
         padding-left: 2.25rem;
      }
