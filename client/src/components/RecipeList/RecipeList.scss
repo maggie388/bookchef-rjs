@@ -1,0 +1,12 @@
+@import '../../partials/resets';
+@import '../../partials/typography';
+@import '../../partials/variables';
+
+.recipe-list {
+    padding: 1rem;
+
+    &__title {
+        @include m-h1;
+        margin-bottom: 1rem;
+    }
+}

@@ -2,15 +2,19 @@
 @import '../../partials/variables';
 
 .login {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-    padding: 2rem;
-    border: 1px solid color(accent);
-    border-radius: 20px;
-    box-shadow: 2px 2px 10px 1px rgba(color(accent), .2);
-    margin: 2rem auto;
+    padding: 1rem;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+        border: 1px solid color(accent);
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px 1px rgba(color(accent), .2);
+        margin: 2rem auto;
+    }
 
     &__label {
         margin-bottom: 0.5rem;
