@@ -164,6 +164,16 @@ class RecipeForm extends Component {
         }
     }
 
+    setImageSource = () => {
+        if (this.state.image.match(/blob/)) {
+            console.log(this.state.image);
+            return this.state.image;
+        } else {
+            console.log(`${API_URL}/${this.state.image}`);
+            return `${API_URL}/${this.state.image}`;
+        }
+    }
+
     render() {
         if (this.state.scanIngredientsModal) {
             return (
@@ -191,7 +201,7 @@ class RecipeForm extends Component {
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 <div className='recipe-form__top'>
                     {this.state.image ?
-                        <img className='recipe-form__pic' src={`${API_URL}/${this.state.image}`} alt='' /> :
+                        <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
                         <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
                 </div>
                 <div className='recipe-form__bottom'>
