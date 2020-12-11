@@ -32,7 +32,6 @@ class Home extends Component {
                     }
                 })
                 .then(response => {
-                    console.log(response.data);
                     this.setState({
                         isLoggedIn: true,
                         recipes: response.data

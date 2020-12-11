@@ -39,8 +39,9 @@ class RecipeList extends Component {
 
     componentWillMount() {
         if (this.props.recipes.length > 0) {
+            const sortedRecipes = this.props.recipes.sort(this.sortByDate);
             this.setState({
-                recipes: this.props.recipes
+                recipes: sortedRecipes
             });
             return;
         }

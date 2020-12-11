@@ -166,10 +166,8 @@ class RecipeForm extends Component {
 
     setImageSource = () => {
         if (this.state.image.match(/blob/)) {
-            console.log(this.state.image);
             return this.state.image;
         } else {
-            console.log(`${API_URL}/${this.state.image}`);
             return `${API_URL}/${this.state.image}`;
         }
     }
