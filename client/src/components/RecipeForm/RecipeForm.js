@@ -12,6 +12,7 @@ import ChooseButton from '../../components/ChooseButton/ChooseButton';
 import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
+import closeIcon from '../../assets/icons/close-sharp.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -172,6 +173,13 @@ class RecipeForm extends Component {
         }
     }
 
+    deleteImage = () => {
+        this.setState({
+            image: '',
+            file: ''
+        });
+    }
+
     render() {
         if (this.state.scanIngredientsModal) {
             return (
@@ -198,6 +206,7 @@ class RecipeForm extends Component {
         return (
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 <div className='recipe-form__top'>
+                    <img className='recipe-form__delete-pic' src={closeIcon} alt='close' onClick={this.deleteImage} />
                     {this.state.image ?
                         <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
                         <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 

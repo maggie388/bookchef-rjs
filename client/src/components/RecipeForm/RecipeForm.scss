@@ -7,6 +7,15 @@
 
     &__top {
         @include recipePicDiv;
+        position: relative;
+    }
+    &__delete-pic {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 1.75rem;
+        opacity: 0.5;
+        cursor: pointer;
     }
 
     &__pic {
