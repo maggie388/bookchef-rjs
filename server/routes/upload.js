@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const vision = require('@google-cloud/vision');
+const fs = require('fs');
 
 
 // MULTER CONFIG
@@ -28,6 +29,11 @@ router.post('/', upload.single('file'), async (req, res) => {
     const detections = result.textAnnotations;
     console.log('Text:');
     console.log(detections[0].description);
+    fs.unlink(`./uploads/temp/${filename}`, (error) => {
+        if (!error) {
+            console.log("File deleted!");
+        }
+    }) 
     res.status(200).send(detections[0].description);
 });
 
