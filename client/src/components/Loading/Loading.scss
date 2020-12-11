@@ -1,0 +1,41 @@
+@import '../../partials/variables';
+
+
+@keyframes grow {
+    50% {width: 25px; height: 25px;}
+}
+
+.loading {
+    padding: 3rem 1rem;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 75px;
+        margin: 0 auto;
+    }
+    
+    &__shape {
+        width: 20px;
+        height: 20px;
+        background-color: color(accent);
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        opacity: 0.4;
+
+        &--1 {
+            animation: grow 1s ease 0s infinite;
+        }
+
+        &--2 {
+            animation: grow 1s ease .25s infinite;
+        }
+
+        &--3 {
+            animation: grow 1s ease .5s infinite;
+        }
+    }
+}
+

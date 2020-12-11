@@ -4,6 +4,7 @@ import './Recipe.scss';
 
 // COMPONENTS
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
+import Loading from '../../components/Loading/Loading';
 
 // ASSETS
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -58,7 +59,7 @@ class Recipe extends Component {
         const {isLoading, notFound, title, book, page, category, ingredients, instructions, image} = this.state;
 
         if (isLoading) {
-            return 'Loading...';
+            return <Loading />;
         }
 
         if (notFound) {

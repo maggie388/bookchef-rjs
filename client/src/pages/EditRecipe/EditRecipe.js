@@ -4,6 +4,7 @@ import './EditRecipe.scss';
 
 // COMPONENTS
 import RecipeForm from '../../components/RecipeForm/RecipeForm';
+import Loading from '../../components/Loading/Loading';
 
 
 class EditRecipe extends Component {
@@ -36,7 +37,7 @@ class EditRecipe extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return "Loading..."
+            return <Loading />;
         }
 
         if (this.state.notFound) {

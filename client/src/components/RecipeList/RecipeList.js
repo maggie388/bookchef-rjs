@@ -4,6 +4,7 @@ import './RecipeList.scss';
 
 // COMPONENTS
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
+import Loadinf from '../../components/Loading/Loading';
 
 class RecipeList extends Component {
     state = {
@@ -49,6 +50,10 @@ class RecipeList extends Component {
     }
 
     render() {
+        if (this.state.isLoading) {
+            return <Loading />;
+        }
+        
         return (
             <main className='recipe-list'>
                 <h1 className='recipe-list__title'>Recent Recipes</h1>
