@@ -30,6 +30,7 @@ class Recipe extends Component {
     getSingleRecipe = () => {
         axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
+            console.log(response.data.notes);
             const { image, title, book, page, category, ingredients, instructions } = response.data;
             this.setState({
                 isLoading: false,

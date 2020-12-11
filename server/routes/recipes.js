@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const Users = require('../models/users');
 const Recipes = require('../models/recipes');
+const Notes = require('../models/notes');
 
 // MULTER CONFIG
 const multer = require('multer');
@@ -53,9 +54,11 @@ router.get('/', authorize, (req, res) => {
 });
 
 router.get('/:recipeId', authorize, (req, res) => {
+    console.log('Recipe ID:', req.params.recipeId);
+    console.log('User ID', req.userId);
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
-        .fetch({ require: false })
+        .fetch({ withRelated: ['notes'] })
         .then(recipe => {
             if (!recipe) {
                 return res.status(404).json({error: 'Recipe Not Found.'})
