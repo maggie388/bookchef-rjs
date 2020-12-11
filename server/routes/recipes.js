@@ -89,6 +89,13 @@ router.put('/:recipeId', authorize, upload.single('image'), (req, res) => {
         .fetch()
         .then(recipe => {
             const { userId, title, book, page, category, ingredients, instructions } = req.body;
+            if (req.file) {
+                fs.unlink(`./uploads/images/${recipe.attributes.image}`, (error) => {
+                    if (!error) {
+                        console.log("File deleted!");
+                    }
+                }) 
+            }
             recipe
                 .save({
                     user_id: userId ? userId : recipe.user_id,
@@ -112,20 +119,19 @@ router.delete('/:recipeId', authorize, (req, res) => {
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
         .fetch()
-        .then((recipe) => {
+        .then(recipe => {
             fs.unlink(`./uploads/images/${recipe.attributes.image}`, (error) => {
                 if (!error) {
                     console.log("File deleted!");
                 }
             }) 
-        })
-    Recipes
-        .where({ id: req.params.recipeId, user_id: req.userId })
-        .destroy()
-        .then(() => {
-            res.status(204).send();
-        })
-        .catch(error => console.log(error));
+            recipe
+                .destroy()
+                .then(() => {
+                    res.status(204).send();
+                })
+                .catch(error => console.log(error));
+        });
 });
 
 module.exports = router;
