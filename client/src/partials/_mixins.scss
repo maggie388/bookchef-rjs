@@ -55,11 +55,11 @@
     width: 100%;
     height: 225px;
     background-color: rgba(color(accent), .2);
+    overflow: hidden;
 }
 
 @mixin containedPic {
     width: 100%;
-    height: 100%; 
     object-fit: cover;
 }
 
