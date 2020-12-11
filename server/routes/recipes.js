@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 
 const Users = require('../models/users');
 const Recipes = require('../models/recipes');
@@ -24,7 +25,6 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 function authorize(req, res, next) {
-    console.log(req.headers.authorization);
     if (!req.headers.authorization) {
         return res.status(403).json({ error: 'This endpoint requires Auth Header' });
     }
@@ -109,6 +109,16 @@ router.put('/:recipeId', authorize, upload.single('image'), (req, res) => {
 });
 
 router.delete('/:recipeId', authorize, (req, res) => {
+    Recipes
+        .where({ id: req.params.recipeId, user_id: req.userId })
+        .fetch()
+        .then((recipe) => {
+            fs.unlink(`./uploads/images/${recipe.attributes.image}`, (error) => {
+                if (!error) {
+                    console.log("File deleted!");
+                }
+            }) 
+        })
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
         .destroy()
