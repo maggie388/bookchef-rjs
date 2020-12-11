@@ -10,7 +10,8 @@ const ExpendedMenu = ({ toggleMenu }) => {
     const signOut = () => {
         sessionStorage.removeItem('authToken');
         toggleMenu();
-        return history.push('/');
+        history.push('/');
+        window.location.reload();
     }
 
     return (

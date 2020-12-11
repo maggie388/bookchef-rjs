@@ -37,7 +37,13 @@ class RecipeList extends Component {
             .catch(error => console.log(error));
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        if (this.props.recipes.length > 0) {
+            this.setState({
+                recipes: this.props.recipes
+            });
+            return;
+        }
         this.getRecipes();
     }
 

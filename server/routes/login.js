@@ -11,15 +11,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // BCRYPT CONFIG
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const plaintextPassword1 = 'password1';
-const plaintextPassword2 = 'password2';
 
 const createHashPassword = (plaintext) => {
-    bcrypt.hash(plaintextPassword1, saltRounds, function(_err, hash) {
+    bcrypt.hash(plaintext, saltRounds, function(_err, hash) {
         console.log('hash :: ', hash);
     });
 };
 
+// ROUTES
 router.post('/', (req, res) => {
     const { username, password } = req.body;
     Users

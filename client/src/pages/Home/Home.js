@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import axiosInstance from '../../utils/axios';
 import './Home.scss';
 
@@ -6,11 +7,15 @@ import './Home.scss';
 import RecipeList from '../../components/RecipeList/RecipeList';
 import Login from '../../components/Login/Login';
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 class Home extends Component {
     state = {
         isLoggedIn: false,
         isLoginError: false,
         errorMessage: '',
+        recipes: []
     }
 
     login = (username, password) => {
@@ -18,10 +23,21 @@ class Home extends Component {
             .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token);
                 this.setState({
-                    isLoggedIn: true,
                     isLoginError: false, 
                     errorMessage: ''
                 });
+                axios.get(API_URL + '/recipes', {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                })
+                .then(response => {
+                    console.log(response.data);
+                    this.setState({
+                        isLoggedIn: true,
+                        recipes: response.data
+                    });
+                }) 
             })
             .catch(error => {
                 this.setState({
@@ -37,12 +53,16 @@ class Home extends Component {
             this.setState({
                 isLoggedIn: true
             });
+        } else {
+            this.setState({
+                isLoggedIn: false
+            })
         }
     }
 
     render() {
         if (this.state.isLoggedIn) {
-            return <RecipeList />;
+            return <RecipeList recipes={this.state.recipes} />;
         }
 
         return <Login login={this.login} />;
