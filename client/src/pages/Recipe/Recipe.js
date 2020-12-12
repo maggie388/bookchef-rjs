@@ -103,7 +103,7 @@ class Recipe extends Component {
                             dangerouslySetInnerHTML={{ __html: instructions }}>
                         </ul>
                         <h2 className='recipe__subtitle'>Notes</h2>
-                        <NoteList notes={this.state.notes} />
+                        <NoteList notes={this.state.notes} updateNotes={this.getSingleRecipe} />
                     </div>
                 </div>
             </main>

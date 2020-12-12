@@ -1,12 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import './Note.scss';
 
 // IMPORTED COMPONENTS
 import CloseButton from '../CloseButton/CloseButton';
 
-const Note = ({ note }) => {
+// VARIABLES
+const API_URL = process.env.REACT_APP_API_URL;
+
+const Note = ({ note, updateNotes }) => {
+
     const removeNote = () => {
-        console.log('Delete Note');
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.delete(`${API_URL}/notes/${note.id}`, axiosConfig)
+            .then(() => {
+                updateNotes();
+                console.log('Delete Note');
+            })
     }
 
     const formatedDate = new Date(note.created_at).toDateString();
