@@ -39,6 +39,7 @@ class Recipe extends Component {
         axios.get(`${API_URL}/recipes/${this.props.match.params.recipeId}`, axiosConfig)
         .then((response) => {
             const { image, title, book, page, category, ingredients, instructions, notes } = response.data;
+            const sortedNotes = notes.sort(this.sortByDate);
             this.setState({
                 isLoading: false,
                 image: image,
@@ -48,7 +49,7 @@ class Recipe extends Component {
                 category: category,
                 ingredients: ingredients,
                 instructions: instructions,
-                notes: notes
+                notes: sortedNotes
             })
         })
         .catch((error) => {
@@ -58,6 +59,10 @@ class Recipe extends Component {
             });
             console.log(error);
         });
+    }
+
+    sortByDate(obj1, obj2) {
+        return new Date(obj2.created_at) - new Date(obj1.created_at);
     }
 
     componentDidMount = () => {
