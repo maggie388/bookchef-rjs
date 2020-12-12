@@ -3,10 +3,15 @@
 @import '../../partials/variables';
 
 .recipe-list {
-    padding: 1rem;
+    padding: 2rem 1rem;
+
+    &__title-group {
+        display: flex;
+        margin-bottom: 2rem;
+    }
 
     &__title {
         @include m-h1;
-        margin-bottom: 1rem;
+        margin-right: 1rem;
     }
 }

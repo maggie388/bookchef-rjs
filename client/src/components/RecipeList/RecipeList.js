@@ -6,6 +6,7 @@ import './RecipeList.scss';
 // COMPONENTS
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
 import Loading from '../../components/Loading/Loading';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -73,7 +74,10 @@ class RecipeList extends Component {
 
         return (
             <main className='recipe-list'>
-                <h1 className='recipe-list__title'>Recent Recipes</h1>
+                <div className='recipe-list__title-group'>
+                    <h1 className='recipe-list__title'>Recent Recipes</h1>
+                    <SearchBar />
+                </div>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>
         );

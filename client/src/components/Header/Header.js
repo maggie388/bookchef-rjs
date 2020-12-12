@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 
 // IMPORTED COMPONENTS
-import SearchBar from '../SearchBar/SearchBar';
 import AddRecipeButton from '../AddRecipeButton/AddRecipeButton';
 import ExpandedMenu from '../ExpandedMenu/ExpandedMenu';
 
@@ -33,7 +32,6 @@ class Header extends Component {
                     <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
                 </div>
                 <div className='header__bottom-row'>
-                    <SearchBar />
                     <AddRecipeButton />
                 </div>
             </header>
