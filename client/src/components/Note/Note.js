@@ -93,6 +93,13 @@ class Note extends Component {
             .catch(error => console.log(error))
     }
 
+    handleClose = () => {
+        if (this.props.note) {
+            return this.removeNote();
+        }
+        this.props.toggleAddNote();
+    }
+
     renderEditableText = () => {
         return (
             <ContentEditable 
@@ -116,7 +123,7 @@ class Note extends Component {
                 {this.props.note &&  <p className='note__date'>{formatedDate}</p>}
                 {/* <p className='note__date'>{formatedDate}</p> */}
                 {isEditable ? <SaveButton alt='Save Note' clickAction={this.handleSave} /> : <EditButton alt='Edit Note' clickAction={this.editNote} />}
-                <CloseButton alt='Delete Note' clickAction={this.removeNote} />
+                <CloseButton alt='Delete Note' clickAction={this.handleClose} />
             </li>
         );
     }
