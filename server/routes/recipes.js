@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 
-const Users = require('../models/users');
 const Recipes = require('../models/recipes');
-const Notes = require('../models/notes');
 
 // MULTER CONFIG
 const multer = require('multer');

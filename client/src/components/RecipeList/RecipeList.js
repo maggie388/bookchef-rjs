@@ -55,6 +55,22 @@ class RecipeList extends Component {
             .catch(error => console.log(error));
     }
 
+    search = (query) => {
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.get(`${API_URL}/search?query=${query}`, axiosConfig)
+            .then(response => {
+                this.setState({
+                    recipes: response.data
+                });
+            })
+            .catch(error => console.log(error))
+    }
+
     componentWillMount() {
         if (this.props.recipes.length > 0) {
             const sortedRecipes = this.props.recipes.sort(this.sortByDate);
@@ -76,7 +92,7 @@ class RecipeList extends Component {
             <main className='recipe-list'>
                 <div className='recipe-list__title-group'>
                     <h1 className='recipe-list__title'>Recent Recipes</h1>
-                    <SearchBar />
+                    <SearchBar search={this.search} />
                 </div>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>
