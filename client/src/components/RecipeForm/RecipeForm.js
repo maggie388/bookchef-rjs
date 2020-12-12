@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable';
-import axiosInstance from '../../utils/axios';
+import axios from 'axios';
+// import axiosInstance from '../../utils/axios';
 import './RecipeForm.scss';
 
 // COMPONENTS
@@ -14,8 +15,8 @@ import addIcon from '../../assets/icons/add-sharp.svg';
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
 import closeIcon from '../../assets/icons/close-sharp.svg';
 
+// VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
-
 
 class RecipeForm extends Component {
     constructor() {
@@ -89,7 +90,7 @@ class RecipeForm extends Component {
     }
 
     readTextInImage = (formData, addToState, formatFn) => {
-        axiosInstance.post('/upload', formData)
+        axios.post(`${API_URL}/upload`, formData)
             .then(response => {
                 addToState(formatFn(response.data));
             })
@@ -124,7 +125,13 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
-        axiosInstance.post('/recipes', data)
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.post(`${API_URL}/recipes`, data, axiosConfig)
             .then((_response) => {
                 this.goBack();
             })
@@ -132,7 +139,13 @@ class RecipeForm extends Component {
     }
 
     handleEdit = (data) => {
-        axiosInstance.put(`/recipes/${this.props.recipe.id}`, data)
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.put(`${API_URL}/recipes/${this.props.recipe.id}`, data, axiosConfig)
             .then((_response) => {
                 this.goBack();
             })

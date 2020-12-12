@@ -1,6 +1,7 @@
 import React from 'react';
 import './CloseButton.scss';
 
+// ASSETS
 import closeIcon from '../../assets/icons/close-sharp.svg';
 
 const CloseIcon = ({ alt, clickAction }) => {

@@ -7,12 +7,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    padding-bottom: 0.5rem;
     border-radius: 5px;
     margin-bottom: 1rem;
 
     &__text {
         width: 100%;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
 
     &__date {
@@ -20,10 +21,10 @@
     }
 
     &:nth-child(odd) {
-        background-color: rgba(color(accent), .1);
+        background-color: rgba(color(body-text), .05);
     }
 
     &:nth-child(even) {
-        background-color: rgba(color(accent), .3);
+        background-color: rgba(color(body-text), .15);
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './NoteList.scss';
 
+// IMPORTED COMPONENTS
 import Note from '../Note/Note';
 
 const NoteList = ({ notes }) => {

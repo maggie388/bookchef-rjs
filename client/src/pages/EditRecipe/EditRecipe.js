@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import axiosInstance from '../../utils/axios';
+import axios from 'axios';
+// import axiosInstance from '../../utils/axios';
 import './EditRecipe.scss';
 
 // COMPONENTS
 import RecipeForm from '../../components/RecipeForm/RecipeForm';
 import Loading from '../../components/Loading/Loading';
+
+// VARIABLES
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 class EditRecipe extends Component {
@@ -15,7 +19,13 @@ class EditRecipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.get(`${API_URL}/recipes/${this.props.match.params.recipeId}`, axiosConfig)
         .then((response) => {
             this.setState({
                 isLoading: false,

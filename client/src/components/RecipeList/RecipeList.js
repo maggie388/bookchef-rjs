@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import axiosInstance from '../../utils/axios';
+import axios from 'axios';
+// import axiosInstance from '../../utils/axios';
 import './RecipeList.scss';
 
 // COMPONENTS
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
 import Loading from '../../components/Loading/Loading';
+
+// VARIABLES
+const API_URL = process.env.REACT_APP_API_URL;
 
 class RecipeList extends Component {
     state = {
@@ -13,7 +17,13 @@ class RecipeList extends Component {
     }
 
     getRecipes = () => {
-        axiosInstance.get('/recipes')
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.get(`${API_URL}/recipes`, axiosConfig)
             .then(response => {
                 const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
@@ -31,7 +41,13 @@ class RecipeList extends Component {
     }
 
     deleteRecipe = (recipeId) => {
-        axiosInstance.delete(`/recipes/${recipeId}`)
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.delete(`${API_URL}/recipes/${recipeId}`, axiosConfig)
             .then(_response => {
                 this.getRecipes();
             })

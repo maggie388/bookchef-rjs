@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axiosInstance from '../../utils/axios';
+import axios from 'axios';
+// import axiosInstance from '../../utils/axios';
 import './Recipe.scss';
 
 // COMPONENTS
@@ -12,7 +13,6 @@ import editIcon from '../../assets/icons/pencil-sharp.svg';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
-
 
 class Recipe extends Component {
     state = {
@@ -30,7 +30,13 @@ class Recipe extends Component {
     }
 
     getSingleRecipe = () => {
-        axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.get(`${API_URL}/recipes/${this.props.match.params.recipeId}`, axiosConfig)
         .then((response) => {
             const { image, title, book, page, category, ingredients, instructions, notes } = response.data;
             this.setState({

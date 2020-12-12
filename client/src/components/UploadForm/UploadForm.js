@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './UploadForm.scss';
 
 // COMPONENTS
-// import UploadPreview from '../../components/UploadPreview/UploadPreview';
 import ChooseButton from '../../components/ChooseButton/ChooseButton';
 
 class UploadForm extends Component {
@@ -29,7 +28,6 @@ class UploadForm extends Component {
     render() {
         return (
             <form className='upload-form' onSubmit={this.handleFormSubmit}>
-                {/* <UploadPreview imageURL={imageURL} />  */}
                 <ChooseButton 
                     handleFileUpload={this.handleFileUpload}
                     imageURL={imageURL} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Note.scss';
 
+// IMPORTED COMPONENTS
 import CloseButton from '../CloseButton/CloseButton';
 
 const Note = ({ note }) => {

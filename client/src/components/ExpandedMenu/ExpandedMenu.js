@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './ExpandedMenu.scss';
 
+// ASSETS
 import closeIcon from '../../assets/icons/close-sharp.svg';
 
 const ExpendedMenu = ({ toggleMenu }) => {

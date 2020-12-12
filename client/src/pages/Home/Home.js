@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import axiosInstance from '../../utils/axios';
+// import axiosInstance from '../../utils/axios';
 import './Home.scss';
 
 // COMPONENTS
 import RecipeList from '../../components/RecipeList/RecipeList';
 import Login from '../../components/Login/Login';
 
-
+// VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
 
 class Home extends Component {
@@ -19,18 +19,20 @@ class Home extends Component {
     }
 
     login = (username, password) => {
-        axiosInstance.post('/login', { username, password })
+        axios.post(`${API_URL}/login`, { username, password })
             .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token);
                 this.setState({
                     isLoginError: false, 
                     errorMessage: ''
                 });
-                axios.get(API_URL + '/recipes', {
+                const authToken = sessionStorage.getItem('authToken');
+                const axiosConfig = {
                     headers: {
-                        authorization: `Bearer ${token}`
+                        authorization: `Bearer ${authToken}`
                     }
-                })
+                };
+                axios.get(`${API_URL}/recipes`, axiosConfig)
                 .then(response => {
                     this.setState({
                         isLoggedIn: true,
@@ -43,6 +45,7 @@ class Home extends Component {
                     isLoginError: true,
                     errorMessage: 'Login failed'
                 });
+                console.log(error);
             });
     }
 
@@ -63,7 +66,6 @@ class Home extends Component {
         if (this.state.isLoggedIn) {
             return <RecipeList recipes={this.state.recipes} />;
         }
-
         return <Login login={this.login} />;
     }
 }

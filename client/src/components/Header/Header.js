@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
-// COMPONENTS
+// IMPORTED COMPONENTS
 import SearchBar from '../SearchBar/SearchBar';
 import AddRecipeButton from '../AddRecipeButton/AddRecipeButton';
 import ExpandedMenu from '../ExpandedMenu/ExpandedMenu';
@@ -10,7 +10,6 @@ import ExpandedMenu from '../ExpandedMenu/ExpandedMenu';
 // ASSETS
 import bookchefLogo from '../../assets/logos/bookchef-logo.svg';
 import menuIcon from '../../assets/icons/menu-outline.svg';
-
 
 class Header extends Component {
     state = {

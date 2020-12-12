@@ -10,7 +10,7 @@ import editIcon from '../../assets/icons/pencil-sharp.svg';
 const API_URL = process.env.REACT_APP_API_URL
 
 const RecipeListItem = ({ recipe, deleteRecipe }) => {
-    // other avaiable value to deconstruct: ingredients, instructions
+
     const { id, title, book, page, category, image } = recipe;
 
     const handleDelete = () => {
@@ -20,30 +20,28 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
     const recipePic = image && <img className='recipe-list-item__pic' src={`${API_URL}/${image}`} alt={title} />;
 
     return (
-        <div>
-            <div className='recipe-list-item'>
+        <div className='recipe-list-item'>
+            <Link to={`/recipe/${recipe.id}`}>
+                <div className='recipe-list-item__pic-div'>
+                    {image && recipePic}
+                </div>
+            </Link>
+            <div className='recipe-list-item__details-div'>
                 <Link to={`/recipe/${recipe.id}`}>
-                    <div className='recipe-list-item__pic-div'>
-                        {image && recipePic}
-                    </div>
+                    <h2 className='recipe-list-item__title'>{title}</h2>
+                    <p className='recipe-list-item__source'>{`${book}, page ${page}`}</p>
                 </Link>
-                <div className='recipe-list-item__details-div'>
-                    <Link to={`/recipe/${recipe.id}`}>
-                        <h2 className='recipe-list-item__title'>{title}</h2>
-                        <p className='recipe-list-item__source'>{`${book}, page ${page}`}</p>
+                <div className='recipe-list-item__icon-group'>
+                    <h3 className='recipe-list-item__category'>{category}</h3>
+                    <Link to={`/recipe/edit/${recipe.id}`}>
+                        <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
                     </Link>
-                    <div className='recipe-list-item__icon-group'>
-                        <h3 className='recipe-list-item__category'>{category}</h3>
-                        <Link to={`/recipe/edit/${recipe.id}`}>
-                            <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
-                        </Link>
-                        <img 
-                            className='recipe-list-item__icon'
-                            onClick={handleDelete}
-                            src={trashIcon} 
-                            alt='Delete' 
-                        />
-                    </div>
+                    <img 
+                        className='recipe-list-item__icon'
+                        onClick={handleDelete}
+                        src={trashIcon} 
+                        alt='Delete' 
+                    />
                 </div>
             </div>
         </div>
