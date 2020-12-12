@@ -2,6 +2,7 @@
 
 .save-button {
     @include icon-button-small;
+    width: 1.5rem;
     
     &__pic {
         @include icon-button-pic;

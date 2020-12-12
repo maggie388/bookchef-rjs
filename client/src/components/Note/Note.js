@@ -74,8 +74,8 @@ class Note extends Component {
         if (this.props.note) {
             return this.saveEditedNote();
         }
-        this.addNewNote();
         this.props.toggleAddNote();
+        this.addNewNote();
     }
 
     removeNote = () => {
@@ -121,7 +121,6 @@ class Note extends Component {
             <li className='note'>
                 {isEditable ? this.renderEditableText() : <p className='note__text'>{this.state.text}</p>}
                 {this.props.note &&  <p className='note__date'>{formatedDate}</p>}
-                {/* <p className='note__date'>{formatedDate}</p> */}
                 {isEditable ? <SaveButton alt='Save Note' clickAction={this.handleSave} /> : <EditButton alt='Edit Note' clickAction={this.editNote} />}
                 <CloseButton alt='Delete Note' clickAction={this.handleClose} />
             </li>

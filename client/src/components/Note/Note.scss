@@ -4,7 +4,7 @@
 .note {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 0.5rem;
     padding-bottom: 0.5rem;
@@ -28,11 +28,15 @@
         margin-right: auto;
     }
 
-    &:nth-child(odd) {
+    > :last-child {
+        margin-left: 0.5rem;
+    }
+
+    &:nth-last-child(odd) {
         background-color: rgba(color(body-text), .05);
     }
 
-    &:nth-child(even) {
+    &:nth-last-child(even) {
         background-color: rgba(color(body-text), .15);
     }
 }
