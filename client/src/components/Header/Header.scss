@@ -1,35 +1,27 @@
 @import '../../partials/variables.scss';
 
 .header {
+    display: flex;
+    align-items: center;
     width: 100%;
     padding: 1rem;
     background-color: color(accent);
 
-    &__top-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
+    // targets logo <Link> component
+    > :first-child {
+        margin-right: auto;
     }
     
     &__logo {
-        height: 2.75rem;
+        height: 2.6rem;
         margin-left: -.25rem;
     }
 
     &__menu {
-        width: 2.5rem;
+        width: 3rem;
+        margin-left: 2rem;
+        opacity: 0.7;
         cursor: pointer;
-    }
-
-    &__bottom-row {
-        display: flex;
-        align-items: center;
-
-        // targets SearBar component
-        > :first-child {
-            margin-right: 1rem;
-        }
     }
 
 }

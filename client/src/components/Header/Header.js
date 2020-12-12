@@ -25,15 +25,11 @@ class Header extends Component {
         return (
             <>
             <header className='header'>
-                <div className='header__top-row'>
-                    <Link to='/'>
-                        <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
-                    </Link>
-                    <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
-                </div>
-                <div className='header__bottom-row'>
-                    <AddRecipeButton />
-                </div>
+                <Link to='/'>
+                    <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
+                </Link>
+                <AddRecipeButton />
+                <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
             </header>
             {this.state.expandMenu && <ExpandedMenu toggleMenu={this.toggleMenu} />}
             </>
