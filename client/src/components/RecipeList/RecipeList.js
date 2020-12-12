@@ -7,6 +7,7 @@ import './RecipeList.scss';
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
 import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import AddRecipeButton from '../../components/AddRecipeButton/AddRecipeButton'
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -92,6 +93,7 @@ class RecipeList extends Component {
             <main className='recipe-list'>
                 <div className='recipe-list__title-group'>
                     <h1 className='recipe-list__title'>Recent Recipes</h1>
+                    <AddRecipeButton />
                     <SearchBar search={this.search} />
                 </div>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />

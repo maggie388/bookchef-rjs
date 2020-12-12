@@ -6,9 +6,11 @@ import RecipeListItem from '../RecipeListItem/RecipeListItem';
 
 const RecipeListContainer = ({ recipes, deleteRecipe }) => {
     return (
-        recipes.map((recipe) => {
-            return <RecipeListItem key={recipe.id} recipe={recipe} deleteRecipe={deleteRecipe} />
-        })
+        <div className='recipe-list-container'>
+            {recipes.map((recipe) => {
+                return <RecipeListItem key={recipe.id} recipe={recipe} deleteRecipe={deleteRecipe} />
+            })}
+        </div>
     );
 };
 

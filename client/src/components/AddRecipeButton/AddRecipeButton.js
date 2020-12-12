@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './AddRecipeButton.scss';
 
 // ASSETS
-import addIcon from '../../assets/icons/add-circle-sharp.svg';
+import addIcon from '../../assets/icons/add-circle-green.svg';
 
 const AddRecipeButton = () => {
     return (

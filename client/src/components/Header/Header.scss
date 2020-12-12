@@ -7,6 +7,14 @@
     padding: 1rem;
     background-color: color(accent);
 
+    @media (min-width: 768px) {
+        padding: 2rem 1.5rem;
+    }
+
+    @media (min-width: 948px) {
+        padding: 2rem calc( 50% - 450px );
+    }
+    
     // targets logo <Link> component
     > :first-child {
         margin-right: auto;

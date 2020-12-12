@@ -10,6 +10,16 @@
     border-radius: 5px;
     margin-bottom: 1rem;
 
+    @media (min-width: 748px) {
+        width: calc(50% - 8px);
+        // max-width: 350px;
+
+        &:nth-child(odd) {
+            // border: 1px solid red;
+            margin-right: 1rem;
+        }
+    }
+
     &__pic-div {
         @include recipePicDiv;
         width: 100px;

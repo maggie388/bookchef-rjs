@@ -5,13 +5,47 @@
 .recipe-list {
     padding: 2rem 1rem;
 
+    @media (min-width: 768px) {
+        padding: 2rem 1.5rem;
+    }
+
+    @media (min-width: 948px) {
+        padding: 2rem calc( 50% - 450px );
+    }
+
     &__title-group {
         display: flex;
-        margin-bottom: 2rem;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+
+        @media (min-width: 768px) {
+            display: flex;
+        }
+
+        // target the AddRecipeButton component
+        > :nth-child(2) {
+            margin-bottom: 1rem;
+        }
+
+        // targers the SearchBar component
+        > :last-child {
+            width: 100%;
+
+            @media (min-width: 748px) {
+                width: calc(50% - 8px);
+                margin-left: .8rem;
+            }
+        }
+
     }
 
     &__title {
         @include m-h1;
-        margin-right: 1rem;
+        line-height: 40px;
+        
+        @media (min-width: 768px) {
+            margin-right: auto;
+        }
     }
 }

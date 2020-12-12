@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 
 // IMPORTED COMPONENTS
-import AddRecipeButton from '../AddRecipeButton/AddRecipeButton';
 import ExpandedMenu from '../ExpandedMenu/ExpandedMenu';
 
 // ASSETS
@@ -28,7 +27,6 @@ class Header extends Component {
                 <Link to='/'>
                     <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
                 </Link>
-                <AddRecipeButton />
                 <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
             </header>
             {this.state.expandMenu && <ExpandedMenu toggleMenu={this.toggleMenu} />}
