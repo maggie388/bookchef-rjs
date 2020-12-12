@@ -4,6 +4,7 @@ const app = express();
 const loginRouter = require('./routes/login');
 const recipesRouter = require('./routes/recipes');
 const uploadRouter = require('./routes/upload');
+const notesRouter = require('./routes/notes');
 
 // OTHER PACKAGE IMPORTS
 require('dotenv').config();
@@ -20,6 +21,7 @@ app.use(logger('dev'));
 // ROUTERS
 app.use('/login', loginRouter);
 app.use('/recipes', recipesRouter);
+app.use('/notes', notesRouter);
 app.use('/upload', uploadRouter);
 
 app.use(express.static('uploads/images'));
