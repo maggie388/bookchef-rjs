@@ -6,8 +6,7 @@ import './Recipe.scss';
 // COMPONENTS
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import Loading from '../../components/Loading/Loading';
-import NoteList from '../../components/NoteList/NoteList';
-import AddButton from '../../components/AddButton/AddButton';
+import NotesContainer from '../../components/NotesContainer/NotesContainer';
 
 // ASSETS
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -19,7 +18,6 @@ class Recipe extends Component {
     state = {
         isLoading: true,
         notFound: false,
-        recipeId: this.props.match.params.recipeId,
         image: '',
         title: '',
         book: '',
@@ -28,10 +26,6 @@ class Recipe extends Component {
         ingredients: '',
         instructions: '', 
         notes: ''
-    }
-
-    addNote = () => {
-
     }
 
     getSingleRecipe = () => {
@@ -97,7 +91,7 @@ class Recipe extends Component {
                         goBack={this.props.history.goBack}
                         h1Text={title}
                         icon={editIcon}
-                        recipeId={this.state.recipeId}
+                        recipeId={this.props.match.params.recipeId}
                     />
                     <div className='recipe__details-div'>
                         <h3 className='recipe__category'>{category}</h3>
@@ -112,11 +106,7 @@ class Recipe extends Component {
                             className='recipe__list recipe__list--instructions'
                             dangerouslySetInnerHTML={{ __html: instructions }}>
                         </ul>
-                        <div className='recipe__notes-heading'>
-                            <h2 className='recipe__subtitle recipe__subtitle--notes'>Notes</h2>
-                            <AddButton alt='Add Note' clickAction={this.addNote} />
-                        </div>
-                        <NoteList notes={this.state.notes} updateNotes={this.getSingleRecipe} />
+                        <NotesContainer recipeId={this.props.match.params.recipeId} notes={this.state.notes} updateNotes={this.getSingleRecipe} />
                     </div>
                 </div>
             </main>

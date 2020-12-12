@@ -1,5 +1,5 @@
 import React from 'react';
-import './NoteList.scss';
+import './NotesList.scss';
 
 // IMPORTED COMPONENTS
 import Note from '../Note/Note';

@@ -16,9 +16,9 @@ class Note extends Component {
         super();
         this.editableText = React.createRef();
         this.state = {
-            note: props.note,
-            text: props.note.text,
-            isEditable: false
+            note: props.note || '',
+            text: (props.note && props.note.text) || '',
+            isEditable: props.isEditable ? true : false
         };
     }
 
@@ -50,6 +50,32 @@ class Note extends Component {
                 console.log('Edited Note');
             })
             .catch(error => console.log(error))
+    }
+
+    addNewNote = () => {
+        const authToken = sessionStorage.getItem('authToken');
+        const axiosConfig = {
+            headers: {
+                authorization: `Bearer ${authToken}`
+            }
+        };
+        axios.post(`${API_URL}/notes`, { text: this.state.text, recipeId: this.props.recipeId }, axiosConfig)
+            .then(() => {
+                this.setState({
+                    isEditable: false
+                });
+                this.props.updateNotes();
+                console.log('Added a Note');
+            })
+            .catch(error => console.log(error))
+    }
+
+    handleSave = () => {
+        if (this.props.note) {
+            return this.saveEditedNote();
+        }
+        this.addNewNote();
+        this.props.toggleAddNote();
     }
 
     removeNote = () => {
@@ -87,8 +113,9 @@ class Note extends Component {
         return (
             <li className='note'>
                 {isEditable ? this.renderEditableText() : <p className='note__text'>{this.state.text}</p>}
-                <p className='note__date'>{formatedDate}</p>
-                {isEditable ? <SaveButton alt='Save Note' clickAction={this.saveEditedNote} /> : <EditButton alt='Edit Note' clickAction={this.editNote} />}
+                {this.props.note &&  <p className='note__date'>{formatedDate}</p>}
+                {/* <p className='note__date'>{formatedDate}</p> */}
+                {isEditable ? <SaveButton alt='Save Note' clickAction={this.handleSave} /> : <EditButton alt='Edit Note' clickAction={this.editNote} />}
                 <CloseButton alt='Delete Note' clickAction={this.removeNote} />
             </li>
         );

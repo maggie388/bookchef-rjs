@@ -36,22 +36,10 @@
         color: grey;
      }
 
-     &__notes-heading {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.75rem;
-     }
-
      &__subtitle {
         @include m-h2;
         margin-bottom: 0.75rem;
-        margin-right: 1rem;
         font-size: 1.25rem;
-
-        &--notes {
-           margin-right: 1rem;
-           margin-bottom: 0.3rem;
-        }
      }
 
      &__list {
