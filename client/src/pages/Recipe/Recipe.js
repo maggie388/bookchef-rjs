@@ -7,6 +7,7 @@ import './Recipe.scss';
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import Loading from '../../components/Loading/Loading';
 import NoteList from '../../components/NoteList/NoteList';
+import AddButton from '../../components/AddButton/AddButton';
 
 // ASSETS
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -27,6 +28,10 @@ class Recipe extends Component {
         ingredients: '',
         instructions: '', 
         notes: ''
+    }
+
+    addNote = () => {
+
     }
 
     getSingleRecipe = () => {
@@ -107,7 +112,10 @@ class Recipe extends Component {
                             className='recipe__list recipe__list--instructions'
                             dangerouslySetInnerHTML={{ __html: instructions }}>
                         </ul>
-                        <h2 className='recipe__subtitle'>Notes</h2>
+                        <div className='recipe__notes-heading'>
+                            <h2 className='recipe__subtitle recipe__subtitle--notes'>Notes</h2>
+                            <AddButton alt='Add Note' clickAction={this.addNote} />
+                        </div>
                         <NoteList notes={this.state.notes} updateNotes={this.getSingleRecipe} />
                     </div>
                 </div>
