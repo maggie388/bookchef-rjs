@@ -96,11 +96,19 @@ class Recipe extends Component {
                     <div className='recipe__details-div'>
                         <h3 className='recipe__category'>{category}</h3>
                         <p className='recipe__source'>{book}, page {page}</p>
-                        <h2 className='recipe__subtitle'>Ingredients</h2>
-                        <ul 
-                            className='recipe__list recipe__list--ingredients' 
-                            dangerouslySetInnerHTML={{ __html: ingredients }}>
-                        </ul>
+                        <div className='recipe__side'>
+                            <div className='recipe__side-pic-container'>
+                                {image && recipePic}
+                            </div>
+                            <div>
+                                <h2 className='recipe__subtitle'>Ingredients</h2>
+                                <ul 
+                                    className='recipe__list recipe__list--ingredients' 
+                                    dangerouslySetInnerHTML={{ __html: ingredients }}>
+                                </ul>
+                            </div>
+                        </div>
+                        
                         <h2 className='recipe__subtitle'>Instructions</h2>
                         <ul 
                             className='recipe__list recipe__list--instructions'
