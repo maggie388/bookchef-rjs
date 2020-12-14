@@ -18,10 +18,10 @@ class ScanModal extends PureComponent {
         src: null,
         crop: {
             unit: '%',
-            width: 80,
-            height: 80,
-            x: 30,
-            y: 30
+            width: 30,
+            height: 30,
+            x: 0,
+            y: 0
         }
     }
 
@@ -105,7 +105,6 @@ class ScanModal extends PureComponent {
         const formData = new FormData();
         formData.append('file', this.state.file2);
         readText(formData, addToState, formatFn);
-        
     }
 
     handleClose = () => {

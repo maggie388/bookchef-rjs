@@ -67,13 +67,13 @@ class RecipeForm extends Component {
 
     toggleScanIngredientsModal = () => {
         this.setState({
-            scanIngredientsModal: !this.state.scanIngredientsModal
+            scanIngredientsModal: this.state.scanIngredientsModal ? false : true
         });
     }
 
     toggleScanInstructionsModal = () => {
         this.setState({
-            scanInstructionsModal: !this.state.scanInstructionsModal
+            scanInstructionsModal: this.state.scanInstructionsModal ? false : true
         });
     }
 
@@ -84,7 +84,8 @@ class RecipeForm extends Component {
     }
 
     formatInstructions = (string) => {
-        const instructionsArr = string.split('.\n');
+        console.log(string.replace(/\d\./, ''));
+        const instructionsArr = string.replace(/\d\./g, '').split('.\n');
         const instructionsHTML = instructionsArr.map(instructions => `<li>${instructions}</li>`).join('');
         return instructionsHTML;
     }
@@ -108,7 +109,7 @@ class RecipeForm extends Component {
         this.setState({
             instructionsHTML: instructionsHTML
         });
-        this.toggleScanInstructionsModal()
+        this.toggleScanInstructionsModal();
     }
 
     buildRequestObject = (e) => {
