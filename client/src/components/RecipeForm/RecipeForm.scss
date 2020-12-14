@@ -48,12 +48,42 @@
         flex-grow: 2;
     }
 
+    &__book-page-group {
+        display: flex;
+        width: 100%;
+
+        :first-child {
+            margin-right: 1.5rem;
+            width: 90%;
+        }
+    }
+
+    &__input-group {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__label {
         @include form-label;
     }
 
     &__text-input {
         @include input-field;
+    }
+
+    &__dropdown{
+        @include category;
+        width: fit-content;
+        padding-right: 2rem;
+        font-size: 0.8rem;
+        border: none;
+        outline: none;
+        appearance: none;
+        background-image: url('../../assets/icons/chevron-down.svg');
+        background-repeat: no-repeat;
+        background-size: 1rem;
+        background-position: 90% 50%;
+        margin-bottom: 1.5rem;
     }
 
     &__label-div {

@@ -249,33 +249,45 @@ class RecipeForm extends Component {
                                     value={this.state.title}
                                     onChange={this.handleChange}
                                 />
-                                <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
-                                <input
-                                    className='recipe-form__text-input'
-                                    id='book'
-                                    name='book' 
-                                    type='text' 
-                                    value={this.state.book}
-                                    onChange={this.handleChange}
-                                />
-                                <label className='recipe-form__label' htmlFor='page'>Page</label>
-                                <input
-                                    className='recipe-form__text-input'
-                                    id='page'
-                                    name='page' 
-                                    type='text' 
-                                    value={this.state.page}
-                                    onChange={this.handleChange}
-                                />
-                                <label className='recipe-form__label' htmlFor='page'>Category</label>
-                                <input
-                                    className='recipe-form__text-input'
+                                <div className='recipe-form__book-page-group'>
+                                    <div className='recipe-form__input-group'>
+                                        <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
+                                        <input
+                                            className='recipe-form__text-input'
+                                            id='book'
+                                            name='book' 
+                                            type='text' 
+                                            value={this.state.book}
+                                            onChange={this.handleChange}
+                                        />
+                                    </div>
+                                    <div className='recipe-form__input-group'>
+                                        <label className='recipe-form__label' htmlFor='page'>Page</label>
+                                        <input
+                                            className='recipe-form__text-input'
+                                            id='page'
+                                            name='page' 
+                                            type='text' 
+                                            value={this.state.page}
+                                            onChange={this.handleChange}
+                                        />
+                                    </div>
+                                </div>
+                                <label className='recipe-form__label' htmlFor='category'>Category</label>
+                                <select
+                                    className='recipe-form__dropdown'
                                     id='category'
                                     name='category' 
-                                    type='text' 
                                     value={this.state.category}
                                     onChange={this.handleChange}
-                                />
+                                >
+                                    <option value=''>--</option>
+                                    <option value='Main'>MAIN</option>
+                                    <option value='Side Dish'>SIDE DISH</option>
+                                    <option value='Dessert'>DESSERT</option>
+                                    <option value='Breakfast'>BREAKFAST</option>
+                                    <option value='Beverage'>BEVERAGE</option>
+                                </select>
                             </div>
                         </div>
                         <div className='recipe-form__label-div'>

@@ -34,7 +34,7 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
                 <div className='recipe-list-item__icon-group'>
                     <h3 className='recipe-list-item__category'>{category}</h3>
                     <Link to={`/recipe/edit/${recipe.id}`}>
-                        <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
+                        <img className='recipe-list-item__icon recipe-list-item__icon--nudge'src={editIcon} alt='Edit' />
                     </Link>
                     <img 
                         className='recipe-list-item__icon'

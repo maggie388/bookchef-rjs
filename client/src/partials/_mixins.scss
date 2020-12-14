@@ -68,7 +68,7 @@
             top: 0;
             left: 0;
             z-index: -5;
-            width: 100vw;
+            width: 100%;
             height: 30px;
             background-color: color(accent);
         }
@@ -79,7 +79,7 @@
     }
 }
 
-@mixin backIcon {
+@mixin back-icon {
     height: 1.75rem;
     margin-top: 0.20rem;
     margin-right: 0.5rem;
@@ -90,18 +90,18 @@
     border: 1px solid color(accent);
     border-radius: 5px;
     outline: none;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
 }
 
 @mixin category {
     width: fit-content;
-    padding: 0.25rem 0.75rem;
-    padding-top: 0.4rem;
+    padding: 0.60rem 1rem;
     border-radius: 10px;
     color: #FFFFFF;
     background-color: color(accent);
-    font-size: 0.60rem;
+    font-size: 0.75rem;
+    line-height: 0.60rem;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -135,4 +135,22 @@
 @mixin icon-button-pic {
     width: 100%;
     opacity: 0.4;
+}
+
+@mixin body-rounded-corners {
+    position: relative;
+    border-radius: 30px;
+    background-color: #FFF;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -5;
+        width: 100%;
+        height: 30px;
+        background-color: color(accent);
+    }
 }
