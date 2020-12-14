@@ -96,7 +96,7 @@ class Recipe extends Component {
                     <div className='recipe__details-div'>
                         <h3 className='recipe__category'>{category}</h3>
                         <p className='recipe__source'>{book}, page {page}</p>
-                        <div className='recipe__side'>
+                        <div className='recipe__side-by-side'>
                             <div className='recipe__side-pic-container'>
                                 {image && recipePic}
                             </div>

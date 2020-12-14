@@ -218,51 +218,66 @@ class RecipeForm extends Component {
 
         return (
             <form className='recipe-form' onSubmit={this.handleSubmit}>
+                {/* Display ChooseButton to add a picture or display current recipe picture with option ot remove */}
                 <div className='recipe-form__top'>
-                    <img className='recipe-form__delete-pic' src={closeIcon} alt='close' onClick={this.deleteImage} />
+                    <img className='recipe-form__delete-icon' src={closeIcon} alt='close' onClick={this.deleteImage} />
                     {this.state.image ?
                         <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
                         <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
                 </div>
+                {/* bottom on form that overlaps the image div */}
                 <div className='recipe-form__bottom'>
                     <BodyHeader goBack={this.goBack} h1Text={this.props.h1Text} icon={saveIcon} />
                     <div className='recipe-form__details-div'>
-                        <label className='recipe-form__label' htmlFor='title'>Title</label>
-                        <input
-                            className='recipe-form__text-input'
-                            id='title'
-                            name='title' 
-                            type='text' 
-                            value={this.state.title}
-                            onChange={this.handleChange}
-                        />
-                        <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
-                        <input
-                            className='recipe-form__text-input'
-                            id='book'
-                            name='book' 
-                            type='text' 
-                            value={this.state.book}
-                            onChange={this.handleChange}
-                        />
-                        <label className='recipe-form__label' htmlFor='page'>Page</label>
-                        <input
-                            className='recipe-form__text-input'
-                            id='page'
-                            name='page' 
-                            type='text' 
-                            value={this.state.page}
-                            onChange={this.handleChange}
-                        />
-                        <label className='recipe-form__label' htmlFor='page'>Category</label>
-                        <input
-                            className='recipe-form__text-input'
-                            id='category'
-                            name='category' 
-                            type='text' 
-                            value={this.state.category}
-                            onChange={this.handleChange}
-                        />
+                        {/* contains stucture for the split view for desktop */}
+                        <div className='recipe-form__side-by-side'>
+                            {/* left side is same as ".recipe-form__top" but only visible on larger screen with the top div is hidden */}
+                            <div className='recipe-form__side-pic-container'>
+                                <img className='recipe-form__delete-icon' src={closeIcon} alt='close' onClick={this.deleteImage} />
+                                {this.state.image ?
+                                    <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
+                                    <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
+                            </div>
+                            {/* will appear to the right of the picture on desktop view */}
+                            <div className='recipe-form__side-recipe-details'>
+                                <label className='recipe-form__label' htmlFor='title'>Title</label>
+                                <input
+                                    className='recipe-form__text-input'
+                                    id='title'
+                                    name='title' 
+                                    type='text' 
+                                    value={this.state.title}
+                                    onChange={this.handleChange}
+                                />
+                                <label className='recipe-form__label' htmlFor='book'>Cookbook</label>
+                                <input
+                                    className='recipe-form__text-input'
+                                    id='book'
+                                    name='book' 
+                                    type='text' 
+                                    value={this.state.book}
+                                    onChange={this.handleChange}
+                                />
+                                <label className='recipe-form__label' htmlFor='page'>Page</label>
+                                <input
+                                    className='recipe-form__text-input'
+                                    id='page'
+                                    name='page' 
+                                    type='text' 
+                                    value={this.state.page}
+                                    onChange={this.handleChange}
+                                />
+                                <label className='recipe-form__label' htmlFor='page'>Category</label>
+                                <input
+                                    className='recipe-form__text-input'
+                                    id='category'
+                                    name='category' 
+                                    type='text' 
+                                    value={this.state.category}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        </div>
                         <div className='recipe-form__label-div'>
                             <label 
                                 className='recipe-form__label' 

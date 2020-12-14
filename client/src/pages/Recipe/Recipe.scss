@@ -4,8 +4,9 @@
 
 .recipe {
    position: relative;
+   
      &__top {
-        @include recipePicDiv;
+        @include top-pic-container;
          background-image: url('../../assets/icons/food.svg');
          background-repeat: no-repeat;
          background-position: 50% 40%;
@@ -16,52 +17,20 @@
          }
      }
 
-     &__side {
+     &__side-by-side {
         display: flex;
      }
 
      &__side-pic-container {
-        display: none;
-        width: 300px;
-        height: 250px;
-        border-radius: 5px;
-        margin-right: 2rem;
-        margin-bottom: 1.5rem;
-        overflow: hidden;
-
-        @media (min-width: 768px) {
-            display: block;
-        }
+        @include side-pic-container;
      }
      
      &__pic {
-        @include containedPic;
+        @include contained-pic;
      }
 
      &__bottom {
-        @include overlapTopDiv;
-        padding: 1.5rem 1rem;
-
-        @media (min-width: 768px) {
-            position: static;
-            padding: 2rem 1.5rem;
-
-            &:before {
-               content: '';
-               display: block;
-               position: absolute;
-               top: 0;
-               left: 0;
-               z-index: -5;
-               width: 100vw;
-               height: 30px;
-               background-color: color(accent);
-            }
-        }
-
-        @media (min-width: 948px) {
-            padding: 2rem calc( 50% - 450px );
-        }
+        @include bottom-details-container;
      }
 
      &__details-div {

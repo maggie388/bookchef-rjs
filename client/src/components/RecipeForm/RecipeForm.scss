@@ -3,13 +3,14 @@
 @import '../../partials/variables';
 
 .recipe-form {
+    position: relative;
     width: 100%;
 
     &__top {
-        @include recipePicDiv;
+        @include top-pic-container;
         position: relative;
     }
-    &__delete-pic {
+    &__delete-icon {
         position: absolute;
         right: 1rem;
         top: 1rem;
@@ -19,19 +20,32 @@
     }
 
     &__pic {
-        @include containedPic;
+        @include contained-pic;
     }
 
     &__bottom {
-        @include overlapTopDiv;
-        padding: 1.5rem 1rem;
-        padding-right: 2rem;
+        @include bottom-details-container;
     }
 
     &__details-div {
         display: flex;
         flex-direction: column;
         padding-left: 2.25rem;
+    }
+
+    &__side-by-side {
+        display: flex;
+    }
+
+    &__side-pic-container {
+        @include side-pic-container;
+        position: relative;
+    }
+
+    &__side-recipe-details {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
     }
 
     &__label {
@@ -52,6 +66,7 @@
     }
 
     &__label-icon {
+        width: 25px;
         height: 100%;
     }
 
@@ -71,21 +86,5 @@
         > li {
             margin-bottom: 0.5rem;
         }
-
-    }
-}
-
-.recipe-form {
-
-    &__label-div {
-        display: flex;
-        align-items: center;
-        // border: 1px solid red;
-        
-    }
-
-    &__label-icon {
-        width: 25px;
-        // border: 1px solid blue;
     }
 }

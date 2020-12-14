@@ -21,7 +21,6 @@
     }
 
     &__pic-div {
-        @include recipePicDiv;
         width: 100px;
         height: 100px;
         border-radius: 5px;
@@ -33,7 +32,7 @@
     }
 
     &__pic {
-        @include containedPic; 
+        @include contained-pic; 
         border-radius: 5px;   
     }
 
