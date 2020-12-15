@@ -84,12 +84,12 @@ router.post('/', authorize, upload.single('image'), (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.put('/:recipeId', authorize, upload.single('image'), (req, res) => {
+router.put('/:recipeId', authorize, upload.single('file'), (req, res) => {
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
         .fetch()
         .then(recipe => {
-            const { userId, title, book, page, category, ingredients, instructions } = req.body;
+            const { userId, title, book, page, category, ingredients, instructions, image } = req.body;
             if (req.file) {
                 fs.unlink(`./uploads/images/${recipe.attributes.image}`, (error) => {
                     if (!error) {
@@ -106,7 +106,7 @@ router.put('/:recipeId', authorize, upload.single('image'), (req, res) => {
                     category: category ? category : recipe.category,
                     ingredients: ingredients ? ingredients : recipe.ingredients,
                     instructions: instructions ? instructions : recipe.instructions,
-                    image: req.file ? req.file.filename : recipe.image
+                    image: req.file ? req.file.filename : image
                 })
                 .then(newRecipe => {
                     res.status(201).json(newRecipe)

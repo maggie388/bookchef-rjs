@@ -114,7 +114,8 @@ class RecipeForm extends Component {
 
     buildRequestObject = (e) => {
         const data = new FormData(e.target);
-        data.append('image', this.state.file);
+        data.append('file', this.state.file);
+        data.append('image', this.state.image);
         data.append('userId', this.state.userId);
         data.append('ingredients', this.state.ingredientsHTML);
         data.append('instructions', this.state.instructionsHTML);
