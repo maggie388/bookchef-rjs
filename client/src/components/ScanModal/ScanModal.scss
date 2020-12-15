@@ -1,3 +1,5 @@
+@import '../../partials/mixins';
+
 .scan-modal {
     position: absolute;
     top: 0;
@@ -8,6 +10,10 @@
     width: 100vw;
     height: 100vh;
     background-color: #FFF;
+
+    @include tablet {
+        
+    }
 
     &__top {
         display: flex;

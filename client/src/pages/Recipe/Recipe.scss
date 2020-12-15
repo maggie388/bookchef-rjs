@@ -6,11 +6,8 @@
    position: relative;
    
      &__top {
-        @include top-pic-container;
-         background-image: url('../../assets/icons/food.svg');
-         background-repeat: no-repeat;
-         background-position: 50% 40%;
-         background-size: 5rem;
+         @include top-pic-container;
+         @include pic-container-bg;
 
          @media (min-width: 768px) {
             display: none;
@@ -23,6 +20,7 @@
 
      &__side-pic-container {
         @include side-pic-container;
+        @include pic-container-bg;
      }
      
      &__pic {

@@ -50,6 +50,13 @@
     object-fit: cover;
 }
 
+@mixin pic-container-bg {
+    background-image: url('../assets/icons/food.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 5rem;
+}
+
 @mixin bottom-details-container {
     position: relative;
     top: -30px;
