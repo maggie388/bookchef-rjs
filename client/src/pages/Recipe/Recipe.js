@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
 import './Recipe.scss';
 
 // COMPONENTS
@@ -29,13 +28,7 @@ class Recipe extends Component {
     }
 
     getSingleRecipe = () => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.get(`${API_URL}/recipes/${this.props.match.params.recipeId}`, axiosConfig)
+        axiosInstance.get(`/recipes/${this.props.match.params.recipeId}`)
         .then((response) => {
             const { image, title, book, page, category, ingredients, instructions, notes } = response.data;
             const sortedNotes = notes.sort(this.sortByDate);

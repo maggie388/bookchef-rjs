@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable';
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import './Note.scss';
 
 // IMPORTED COMPONENTS
 import CloseButton from '../CloseButton/CloseButton';
 import EditButton from '../EditButton/EditButton';
 import SaveButton from '../SaveButton/SaveButton';
-
-// VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
 
 class Note extends Component {
     constructor(props) {
@@ -35,13 +32,7 @@ class Note extends Component {
     }
 
     saveEditedNote = () => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.put(`${API_URL}/notes/${this.state.note.id}`, { text: this.state.text }, axiosConfig)
+        axiosInstance.put(`/notes/${this.state.note.id}`, { text: this.state.text })
             .then(() => {
                 this.setState({
                     isEditable: false
@@ -53,13 +44,7 @@ class Note extends Component {
     }
 
     addNewNote = () => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.post(`${API_URL}/notes`, { text: this.state.text, recipeId: this.props.recipeId }, axiosConfig)
+        axiosInstance.post(`/notes`, { text: this.state.text, recipeId: this.props.recipeId })
             .then(() => {
                 this.setState({
                     isEditable: false
@@ -79,13 +64,7 @@ class Note extends Component {
     }
 
     removeNote = () => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.delete(`${API_URL}/notes/${this.state.note.id}`, axiosConfig)
+        axiosInstance.delete(`/notes/${this.state.note.id}`)
             .then(() => {
                 this.props.updateNotes();
                 console.log('Delete Note');

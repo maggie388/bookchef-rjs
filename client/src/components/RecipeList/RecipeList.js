@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
 import './RecipeList.scss';
 
 // COMPONENTS
@@ -9,9 +8,6 @@ import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import AddRecipeButton from '../../components/AddRecipeButton/AddRecipeButton'
 
-// VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
-
 class RecipeList extends Component {
     state = {
         isLoading: true,
@@ -19,13 +15,7 @@ class RecipeList extends Component {
     }
 
     getRecipes = () => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.get(`${API_URL}/recipes`, axiosConfig)
+        axiosInstance.get(`/recipes`)
             .then(response => {
                 const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
@@ -43,13 +33,7 @@ class RecipeList extends Component {
     }
 
     deleteRecipe = (recipeId) => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.delete(`${API_URL}/recipes/${recipeId}`, axiosConfig)
+        axiosInstance.delete(`/recipes/${recipeId}`)
             .then(_response => {
                 this.getRecipes();
             })
@@ -57,13 +41,7 @@ class RecipeList extends Component {
     }
 
     search = (query) => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.get(`${API_URL}/search?query=${query}`, axiosConfig)
+        axiosInstance.get(`/search?query=${query}`)
             .then(response => {
                 this.setState({
                     recipes: response.data

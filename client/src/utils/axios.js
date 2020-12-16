@@ -1,13 +1,19 @@
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
-const authToken = sessionStorage.getItem('authToken');
 
 const axiosInstance = axios.create({
-    baseURL: API_URL, 
-    headers: {
-        authorization: `Bearer ${authToken}`
-    }
+    baseURL: API_URL
 });
+
+axiosInstance.interceptors.request.use(req => {
+    const authToken = sessionStorage.getItem('authToken');
+    if (authToken) {
+        req.headers.Authorization = `Bearer ${authToken}`;
+    }
+    console.log(authToken);
+    return req;
+});
+
 
 export default axiosInstance;

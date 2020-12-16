@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ContentEditable from 'react-contenteditable';
-import axios from 'axios';
-// import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
 import './RecipeForm.scss';
 
 // COMPONENTS
@@ -91,7 +90,7 @@ class RecipeForm extends Component {
     }
 
     readTextInImage = (formData, addToState, formatFn) => {
-        axios.post(`${API_URL}/upload`, formData)
+        axiosInstance.post(`/upload`, formData)
             .then(response => {
                 addToState(formatFn(response.data));
             })
@@ -127,13 +126,13 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.post(`${API_URL}/recipes`, data, axiosConfig)
+        // const authToken = sessionStorage.getItem('authToken');
+        // const axiosConfig = {
+        //     headers: {
+        //         authorization: `Bearer ${authToken}`
+        //     }
+        // };
+        axiosInstance.post(`/recipes`, data)
             .then((_response) => {
                 this.goBack();
             })
@@ -141,13 +140,13 @@ class RecipeForm extends Component {
     }
 
     handleEdit = (data) => {
-        const authToken = sessionStorage.getItem('authToken');
-        const axiosConfig = {
-            headers: {
-                authorization: `Bearer ${authToken}`
-            }
-        };
-        axios.put(`${API_URL}/recipes/${this.props.recipe.id}`, data, axiosConfig)
+        // const authToken = sessionStorage.getItem('authToken');
+        // const axiosConfig = {
+        //     headers: {
+        //         authorization: `Bearer ${authToken}`
+        //     }
+        // };
+        axiosInstance.put(`/recipes/${this.props.recipe.id}`, data)
             .then((_response) => {
                 this.goBack();
             })

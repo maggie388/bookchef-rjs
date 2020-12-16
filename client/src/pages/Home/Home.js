@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
 import './Home.scss';
 
 // COMPONENTS
 import RecipeList from '../../components/RecipeList/RecipeList';
 import Login from '../../components/Login/Login';
-
-// VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
 
 class Home extends Component {
     state = {
@@ -19,20 +15,14 @@ class Home extends Component {
     }
 
     login = (username, password) => {
-        axios.post(`${API_URL}/login`, { username, password })
+        axiosInstance.post(`/login`, { username, password })
             .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token);
                 this.setState({
                     isLoginError: false, 
                     errorMessage: ''
                 });
-                const authToken = sessionStorage.getItem('authToken');
-                const axiosConfig = {
-                    headers: {
-                        authorization: `Bearer ${authToken}`
-                    }
-                };
-                axios.get(`${API_URL}/recipes`, axiosConfig)
+                axiosInstance.get(`/recipes`)
                 .then(response => {
                     this.setState({
                         isLoggedIn: true,
