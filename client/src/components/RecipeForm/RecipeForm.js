@@ -237,6 +237,7 @@ class RecipeForm extends Component {
                                     type='text' 
                                     value={this.state.title}
                                     onChange={this.handleChange}
+                                    required
                                 />
                                 <div className='recipe-form__book-page-group'>
                                     <div className='recipe-form__input-group'>
@@ -248,6 +249,7 @@ class RecipeForm extends Component {
                                             type='text' 
                                             value={this.state.book}
                                             onChange={this.handleChange}
+                                            required
                                         />
                                     </div>
                                     <div className='recipe-form__input-group'>
@@ -259,6 +261,7 @@ class RecipeForm extends Component {
                                             type='text' 
                                             value={this.state.page}
                                             onChange={this.handleChange}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -269,6 +272,7 @@ class RecipeForm extends Component {
                                     name='category' 
                                     value={this.state.category}
                                     onChange={this.handleChange}
+                                    required
                                 >
                                     <option value=''>--</option>
                                     <option value='Main'>MAIN</option>
