@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './SearchBar.scss';
 
-// ASSETS
-
 class SearchBar extends Component {
     state = {
         query: ''

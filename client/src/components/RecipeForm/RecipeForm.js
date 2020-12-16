@@ -126,12 +126,6 @@ class RecipeForm extends Component {
     }
 
     handleAdd = (data) => {
-        // const authToken = sessionStorage.getItem('authToken');
-        // const axiosConfig = {
-        //     headers: {
-        //         authorization: `Bearer ${authToken}`
-        //     }
-        // };
         axiosInstance.post(`/recipes`, data)
             .then((_response) => {
                 this.goBack();
@@ -140,12 +134,6 @@ class RecipeForm extends Component {
     }
 
     handleEdit = (data) => {
-        // const authToken = sessionStorage.getItem('authToken');
-        // const axiosConfig = {
-        //     headers: {
-        //         authorization: `Bearer ${authToken}`
-        //     }
-        // };
         axiosInstance.put(`/recipes/${this.props.recipe.id}`, data)
             .then((_response) => {
                 this.goBack();
