@@ -52,8 +52,6 @@ router.get('/', authorize, (req, res) => {
 });
 
 router.get('/:recipeId', authorize, (req, res) => {
-    console.log('Recipe ID:', req.params.recipeId);
-    console.log('User ID', req.userId);
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
         .fetch({ withRelated: ['notes'] })
