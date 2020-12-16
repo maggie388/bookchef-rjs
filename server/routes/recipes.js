@@ -123,7 +123,7 @@ router.delete('/:recipeId', authorize, (req, res) => {
         .then(recipe => {
             fs.unlink(`./uploads/images/${recipe.attributes.image}`, (error) => {
                 if (!error) {
-                    console.log("File deleted!");
+                    console.log("Related Image File was Deleted!");
                 }
             }) 
             recipe

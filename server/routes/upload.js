@@ -27,8 +27,8 @@ router.post('/', upload.single('file'), async (req, res) => {
     const filename = req.file.filename;
     const [ result ] = await client.textDetection(`./uploads/temp/${filename}`);
     const detections = result.textAnnotations;
-    console.log('Text:');
-    console.log(detections[0].description);
+    // console.log('Text:');
+    // console.log(detections[0].description);
     fs.unlink(`./uploads/temp/${filename}`, (error) => {
         if (!error) {
             console.log("File deleted!");

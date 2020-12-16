@@ -39,7 +39,6 @@ router.get('/', authorize, (req, res) => {
         })
         .then(user => {
             const recipes = user.models[0].relations.recipes;
-            console.log(recipes);
             res.status(200).json(recipes);
         })
         .catch(console.log); 
