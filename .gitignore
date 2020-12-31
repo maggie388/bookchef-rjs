@@ -28,3 +28,5 @@
 
 # private info
 /server/utils/Bookchef-a1103ea1176a.json
+/client/.env
+/server/.env
