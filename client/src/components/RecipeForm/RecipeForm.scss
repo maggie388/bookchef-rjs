@@ -71,6 +71,7 @@
 
     &__label {
         @include form-label;
+        margin-right: auto;
     }
 
     &__text-input {
@@ -95,15 +96,12 @@
     &__label-div {
         display: flex;
         align-items: center;
+        margin-bottom: .25rem;
     }
 
     &__label-icon {
-        height: 1rem;
-    }
-
-    &__label-icon {
-        width: 25px;
-        height: 100%;
+        width: 20px;
+        margin-left: 1rem;
     }
 
     &__dynamic {

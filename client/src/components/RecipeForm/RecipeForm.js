@@ -13,6 +13,7 @@ import saveIcon from '../../assets/icons/save-sharp.svg';
 import addIcon from '../../assets/icons/add-sharp.svg';
 import cameraIcon from '../../assets/icons/camera-sharp.svg'
 import closeIcon from '../../assets/icons/close-sharp.svg';
+import eraseIcon from '../../assets/icons/erase.svg';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL;
@@ -50,6 +51,18 @@ class RecipeForm extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    handleClearIngredients = () => {
+        this.setState({
+            ingredientsHTML: '<li></li>'
+        })
+    }
+
+    handleClearInstructions = () => {
+        this.setState({
+            instructionsHTML: '<li></li>'
+        })
     }
 
     handleIngredientsChange = (e) => {
@@ -293,8 +306,11 @@ class RecipeForm extends Component {
                                 htmlFor='ingredients'>
                                     Ingredients
                             </label> 
-                            <div className='recipe-form__label-icon' onClick={this.toggleScanIngredientsModal}>
-                                <img src={addIcon} alt='Add Ingredients' />
+                            <div className='recipe-form__label-icon' onClick={this.handleClearIngredients}>
+                                <img className='recipe-form__label-icon-pic' src={eraseIcon} alt='Clear All Ingredients Text' />
+                            </div>
+                            <div  className='recipe-form__label-icon' onClick={this.toggleScanIngredientsModal}>
+                                <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Ingredients' />
                             </div>
                         </div>
                         <ContentEditable 
@@ -311,6 +327,9 @@ class RecipeForm extends Component {
                                 htmlFor='instructions'>
                                     Instructions
                             </label> 
+                            <div className='recipe-form__label-icon' onClick={this.handleClearInstructions}>
+                                <img className='recipe-form__label-icon-pic' src={eraseIcon} alt='Clear All Instructions Text' />
+                            </div>
                             <div className='recipe-form__label-icon' onClick={this.toggleScanInstructionsModal}>
                                 <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Instructions' />
                             </div>
