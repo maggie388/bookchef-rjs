@@ -10,15 +10,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // BCRYPT CONFIG
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-
-// TO DO IN NEXT PHASE: Create sign-up page, use this function to create password hash
-const createHashPassword = (plaintext) => {
-    bcrypt.hash(plaintext, saltRounds, function(_err, hash) {
-        console.log('hash :: ', hash);
-    });
-};
 
 // ROUTES
 router.post('/', (req, res) => {
