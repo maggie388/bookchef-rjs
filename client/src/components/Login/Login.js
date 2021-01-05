@@ -8,8 +8,8 @@ const Login = ({ login }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { username: { value: username }, password: { value: password } } = e.target;
-        login(username, password);
+        const { email: { value: email }, password: { value: password } } = e.target;
+        login(email, password);
         e.target.reset();
     }
 
@@ -18,14 +18,14 @@ const Login = ({ login }) => {
             <form className='login__form' onSubmit={handleSubmit}>
                 <label 
                     className='login__label' 
-                    htmlFor='username'>
-                        Username
+                    htmlFor='email'>
+                        Email
                 </label>
                 <input 
                     className='login__input' 
                     type='text' 
-                    name='username' 
-                    id='username' 
+                    name='email' 
+                    id='email' 
                 />
                 <label 
                     className='login__label' 

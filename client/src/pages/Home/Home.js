@@ -14,8 +14,8 @@ class Home extends Component {
         recipes: []
     }
 
-    login = (username, password) => {
-        axiosInstance.post(`/login`, { username, password })
+    login = (email, password) => {
+        axiosInstance.post(`/login`, { email, password })
             .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token);
                 this.setState({
