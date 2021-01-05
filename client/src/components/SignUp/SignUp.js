@@ -12,9 +12,10 @@ import checkIcon from '../../assets/icons/check-circle.svg';
 class SignUp extends Component {
     initialState = {
         name: '',
+        nameErrorMessage: '',
         email:'',
-        emailAlert: false,
         emailAlertMessage: '',
+        emailErrorMessage: '',
         password: '',
         passwordChecklistIcons: {
             length: xIcon, 
@@ -22,49 +23,35 @@ class SignUp extends Component {
             uppercase: xIcon,
             specialChar: xIcon,
             number: xIcon
-        }
+        },
+        passwordErrorMessage: ''
     }
 
     state = this.initialState;
 
+    // for name and email inputs, there is a seperate function the the password input
     handleChange = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         });
-    }
-
-    checkForEmailSuggestion = () => {
-        const showEmailAlert = (suggestion) => {
+        if (e.target.name === 'name') {
             this.setState({
-                emailAlert: true,
-                emailAlertMessage: `Did you mean ${suggestion}`
+                nameErrorMessage: ''
             })
         }
-
-        const removeEmailAlert = () => {
+        if (e.target.name === 'email') {
             this.setState({
-                emailAlert: false,
-                emailAlertMessage: ''
+                emailErrorMessage: ''
             })
         }
-
-        mailcheck.run({
-            email: this.state.email,
-            suggested: function(suggestion) {
-                showEmailAlert(suggestion.full);
-            },
-            empty: function() {
-                removeEmailAlert();
-            }
-        })
-        
     }
 
     handlePasswordChange = (e) => {
         e.preventDefault();
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            passwordErrorMessage:''
         }, () => {
             this.passwordMeetsRequirements(this.state.password)
         });
@@ -139,26 +126,111 @@ class SignUp extends Component {
         }
     }
 
-    
+    // check for common typos after the user finishes typing (onBlur event)
+    // this only works if the email follows the following format *@*
+    checkForEmailSuggestion = () => {
+        const showEmailAlert = (suggestion) => {
+            this.setState({
+                emailAlertMessage: `Did you mean ${suggestion}`
+            })
+        }
+
+        const removeEmailAlert = () => {
+            this.setState({
+                emailAlertMessage: ''
+            })
+        }
+
+        mailcheck.run({
+            email: this.state.email,
+            suggested: function(suggestion) {
+                showEmailAlert(suggestion.full);
+            },
+            empty: function() {
+                removeEmailAlert();
+            }
+        })
+        
+    }
     
     handleSubmit = (e) => {
         e.preventDefault();
-        const { name, email, password } = this.state;
-        if (this.checkIfInputEmpty(name) && this.checkIfInputEmpty(email) && this.checkIfInputEmpty(password)) {
+        const nameValid = this.checkNameInput(this.state.name);
+        const emailValid = this.checkEmailInput(this.state.email);
+        const passwordValid = this.checkPasswordInput(this.state.password);
+        if (nameValid && emailValid && passwordValid) {
             console.log('form submitted');
             this.setState(() => this.initialState)
-        } else {
-            console.log('one or more inputs is empty');
         }
     }
 
-    checkIfInputEmpty(input) {
+    // name cannot be empty or contain only spaces
+    checkNameInput(nameValue) {
+        let isValid = true;
+        if (this.isInputEmpty(nameValue)) {
+            isValid = false;
+            this.setState({ 
+                name: '',
+                nameErrorMessage: 'This field cannot be empty.'
+            });
+        }
+        return isValid;
+    }
+
+    // cannot be empty or contain only spaces, and must match *@* format
+    // any number of characters can come before and after the @
+    checkEmailInput(emailInput) {
+        let isValid = true;
+        if (this.isInputEmpty(emailInput)) {
+            isValid = false;
+            this.setState({ 
+                email: '',
+                emailErrorMessage: 'This field cannot be empty' 
+            });
+        } else if (!emailInput.match(/@/)) {
+            isValid = false;
+            this.setState({
+                emailErrorMessage: 'The email address is missing an @' 
+            });
+        } else if (!emailInput.match(/.+@.+/)) {
+            isValid = false;
+            this.setState({
+                emailErrorMessage: 'The email address is too short'
+            })
+        }
+        return isValid;
+    }
+
+    // password must meet all criteria listed and cannot be longer than 64 characters
+    checkPasswordInput(passwordInput) {
+        let isValid = true;
+        let checklist = this.state.passwordChecklistIcons;
+        let icon;
+        for (icon in checklist) {
+            if (checklist[icon] === xIcon) {
+                isValid = false;
+                this.setState({
+                    passwordErrorMessage: 'Password does not meet one or more criteria'
+                })
+                return;
+            }
+        }
+        if (passwordInput.length > 65) {
+            isValid = false;
+            this.setState({
+                passwordErrorMessage: 'Password cannot be more than 64 characters'
+            })
+        }
+        return isValid;
+    }
+
+    isInputEmpty(input) {
         let trimmedInput = input.trim();
-        return !!trimmedInput;
+        return !trimmedInput;
     }
 
     render() {
-        const renderEmailAlert = () => {
+        const renderEmailSuggestion = () => {
             return (
                 <>
                     <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
@@ -168,6 +240,33 @@ class SignUp extends Component {
         }
 
         const { passwordChecklistIcons: icons } = this.state;
+
+        const renderNameErrorMessage = () => {
+            return (
+                <>
+                    <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
+                    <p className='sign-up__error-message'>{this.state.nameErrorMessage}</p>
+                </>
+            )
+        }
+
+        const renderEmailErrorMessage = () => {
+            return (
+                <>
+                    <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
+                    <p className='sign-up__error-message'>{this.state.emailErrorMessage}</p>
+                </>
+            )
+        }
+
+        const renderPasswordErrorMessage = () => {
+            return(
+                <>
+                    <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
+                    <p className='sign-up__error-message'>{this.state.passwordErrorMessage}</p>
+                </>
+            )
+        }
 
         return (
             <main className='sign-up'>
@@ -186,6 +285,9 @@ class SignUp extends Component {
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
+                    <div className='sign-up__error'>
+                        {this.state.nameErrorMessage && renderNameErrorMessage()}
+                    </div>
                     {/* EMAIL INPUT */}
                     <label 
                         className='sign-up__label' 
@@ -194,7 +296,7 @@ class SignUp extends Component {
                     </label>
                     <input 
                         className='sign-up__input' 
-                        type='email' 
+                        type='text' 
                         name='email' 
                         id='email' 
                         value={this.state.email}
@@ -202,7 +304,8 @@ class SignUp extends Component {
                         onBlur={this.checkForEmailSuggestion}
                     />
                     <div className='sign-up__error'>
-                        {this.state.emailAlert && renderEmailAlert()}
+                        {this.state.emailAlertMessage && renderEmailSuggestion()}
+                        {this.state.emailErrorMessage && renderEmailErrorMessage()}
                     </div>
                     {/* PASSWORD INPUT */}
                     <label 
@@ -222,7 +325,7 @@ class SignUp extends Component {
                     <ul className='sign-up__password-checklist'>
                         <li className='sign-up__checklist-item'>
                             <img className='sign-up__checklist-icon' src={icons.length} alt='' />
-                            <span>8 characters minimim</span>
+                            <span>8 characters minimum</span>
                         </li>
                         <li className='sign-up__checklist-item'>
                             <img className='sign-up__checklist-icon' src={icons.lowercase} alt='' />
@@ -241,6 +344,9 @@ class SignUp extends Component {
                             <span>One number</span>
                         </li>
                     </ul>
+                    <div className='sign-up__error'>
+                        {this.state.passwordErrorMessage && renderPasswordErrorMessage()}
+                    </div>
                     <button className='sign-up__button' type='submit'>
                         Submit
                     </button>
