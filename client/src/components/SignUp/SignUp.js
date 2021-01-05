@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SignUp.scss';
 // import axiosInstance from '../../utils/axios';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import mailcheck from 'mailcheck';
 
 // ASSETS
 import alertIcon from '../../assets/icons/alert.svg';
@@ -9,11 +10,11 @@ import xIcon from '../../assets/icons/close-circle.svg';
 import checkIcon from '../../assets/icons/check-circle.svg';
 
 class SignUp extends Component {
-    state = {
+    initialState = {
         name: '',
         email:'',
-        emailError: true,
-        emailErrorMessage: 'Did you mean ...',
+        emailAlert: false,
+        emailAlertMessage: '',
         password: '',
         passwordChecklistIcons: {
             length: xIcon, 
@@ -24,11 +25,40 @@ class SignUp extends Component {
         }
     }
 
+    state = this.initialState;
+
     handleChange = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    checkForEmailSuggestion = () => {
+        const showEmailAlert = (suggestion) => {
+            this.setState({
+                emailAlert: true,
+                emailAlertMessage: `Did you mean ${suggestion}`
+            })
+        }
+
+        const removeEmailAlert = () => {
+            this.setState({
+                emailAlert: false,
+                emailAlertMessage: ''
+            })
+        }
+
+        mailcheck.run({
+            email: this.state.email,
+            suggested: function(suggestion) {
+                showEmailAlert(suggestion.full);
+            },
+            empty: function() {
+                removeEmailAlert();
+            }
+        })
+        
     }
 
     handlePasswordChange = (e) => {
@@ -109,41 +139,30 @@ class SignUp extends Component {
         }
     }
 
-    checkIfEmpty = () => {
-
-    }
-
-    checkEmail = () => {
-
-    }
-
-    onPasswordChange = () => {
-
-    }
+    
     
     handleSubmit = (e) => {
         e.preventDefault();
-
+        const { name, email, password } = this.state;
+        if (this.checkIfInputEmpty(name) && this.checkIfInputEmpty(email) && this.checkIfInputEmpty(password)) {
+            console.log('form submitted');
+            this.setState(() => this.initialState)
+        } else {
+            console.log('one or more inputs is empty');
+        }
     }
 
-    
+    checkIfInputEmpty(input) {
+        let trimmedInput = input.trim();
+        return !!trimmedInput;
+    }
 
     render() {
-
-        const usernameAlert = () => {
+        const renderEmailAlert = () => {
             return (
                 <>
                     <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
-                    <p className='sign-up__error-message'>This username is already taken</p>
-                </>
-            )
-        }
-
-        const emailAlert = () => {
-            return (
-                <>
-                    <img className='sign-up__alert-icon' src={alertIcon} alt='Error Alert' />
-                    <p className='sign-up__error-message'>{this.state.emailErrorMessage}</p>
+                    <p className='sign-up__error-message'>{this.state.emailAlertMessage}</p>
                 </>
             )
         }
@@ -167,9 +186,6 @@ class SignUp extends Component {
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
-                    <div className='sign-up__error'>
-                        {this.state.usernameError && usernameAlert()}
-                    </div>
                     {/* EMAIL INPUT */}
                     <label 
                         className='sign-up__label' 
@@ -183,9 +199,10 @@ class SignUp extends Component {
                         id='email' 
                         value={this.state.email}
                         onChange={this.handleChange}
+                        onBlur={this.checkForEmailSuggestion}
                     />
                     <div className='sign-up__error'>
-                        {this.state.emailError && emailAlert()}
+                        {this.state.emailAlert && renderEmailAlert()}
                     </div>
                     {/* PASSWORD INPUT */}
                     <label 
