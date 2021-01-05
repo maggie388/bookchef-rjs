@@ -4,6 +4,9 @@ import axiosInstance from '../../utils/axios';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import mailcheck from 'mailcheck';
 
+// COMPONENTS
+import SignUpFeedback from '../../components/SignUpFeedback/SignUpFeedback';
+
 // ASSETS
 import alertIcon from '../../assets/icons/alert.svg';
 import xIcon from '../../assets/icons/close-circle.svg';
@@ -24,7 +27,8 @@ class SignUp extends Component {
             specialChar: xIcon,
             number: xIcon
         },
-        passwordErrorMessage: ''
+        passwordErrorMessage: '', 
+        displayFeedback: false
     }
 
     // deep cloning the original object
@@ -164,8 +168,11 @@ class SignUp extends Component {
         const passwordValid = this.checkPasswordInput(password);
         if (nameValid && emailValid && passwordValid) {
             console.log('form submitted');
-            // this.signUpNewUser(name, email, password);
-            this.setState({ ...this.initialState });
+            this.signUpNewUser(name, email, password);
+            this.setState({ 
+                ...this.initialState, 
+                displayFeedback: true 
+            });
         }
     }
 
@@ -281,6 +288,10 @@ class SignUp extends Component {
                     <p className='sign-up__error-message'>{this.state.passwordErrorMessage}</p>
                 </>
             )
+        }
+
+        if (this.state.displayFeedback) {
+            return <SignUpFeedback />;
         }
 
         return (
