@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SignUp.scss';
-// import axiosInstance from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import mailcheck from 'mailcheck';
 
@@ -27,7 +27,9 @@ class SignUp extends Component {
         passwordErrorMessage: ''
     }
 
-    state = this.initialState;
+    // deep cloning the original object
+    // this method will work as long as all my key values are primatives
+    state = JSON.parse(JSON.stringify(this.initialState));
 
     // for name and email inputs, there is a seperate function the the password input
     handleChange = (e) => {
@@ -54,11 +56,12 @@ class SignUp extends Component {
             passwordErrorMessage:''
         }, () => {
             this.passwordMeetsRequirements(this.state.password)
+            console.log(this.initialState.password);
         });
     }
 
     passwordMeetsRequirements(password) {
-        let passwordChecklistIcons = this.state.passwordChecklistIcons;
+        let { passwordChecklistIcons } = this.state;
 
         // check for minimum length
         if (password.length > 7) {
@@ -155,12 +158,14 @@ class SignUp extends Component {
     
     handleSubmit = (e) => {
         e.preventDefault();
-        const nameValid = this.checkNameInput(this.state.name);
-        const emailValid = this.checkEmailInput(this.state.email);
-        const passwordValid = this.checkPasswordInput(this.state.password);
+        const { name, email, password } = this.state;
+        const nameValid = this.checkNameInput(name);
+        const emailValid = this.checkEmailInput(email);
+        const passwordValid = this.checkPasswordInput(password);
         if (nameValid && emailValid && passwordValid) {
             console.log('form submitted');
-            this.setState(() => this.initialState)
+            // this.signUpNewUser(name, email, password);
+            this.setState({ ...this.initialState });
         }
     }
 
@@ -227,6 +232,16 @@ class SignUp extends Component {
     isInputEmpty(input) {
         let trimmedInput = input.trim();
         return !trimmedInput;
+    }
+
+    signUpNewUser(name, email, password) {
+        axiosInstance.post('/signup', { name, email, password })
+        .then((response) => {
+            console.log('user signed up', response);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     render() {
