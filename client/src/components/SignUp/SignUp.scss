@@ -31,6 +31,24 @@
         color: red;
     }
 
+    &__password-checklist {
+        list-style: none;
+        font-size: .85rem;
+        padding-left: .25rem;
+        margin-bottom: .75rem;
+    }
+
+    &__checklist-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: .25rem;
+    }
+
+    &__checklist-icon {
+        width: 1rem;
+        margin-right: 0.5rem;
+    }
+
     &__button {
         @include block-button;
         align-self: center;
