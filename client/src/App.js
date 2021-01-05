@@ -10,7 +10,7 @@ import AddRecipe from './pages/AddRecipe/AddRecipe';
 import EditRecipe from './pages/EditRecipe/EditRecipe';
 import Recipe from './pages/Recipe/Recipe';
 
-import SignUp from './components/SignUp/SignUp';
+import SignUp from './pages/SignUp/SignUp';
 
 const Profile = () => 'this is the profile page';
 // const SignUp = () => 'this is the Sign Up page';
