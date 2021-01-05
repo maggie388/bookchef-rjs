@@ -11,7 +11,6 @@ axiosInstance.interceptors.request.use(req => {
     if (authToken) {
         req.headers.Authorization = `Bearer ${authToken}`;
     }
-    console.log(authToken);
     return req;
 });
 

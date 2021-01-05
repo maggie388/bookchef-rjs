@@ -22,9 +22,9 @@ const createHashPassword = (plaintext) => {
 
 // ROUTES
 router.post('/', (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     Users
-        .where({ username })
+        .where({ email })
         .fetch({require: false})
         .then(async user => {
             if (!user) {
@@ -39,7 +39,6 @@ router.post('/', (req, res) => {
                 // TO DO IN NEXT PHASE: check for expiry and make user sign in again if needed
                 if (isValid) {
                     const token = jwt.sign({
-                        username,
                         userId: attributes.id,
                         exp: Date.now() + 7200000
                     }, JWT_SECRET);
