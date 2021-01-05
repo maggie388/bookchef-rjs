@@ -97,7 +97,6 @@
     border: 1px solid color(accent);
     border-radius: 5px;
     outline: none;
-    margin-bottom: 1.5rem;
     font-size: 1rem;
 }
 
@@ -160,4 +159,16 @@
         height: 30px;
         background-color: color(accent);
     }
+}
+
+@mixin mini-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 1px solid color(accent);
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 1px rgba(color(accent), .2);
+    margin: 2rem auto;
 }

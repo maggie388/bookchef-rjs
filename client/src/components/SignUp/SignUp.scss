@@ -1,0 +1,38 @@
+@import '../../partials/mixins';
+
+.sign-up {
+    &__form {
+        @include mini-form;
+    }
+
+    &__label {
+        margin-bottom: 0.5rem;
+    }
+
+    &__input {
+        @include input-field;
+        margin-bottom: 0.25rem;
+    }
+
+    &__error {
+        display: flex;
+        height: 1rem;
+        margin-bottom: .75rem;
+    }
+
+    &__alert-icon {
+        width: 15px;
+        margin-right: 0.5rem;
+    }
+
+    &__error-message {
+        font-size: .85rem;
+        font-style: italic;
+        color: red;
+    }
+
+    &__button {
+        @include block-button;
+        align-self: center;
+    }
+}
