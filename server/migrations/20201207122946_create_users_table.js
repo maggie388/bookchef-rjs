@@ -8,7 +8,7 @@ exports.up = (knex) => {
         table.string('password').notNullable();
         table.boolean('active').defaultTo('false').notNullable();
         table.string('active_token');
-        table.timestamp('active_expires').defaultTo(knex.fn.now());
+        table.timestamp('active_expires');
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
