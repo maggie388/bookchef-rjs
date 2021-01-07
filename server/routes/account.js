@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const authorize = require('../utils/authorize');
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
 require('dotenv').config();
+
 const jwt = require('jsonwebtoken')
+const JWT_SECRET = process.env.JWT_SECRET;
+
 const mailer = require('../utils/mailer');
 const crypto = require('crypto');  // nodejs built-in package
-
-const JWT_SECRET = process.env.JWT_SECRET;
 const SERVER_URL = process.env.SERVER_URL
 
 const Users = require('../models/users');
@@ -80,6 +83,31 @@ router.post('/register', (req, res) => {
             })
             .catch(error => {
                 console.log(error);
+            })
+        })
+});
+
+router.put('/active/:activeToken', (req, res) => {
+    const activeToken = req.params.activeToken;
+    Users
+        .where({active_token: activeToken})
+        .fetch()
+        .then(user => {
+            if (user.attributes.active === 1) {
+                console.log('Account is already active.');
+                return res.status(200).json({ message: 'This account has already been activated.'});
+            }
+            if (user.attributes.active_expires < new Date()) {
+                // TO DO: delete user from database so they can register again
+                console.log('Activation link has expired.')
+                return res.status(200).json({ message: 'Your activation link has expired. Please register again.'});
+            }
+            user.save({
+                active: true,
+            })
+            .then(_savedUser => {
+                console.log('Account activated.');
+                res.status(200).json({ message: 'Your account has been activated. You can login now.' });
             })
         })
 });
