@@ -63,11 +63,13 @@ router.post('/register', (req, res) => {
             })
             .save()
             .then((newUser) => {
+                const date = new Date();
+                date.setDate(date.getDate() + 1 );
                 crypto.randomBytes(20, (error, buf) => {
                     const token = newUser.id + buf.toString('hex');
                     newUser.save({
                         active_token: token,
-                        active_expires: new Date()
+                        active_expires: date
                     })
                     .then(updatedUser => {
                         const link = `${SERVER_URL}/account/active/${updatedUser.attributes.active_token}`;
@@ -87,7 +89,7 @@ router.post('/register', (req, res) => {
         })
 });
 
-router.put('/active/:activeToken', (req, res) => {
+router.get('/active/:activeToken', (req, res) => {
     const activeToken = req.params.activeToken;
     Users
         .where({active_token: activeToken})
@@ -111,5 +113,12 @@ router.put('/active/:activeToken', (req, res) => {
             })
         })
 });
+
+// const date = new Date();
+// console.log(typeof date);
+// console.log(date);
+// date.setDate(date.getDate() + 1 );
+// console.log(typeof date);
+// console.log(date)
 
 module.exports = router;
