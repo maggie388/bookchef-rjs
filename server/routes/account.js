@@ -27,13 +27,17 @@ router.post('/login', (req, res) => {
     Users
         .where({ email })
         .fetch({require: false})
-        .then(async user => {
+        .then(user => {
             if (!user) {
                 // the json object in the response is being ignored
                 // once the client sees the 403 response status it enters the catch statement on the front end
                 // 'error.message' is not the one i'm sending here
                 // also tried error.data and error.data.error and error.error
                 return res.status(403).json({ error: 'User not found.' })
+            }
+            if (user.attributes.active === 0) {
+                // TO DO: Resend activation email here
+                return res.status(200).send('Account has not been activated');
             }
             const { attributes } = user;
             bcrypt.compare(password, attributes.password, function(err, isValid) {
