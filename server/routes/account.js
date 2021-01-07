@@ -2,8 +2,14 @@ const express = require('express');
 const router = express.Router();
 const authorize = require('../utils/authorize');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
+require('dotenv').config();
 const jwt = require('jsonwebtoken')
+const mailer = require('../utils/mailer');
+const crypto = require('crypto');  // nodejs built-in package
+
 const JWT_SECRET = process.env.JWT_SECRET;
+const SERVER_URL = process.env.SERVER_URL
 
 const Users = require('../models/users');
 
@@ -43,5 +49,39 @@ router.post('/login', (req, res) => {
         .catch(error => console.log(error));
 });
 
+router.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+    bcrypt.hash(password, saltRounds)
+        .then((hashedPassword) => {
+            new Users({
+                name,
+                email,
+                password: hashedPassword
+            })
+            .save()
+            .then((newUser) => {
+                crypto.randomBytes(20, (error, buf) => {
+                    const token = newUser.id + buf.toString('hex');
+                    newUser.save({
+                        active_token: token,
+                        active_expires: new Date()
+                    })
+                    .then(updatedUser => {
+                        const link = `${SERVER_URL}/account/active/${updatedUser.attributes.active_token}`;
+                        mailer({
+                            to: updatedUser.attributes.email,
+                            subject: 'Welcome',
+                            html: 'Link: ' + link
+                        })
+                        res.status(200).send('new user saved and activation code sent');
+                    });
+                    
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+});
 
 module.exports = router;

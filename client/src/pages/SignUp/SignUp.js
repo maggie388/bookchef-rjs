@@ -242,7 +242,7 @@ class SignUp extends Component {
     }
 
     signUpNewUser(name, email, password) {
-        axiosInstance.post('/register', { name, email, password })
+        axiosInstance.post('/account/register', { name, email, password })
         .then((response) => {
             console.log('user signed up', response);
         })

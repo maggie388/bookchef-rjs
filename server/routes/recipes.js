@@ -21,11 +21,11 @@ const upload = multer({ storage: storage });
 
 // ROUTES
 router.get('/', authorize, (req, res) => {
+    console.log(req.userId);
     Recipes
         .where({ user_id: req.userId })
         .fetchAll()
         .then(recipes => {
-            console.log(recipes);
             res.status(200).json(recipes);
         })
         .catch(error => console.log(error));
