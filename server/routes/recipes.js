@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const authorize = require('../utils/authorize');
 
 const Recipes = require('../models/recipes');
 
@@ -18,34 +19,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-// JWT AUTH CONFIG
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
-
-function authorize(req, res, next) {
-    if (!req.headers.authorization) {
-        return res.status(403).json({ error: 'This endpoint requires Auth Header' });
-    }
-    const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-        if (err) {
-            res.status(403).json({ error: 'This token is not valid' });
-        } else {
-            req.jwtDecoded = { ...decoded };
-            req.userId = req.jwtDecoded.userId;
-            next();
-      }
-    });
-  }
-
-
 // ROUTES
 router.get('/', authorize, (req, res) => {
     Recipes
         .where({ user_id: req.userId })
         .fetchAll()
         .then(recipes => {
+            console.log(recipes);
             res.status(200).json(recipes);
         })
         .catch(error => console.log(error));

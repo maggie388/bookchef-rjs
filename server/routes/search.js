@@ -1,28 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const authorize = require('../utils/authorize');
 
-const Recipes = require('../models/recipes');
 const Users = require('../models/users');
-
-// JWT AUTH CONFIG
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
-
-function authorize(req, res, next) {
-    if (!req.headers.authorization) {
-        return res.status(403).json({ error: 'This endpoint requires Auth Header' });
-    }
-    const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-        if (err) {
-            res.status(403).json({ error: 'This token is not valid' });
-        } else {
-            req.jwtDecoded = { ...decoded };
-            req.userId = req.jwtDecoded.userId;
-            next();
-      }
-    });
-}
 
 router.get('/', authorize, (req, res) => {
     const { query } = req.query;

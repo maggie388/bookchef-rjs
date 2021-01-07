@@ -30,5 +30,6 @@
 # private info
 /server/utils/Bookchef-a1103ea1176a.json
 /server/utils/Bookchef-a113ea1176a.json
+/server/utils/mailer.js
 /client/.env
 /server/.env
