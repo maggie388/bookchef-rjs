@@ -7,6 +7,7 @@ const uploadRouter = require('./routes/upload');
 const notesRouter = require('./routes/notes');
 const searchRouter = require('./routes/search');
 const registerRouter = require('./routes/register');
+const accountRouter = require('./routes/account');
 
 // OTHER PACKAGE IMPORTS
 require('dotenv').config();
@@ -27,6 +28,7 @@ app.use('/notes', notesRouter);
 app.use('/upload', uploadRouter);
 app.use('/search', searchRouter);
 app.use('/register', registerRouter);
+app.use('/account', accountRouter);
 
 app.use(express.static('uploads/images'));
 

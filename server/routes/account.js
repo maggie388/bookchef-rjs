@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
-const Users = require('../models/users');
-
-// OTHER PACKAGES
-require('dotenv').config();
+const authorize = require('../utils/authorize');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// BCRYPT CONFIG
-const bcrypt = require('bcrypt');
+const Users = require('../models/users');
 
 // ROUTES
-router.post('/', (req, res) => {
+router.get('/:userId', authorize, (req, res) => {
+    // TO DO: connect with profile page when built
+    res.status(200).send('Get account by user ID request received');
+})
+
+router.post('/login', (req, res) => {
     const { email, password } = req.body;
     Users
         .where({ email })
@@ -41,5 +42,6 @@ router.post('/', (req, res) => {
         })
         .catch(error => console.log(error));
 });
+
 
 module.exports = router;
