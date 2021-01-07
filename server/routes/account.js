@@ -127,19 +127,16 @@ router.get('/active/:activeToken', (req, res) => {
         .fetch()
         .then(user => {
             if (user.attributes.active === 1) {
-                console.log('Account is already active.');
                 return res.status(200).json({ message: 'This account has already been activated.'});
             }
             if (user.attributes.active_expires < new Date()) {
-                // TO DO: delete user from database so they can register again
-                console.log('Activation link has expired.')
+                user.destroy();
                 return res.status(200).json({ message: 'Your activation link has expired. Please register again.'});
             }
             user.save({
                 active: true,
             })
             .then(_savedUser => {
-                console.log('Account activated.');
                 res.status(200).json({ message: 'Your account has been activated. You can login now.' });
             })
         })
