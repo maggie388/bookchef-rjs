@@ -20,7 +20,8 @@ exports.up = (knex) => {
             .onDelete('CASCADE');
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
-    });
+    })
+    .raw('ALTER TABLE recipes ADD FULLTEXT (title, ingredients)');
 };
 
 exports.down = (knex) => {
