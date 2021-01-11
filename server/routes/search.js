@@ -7,19 +7,15 @@ const Recipes = require('../models/recipes');
 
 router.get('/', authorize, (req, res) => {
     const { query } = req.query;
-    const rawQueryIngredients = query.split(' ').map(element => `ingredients LIKE '%${element}%'`).join(' AND ');
-    const rawQueryTitle = query.split(' ').map(element => `title LIKE '%${element}%'`).join(' OR ');
+    const ftsQuery = 'MATCH (title, ingredients) AGAINST (? IN BOOLEAN MODE)';
     Users
         .where({ id: req.userId })
         .fetchAll({
             withRelated: [{
                 recipes: function(qb) {
-                    qb
-                        .where(function() {
-                            this.where('user_id', req.userId)
-                            .andWhereRaw(rawQueryIngredients)
-                            .orWhereRaw(rawQueryTitle)
-                        })
+                    if (query) {
+                        qb.whereRaw(ftsQuery, query)
+                    }
                 }
             }]
         })
