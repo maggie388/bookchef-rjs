@@ -69,6 +69,12 @@ class RecipeList extends Component {
         }
     }
 
+    resetRecipes = () => {
+        this.setState({
+            recipes: this.state.allRecipes
+        })
+    }
+
     componentWillMount() {
         if (this.props.recipes.length > 0) {
             const sortedRecipes = this.props.recipes.sort(this.sortByDate);
@@ -91,7 +97,7 @@ class RecipeList extends Component {
                 <div className='recipe-list__title-group'>
                     <h1 className='recipe-list__title'>Recent Recipes</h1>
                     <AddRecipeButton />
-                    <SearchBar search={this.search} filter={this.filter} />
+                    <SearchBar search={this.search} filter={this.filter} reset={this.resetRecipes} />
                 </div>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>

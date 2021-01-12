@@ -22,8 +22,23 @@ class SearchBar extends Component {
         }
     }
 
+    clear = () => {
+        this.props.reset();
+        this.setState({
+            query: '',
+            filter: ''
+        })
+    }
+
 
     render() {
+        const renderClearButton = () => {
+            return (
+                <div className='search-bar__clear'>
+                    <p onClick={this.clear}>clear</p>
+                </div>
+            )
+        }
         return (
             <div className='search-bar'>
                 <input className='search-bar__input' 
@@ -49,6 +64,7 @@ class SearchBar extends Component {
                         <option value='Soup'>SOUP</option>
                     </select>
                 </div>
+                {this.state.query || this.state.filter ? renderClearButton() : ''}
             </div>
         );
     }

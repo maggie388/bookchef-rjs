@@ -2,6 +2,8 @@
 
 .search-bar {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     height: 2.5rem;
 
     &__input {
