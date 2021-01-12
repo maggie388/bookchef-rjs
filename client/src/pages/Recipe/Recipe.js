@@ -66,7 +66,11 @@ class Recipe extends Component {
     }
 
     shareRecipe = (id, email, notes) => {
-        console.log(`recipe with id ${id} was shared with ${email} ${notes ? 'with Notes.' : 'without Notes.'}`);
+        axiosInstance.post(`/recipes/${this.props.match.params.recipeId}/share`, { email, notes })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => console.log(error))
         this.toggleShare();
     }
 

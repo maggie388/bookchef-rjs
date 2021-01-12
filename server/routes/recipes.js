@@ -61,6 +61,13 @@ router.post('/', authorize, upload.single('image'), (req, res) => {
         .catch(error => console.log(error));
 });
 
+router.post('/:recipeId/share', (req, res) => {
+    const { recipeId } = req.params;
+    const { email, notes } = req.body;
+    console.log('request received');
+    res.status(200).json({ success: true });
+})
+
 router.put('/:recipeId', authorize, upload.single('file'), (req, res) => {
     Recipes
         .where({ id: req.params.recipeId, user_id: req.userId })
