@@ -1,4 +1,12 @@
+@import '../../partials/mixins';
+
 .recipe-list-container {
     display: flex;
     flex-wrap: wrap;
+
+    &__empty {
+        @include mini-form;
+        justify-content: center;
+        align-items: center;
+    }
 }

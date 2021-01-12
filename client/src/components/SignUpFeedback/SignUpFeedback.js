@@ -4,7 +4,7 @@ import './SignUpFeedback.scss';
 const SignUpFeedback = () => {
     return (
         <div className='feedback'>
-            <p>New Account Created</p>
+            <p>New Account Created. Check your inbox to activate your account before you login!</p>
         </div>
     );
 };

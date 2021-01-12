@@ -5,6 +5,13 @@ import './RecipeListContainer.scss';
 import RecipeListItem from '../RecipeListItem/RecipeListItem';
 
 const RecipeListContainer = ({ recipes, deleteRecipe }) => {
+    if (recipes.length === 0) {
+        return (
+            <div className='recipe-list-container__empty'>
+                <p className='recipe-list-container__empty-text'>You haven't added any recipes yet!</p>
+            </div>
+        )
+    }
     return (
         <div className='recipe-list-container'>
             {recipes.map((recipe) => {
