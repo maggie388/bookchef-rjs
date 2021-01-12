@@ -32,9 +32,9 @@ class SearchBar extends Component {
                     value={this.state.query} 
                     onChange={this.handleChange}
                 />
-                <div className='filter-bar'>
+                <div className='search-bar__dropdown'>
                     <select
-                        className=''
+                        className='search-bar__select'
                         id='filter'
                         name='filter'
                         value={this.state.filter}
