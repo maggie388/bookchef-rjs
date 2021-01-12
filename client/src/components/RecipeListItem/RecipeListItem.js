@@ -5,6 +5,7 @@ import './RecipeListItem.scss';
 // ASSETS
 import trashIcon from '../../assets/icons/trash-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
+import shareIcon from '../../assets/icons/share.svg';
 
 // VARIABLES
 const API_URL = process.env.REACT_APP_API_URL
@@ -33,6 +34,7 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
                 </Link>
                 <div className='recipe-list-item__icon-group'>
                     <h3 className='recipe-list-item__category'>{category}</h3>
+                    <img className='recipe-list-item__icon' src={shareIcon} alt={`Share ${title} with a friend`} />
                     <Link to={`/recipe/edit/${recipe.id}`}>
                         <img className='recipe-list-item__icon recipe-list-item__icon--nudge'src={editIcon} alt='Edit' />
                     </Link>
