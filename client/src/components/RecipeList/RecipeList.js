@@ -7,10 +7,12 @@ import RecipeListContainer from '../../components/RecipeListContainer/RecipeList
 import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import AddRecipeButton from '../../components/AddRecipeButton/AddRecipeButton'
+import FilterBar from '../../components/FilterBar/FilterBar';
 
 class RecipeList extends Component {
     state = {
         isLoading: true,
+        allRecipes: [],
         recipes: []
     }
 
@@ -20,6 +22,7 @@ class RecipeList extends Component {
                 const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
                     isLoading: false,
+                    allRecipes: sortedRecipes,
                     recipes: sortedRecipes
                 });
             })
@@ -43,11 +46,29 @@ class RecipeList extends Component {
     search = (query) => {
         axiosInstance.get(`/search?query=${query}`)
             .then(response => {
+                console.log(response.data);
                 this.setState({
+                    allRecipes: response.data,
                     recipes: response.data
                 });
             })
             .catch(error => console.log(error))
+    }
+
+    filter = (e) => {
+        console.log('filter me by :::', e.target.value);
+        const recipes = this.state.allRecipes;
+        if (e.target.value) {
+            const recipes = this.state.allRecipes;
+            const filteredRecipes = recipes.filter(recipe => recipe.category === e.target.value);
+            this.setState({
+                recipes: filteredRecipes
+            })
+        } else {
+            this.setState({
+                recipes: recipes
+            })
+        }
     }
 
     componentWillMount() {
@@ -74,6 +95,7 @@ class RecipeList extends Component {
                     <AddRecipeButton />
                     <SearchBar search={this.search} />
                 </div>
+                <FilterBar handleFilter={this.filter} />
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>
         );

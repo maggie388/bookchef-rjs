@@ -297,6 +297,7 @@ class RecipeForm extends Component {
                                     <option value='Dessert'>DESSERT</option>
                                     <option value='Breakfast'>BREAKFAST</option>
                                     <option value='Beverage'>BEVERAGE</option>
+                                    <option value='Soup'>SOUP</option>
                                 </select>
                             </div>
                         </div>
