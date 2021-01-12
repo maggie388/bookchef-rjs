@@ -112,7 +112,7 @@ class RecipeForm extends Component {
 
     addIngredientsToState = (ingredientsHTML) => {
         let newState = this.state.ingredientsHTML + ingredientsHTML;
-        const parsedState = newState.replace(/\<li\>\<\/li\>/g,'');
+        const parsedState = newState.replace(/<li><\/li>/g,'');
         this.setState({
             ingredientsHTML: parsedState
         });
@@ -121,7 +121,7 @@ class RecipeForm extends Component {
 
     addInstructionsToState = (instructionsHTML) => {
         let newState = this.state.instructionsHTML + instructionsHTML;
-        const parsedState = newState.replace(/\<li\>\<\/li\>/g,'');
+        const parsedState = newState.replace(/<li><\/li>/g,'');
         this.setState({
             instructionsHTML: parsedState
         });
