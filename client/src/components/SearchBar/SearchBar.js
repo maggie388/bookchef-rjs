@@ -3,15 +3,23 @@ import './SearchBar.scss';
 
 class SearchBar extends Component {
     state = {
-        query: ''
+        query: '',
+        filter: ''
     }
 
     handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        }, () => {
-            this.props.search(this.state.query);
-        });
+        if (e.target.name === 'query') {
+            this.setState({
+                [e.target.name]: e.target.value
+            }, () => {
+                this.props.search(this.state.query, this.state.filter);
+            });
+        } else {
+            this.setState({
+                [e.target.name]: e.target.value
+            })
+            this.props.filter(e);
+        }
     }
 
 
@@ -24,6 +32,23 @@ class SearchBar extends Component {
                     value={this.state.query} 
                     onChange={this.handleChange}
                 />
+                <div className='filter-bar'>
+                    <select
+                        className=''
+                        id='filter'
+                        name='filter'
+                        value={this.state.filter}
+                        onChange={this.handleChange}
+                    >
+                        <option value=''>--</option>
+                        <option value='Main'>MAIN</option>
+                        <option value='Side Dish'>SIDE DISH</option>
+                        <option value='Dessert'>DESSERT</option>
+                        <option value='Breakfast'>BREAKFAST</option>
+                        <option value='Beverage'>BEVERAGE</option>
+                        <option value='Soup'>SOUP</option>
+                    </select>
+                </div>
             </div>
         );
     }

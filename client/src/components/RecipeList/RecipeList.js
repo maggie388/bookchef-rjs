@@ -6,8 +6,7 @@ import './RecipeList.scss';
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
 import Loading from '../../components/Loading/Loading';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import AddRecipeButton from '../../components/AddRecipeButton/AddRecipeButton'
-import FilterBar from '../../components/FilterBar/FilterBar';
+import AddRecipeButton from '../../components/AddRecipeButton/AddRecipeButton';
 
 class RecipeList extends Component {
     state = {
@@ -43,13 +42,12 @@ class RecipeList extends Component {
             .catch(error => console.log(error));
     }
 
-    search = (query) => {
+    search = (query, filterBy) => {
         axiosInstance.get(`/search?query=${query}`)
             .then(response => {
-                console.log(response.data);
+                const recipes = filterBy ? response.data.filter(recipe => recipe.category === filterBy) : response.data;
                 this.setState({
-                    allRecipes: response.data,
-                    recipes: response.data
+                    recipes
                 });
             })
             .catch(error => console.log(error))
@@ -93,9 +91,8 @@ class RecipeList extends Component {
                 <div className='recipe-list__title-group'>
                     <h1 className='recipe-list__title'>Recent Recipes</h1>
                     <AddRecipeButton />
-                    <SearchBar search={this.search} />
+                    <SearchBar search={this.search} filter={this.filter} />
                 </div>
-                <FilterBar handleFilter={this.filter} />
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>
         );
