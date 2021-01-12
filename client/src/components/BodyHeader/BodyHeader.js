@@ -7,7 +7,7 @@ import backIcon from '../../assets/icons/arrow-back-sharp.svg';
 import shareIcon from '../../assets/icons/share.svg';
 
 // 'recipeId' is an optional prop
-const BodyHeader = ({ goBack, h1Text, icon, recipeId }) => {
+const BodyHeader = ({ goBack, h1Text, icon, recipeId, toggleShare }) => {
 
     const renderSaveButton = () => {
         return (
@@ -24,7 +24,7 @@ const BodyHeader = ({ goBack, h1Text, icon, recipeId }) => {
     const renderShareAndEditButtons = () => {
         return (
             <>
-                <button className='body-header__button'>
+                <button className='body-header__button' onClick={toggleShare}>
                     <img 
                         className='body-header__icon' 
                         src={shareIcon} 

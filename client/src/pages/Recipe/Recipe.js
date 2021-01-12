@@ -6,6 +6,7 @@ import './Recipe.scss';
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import Loading from '../../components/Loading/Loading';
 import NotesContainer from '../../components/NotesContainer/NotesContainer';
+import ShareModal from '../../components/ShareModal/ShareModal';
 
 // ASSETS
 import editIcon from '../../assets/icons/pencil-sharp.svg';
@@ -24,7 +25,8 @@ class Recipe extends Component {
         category: '',
         ingredients: '',
         instructions: '', 
-        notes: ''
+        notes: '',
+        showShareModal: false
     }
 
     getSingleRecipe = () => {
@@ -57,6 +59,17 @@ class Recipe extends Component {
         return new Date(obj2.created_at) - new Date(obj1.created_at);
     }
 
+    toggleShare = () => {
+        this.setState({
+            showShareModal: this.state.showShareModal ? false : true
+        })
+    }
+
+    shareRecipe = (id, email, notes) => {
+        console.log(`recipe with id ${id} was shared with ${email} ${notes ? 'with Notes.' : 'without Notes.'}`);
+        this.toggleShare();
+    }
+
     componentDidMount = () => {
         this.getSingleRecipe();
     }
@@ -85,6 +98,7 @@ class Recipe extends Component {
                         h1Text={title}
                         icon={editIcon}
                         recipeId={this.props.match.params.recipeId}
+                        toggleShare={this.toggleShare}
                     />
                     <div className='recipe__details-div'>
                         <h3 className='recipe__category'>{category}</h3>
@@ -110,6 +124,12 @@ class Recipe extends Component {
                         <NotesContainer recipeId={this.props.match.params.recipeId} notes={this.state.notes} updateNotes={this.getSingleRecipe} />
                     </div>
                 </div>
+                {this.state.showShareModal ? 
+                    <ShareModal 
+                        recipeId={this.props.match.params.recipeId} 
+                        toggleShare={this.toggleShare} 
+                        shareRecipe={this.shareRecipe}
+                    /> : ''}
             </main>
         );
     }
