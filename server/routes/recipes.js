@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const authorize = require('../utils/authorize');
+const mailer = require('../utils/mailer');
+const { shareRecipe } = require('../utils/email');
 
 const Recipes = require('../models/recipes');
 
@@ -23,7 +25,7 @@ const upload = multer({ storage: storage });
 router.get('/', authorize, (req, res) => {
     Recipes
         .where({ user_id: req.userId })
-        .fetchAll()
+        .fetch({ withRelated: [{ user }]})
         .then(recipes => {
             res.status(200).json(recipes);
         })
@@ -61,11 +63,23 @@ router.post('/', authorize, upload.single('image'), (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.post('/:recipeId/share', (req, res) => {
+router.post('/:recipeId/share', authorize, (req, res) => {
+    const userId = req.userId;
     const { recipeId } = req.params;
-    const { email, notes } = req.body;
-    console.log('request received');
-    res.status(200).json({ success: true });
+    const { email, notes: includeNotes } = req.body;
+    Recipes
+        .where({ id: recipeId, user_id: userId })
+        .fetch({ withRelated: ['users', 'notes'] })
+        .then(recipe => {
+            const username = recipe.relations.users.attributes.name;
+            const notes = includeNotes ? recipe.relations.notes.models : '';
+            mailer({
+                to: email,
+                subject: `${username} Has Shared a Recipe With You!`,
+                html: shareRecipe(username, recipe, notes)
+            })
+            res.status(200).json({ success: true });
+        });
 })
 
 router.put('/:recipeId', authorize, upload.single('file'), (req, res) => {

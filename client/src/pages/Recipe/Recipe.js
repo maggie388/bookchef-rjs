@@ -67,11 +67,11 @@ class Recipe extends Component {
 
     shareRecipe = (id, email, notes) => {
         axiosInstance.post(`/recipes/${this.props.match.params.recipeId}/share`, { email, notes })
-        .then(response => {
-            console.log(response.data)
+        .then(_response => {
+            this.toggleShare();
         })
         .catch(error => console.log(error))
-        this.toggleShare();
+        
     }
 
     componentDidMount = () => {
