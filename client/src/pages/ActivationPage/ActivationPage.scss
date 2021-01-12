@@ -1,0 +1,7 @@
+@import '../../partials/mixins';
+
+.activation-page {
+    @include mini-form;
+    justify-content: center;
+    align-items: center;
+}

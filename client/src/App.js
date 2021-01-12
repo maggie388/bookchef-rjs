@@ -9,11 +9,11 @@ import Home from './pages/Home/Home';
 import AddRecipe from './pages/AddRecipe/AddRecipe';
 import EditRecipe from './pages/EditRecipe/EditRecipe';
 import Recipe from './pages/Recipe/Recipe';
+import ActivationPage from './pages/ActivationPage/ActivationPage';
 
 import SignUp from './pages/SignUp/SignUp';
 
 const Profile = () => 'this is the profile page';
-// const SignUp = () => 'this is the Sign Up page';
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path='/recipe/:recipeId' component={Recipe} />
           <Route path='/profile' component={Profile} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/activate/:activeToken' component={ActivationPage} />
         </Switch>
       </Router>
     </div>

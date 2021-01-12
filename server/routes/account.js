@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const mailer = require('../utils/mailer');
 const crypto = require('crypto');  // nodejs built-in package
-const SERVER_URL = process.env.SERVER_URL
+const APP_URL = process.env.APP_URL;
 
 const Users = require('../models/users');
 
@@ -74,7 +74,7 @@ router.post('/register', (req, res) => {
             }
             // If email exists, is not active, and token is not expired, resend activation email and send response
             if (user && user.attributes.active === 0 && user.attributes.active_expires > new Date()) {
-                const link = `${SERVER_URL}/account/active/${user.attributes.active_token}`;
+                const link = `${APP_URL}/activate/${user.attributes.active_token}`;
                 mailer({
                     to: user.attributes.email,
                     subject: 'Activate your Account',
@@ -106,7 +106,7 @@ router.post('/register', (req, res) => {
                                 active_expires: date
                             })
                             .then(updatedUser => {
-                                const link = `${SERVER_URL}/account/active/${updatedUser.attributes.active_token}`;
+                                const link = `${APP_URL}/activate/${updatedUser.attributes.active_token}`;
                                 mailer({
                                     to: updatedUser.attributes.email,
                                     subject: 'Activate your Account',
@@ -124,7 +124,7 @@ router.post('/register', (req, res) => {
         });
 });
 
-router.get('/active/:activeToken', (req, res) => {
+router.post('/activate/:activeToken', (req, res) => {
     const activeToken = req.params.activeToken;
     Users
         .where({active_token: activeToken})
