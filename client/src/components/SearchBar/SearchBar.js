@@ -35,7 +35,7 @@ class SearchBar extends Component {
         const renderClearButton = () => {
             return (
                 <div className='search-bar__clear'>
-                    <p onClick={this.clear}>clear</p>
+                    <p onClick={this.clear}>clear search results</p>
                 </div>
             )
         }

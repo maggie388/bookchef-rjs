@@ -48,4 +48,13 @@
         background-position-y: 50%;
         background-position-x: 90%;
     }
+
+    &__clear {
+        display: flex;
+        align-items: center;
+        height: 2.2rem;
+        font-size: 0.9rem;
+        text-decoration: underline;
+        color: color(accent);
+    }
 }
