@@ -292,11 +292,14 @@ class RecipeForm extends Component {
                                     required
                                 >
                                     <option value=''>--</option>
+                                    <option value='Appetizer'>APPETIZER</option>
+                                    <option value='Beverage'>BEVERAGE</option>
+                                    <option value='Breakfast'>BREAKFAST</option>
+                                    <option value='Dessert'>DESSERT</option>
+                                    <option value='Dinner'>DINNER</option>
+                                    <option value='Lunch'>LUNCH</option>
                                     <option value='Main'>MAIN</option>
                                     <option value='Side Dish'>SIDE DISH</option>
-                                    <option value='Dessert'>DESSERT</option>
-                                    <option value='Breakfast'>BREAKFAST</option>
-                                    <option value='Beverage'>BEVERAGE</option>
                                     <option value='Soup'>SOUP</option>
                                 </select>
                             </div>

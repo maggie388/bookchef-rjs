@@ -26,8 +26,13 @@
     }
 
     &__crop-div {
-        width: 500px;
+        width: 100vw;
         height: auto;
+
+        @include tablet {
+            width: 650px;
+            height: auto;
+        }
     }
 
     &__crop-view {
