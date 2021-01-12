@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 router.get('/', authorize, (req, res) => {
     Recipes
         .where({ user_id: req.userId })
-        .fetch({ withRelated: [{ user }]})
+        .fetchAll()
         .then(recipes => {
             res.status(200).json(recipes);
         })
