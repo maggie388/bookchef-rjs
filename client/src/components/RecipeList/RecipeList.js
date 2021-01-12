@@ -53,11 +53,16 @@ class RecipeList extends Component {
             .catch(error => console.log(error))
     }
 
-    filter = (e) => {
-        console.log('filter me by :::', e.target.value);
+    filter = (e, query) => {
         const recipes = this.state.allRecipes;
-        if (e.target.value) {
+        if (e.target.value && query === '') {
             const recipes = this.state.allRecipes;
+            const filteredRecipes = recipes.filter(recipe => recipe.category === e.target.value);
+            this.setState({
+                recipes: filteredRecipes
+            })
+        } else if (e.target.value && query) {
+            const recipes = this.state.recipes;
             const filteredRecipes = recipes.filter(recipe => recipe.category === e.target.value);
             this.setState({
                 recipes: filteredRecipes

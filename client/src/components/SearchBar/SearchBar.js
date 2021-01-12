@@ -18,7 +18,7 @@ class SearchBar extends Component {
             this.setState({
                 [e.target.name]: e.target.value
             })
-            this.props.filter(e);
+            this.props.filter(e, this.state.query);
         }
     }
 
