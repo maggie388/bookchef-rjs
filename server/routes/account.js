@@ -68,7 +68,7 @@ router.post('/register', (req, res) => {
                 mailer({
                     to: user.attributes.email,
                     subject: ' You are Already Registered',
-                    html: `Hi ${user.attributes.name}, you already have an active account. PLease visit the home page to login.`
+                    html: `Hi ${user.attributes.name}, you already have an active account. Please visit the home page to login.`
                 })
                 return res.status(200).json({ success: true });
             }
@@ -78,7 +78,7 @@ router.post('/register', (req, res) => {
                 mailer({
                     to: user.attributes.email,
                     subject: 'Activate your Account',
-                    html: 'Link: ' + link
+                    html: `Please click on <a href='${link}'>this link</a> to activate your account.`
                 })
                 return res.status(200).json({ success: true });
             }
@@ -110,7 +110,7 @@ router.post('/register', (req, res) => {
                                 mailer({
                                     to: updatedUser.attributes.email,
                                     subject: 'Activate your Account',
-                                    html: 'Link: ' + link
+                                    html: `Please click on <a href='${link}'>this link</a> to activate your account.`
                                 })
                                 res.status(200).send('new user saved and activation code sent');
                             });
