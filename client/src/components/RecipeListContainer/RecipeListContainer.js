@@ -8,7 +8,7 @@ const RecipeListContainer = ({ recipes, deleteRecipe }) => {
     if (recipes.length === 0) {
         return (
             <div className='recipe-list-container__empty'>
-                <p className='recipe-list-container__empty-text'>You haven't added any recipes yet!</p>
+                <p className='recipe-list-container__empty-text'>No recipes.</p>
             </div>
         )
     }
