@@ -7,7 +7,7 @@ const Recipes = require('../models/recipes');
 
 router.get('/', authorize, (req, res) => {
     const { query } = req.query;
-    // objective: add wildcard operator (*) to end of each word to pick up singular and plural versions of same word and partial words
+    // objective: add wildcard operator (*) to end of each word to pick up some singular and plural versions of same word and partial words
     // convert to lowercase to pick up both lowercase and uppercase 's' in the replace methods that follow
     // remove '*' character from input (this is a wildcard in FTS BOOLEAN MODE)
     // remove an 's' when at the end of word
