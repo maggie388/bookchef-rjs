@@ -18,8 +18,8 @@ class ScanModal extends PureComponent {
         src: null,
         crop: {
             unit: '%',
-            width: 30,
-            height: 30,
+            width: 80,
+            height: 80,
             x: 0,
             y: 0
         }
