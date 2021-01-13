@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axiosInstance from '../../utils/axios';
 import './RecipeList.scss';
+import _ from 'lodash';
 
 // COMPONENTS
 import RecipeListContainer from '../../components/RecipeListContainer/RecipeListContainer';
@@ -18,11 +19,10 @@ class RecipeList extends Component {
     getRecipes = () => {
         axiosInstance.get(`/recipes`)
             .then(response => {
-                const sortedRecipes = response.data.sort(this.sortByDate);
                 this.setState({
                     isLoading: false,
-                    allRecipes: sortedRecipes,
-                    recipes: sortedRecipes
+                    allRecipes: response.data.sort(this.sortByDate),
+                    recipes: response.data.sort(this.sortByDate)
                 });
             })
             .catch(error => {
@@ -42,47 +42,50 @@ class RecipeList extends Component {
             .catch(error => console.log(error));
     }
 
-    filterRecipes = (filterBy, query) => {
-        const recipes = this.state.allRecipes;
-        if (filterBy && query === '') {
-            const recipes = this.state.allRecipes;
+    filterRecipes = (searchQuery, filterBy) => {
+        if (searchQuery === '' && filterBy === '') {
+            this.setState({
+                recipes: _.cloneDeep(this.state.allRecipes)
+            })
+        } else if (searchQuery === '' && filterBy) {
+            const recipes = _.cloneDeep(this.state.allRecipes);
             const filteredRecipes = recipes.filter(recipe => recipe.category === filterBy);
             this.setState({
                 recipes: filteredRecipes
-            })
-        } else if (filterBy && query) {
+            }) 
+        } else if (searchQuery && filterBy) {
             const recipes = this.state.recipes;
             const filteredRecipes = recipes.filter(recipe => recipe.category === filterBy);
             this.setState({
                 recipes: filteredRecipes
             })
-        } else {
-            this.setState({
-                recipes: recipes
-            })
         }
     }
 
-    search = (query, filterBy) => {
-        if (query === '' && filterBy) {
-            this.filterRecipes(filterBy, query);
-            return;
-        }
-        axiosInstance.get(`/search?query=${query}`)
+    search = (searchQuery, filterBy) => {
+        if (searchQuery === '' && filterBy === '') {
+            this.setState({
+                recipes: _.cloneDeep(this.state.allRecipes)
+            })
+        } else if (searchQuery === '' && filterBy) {
+            this.filterRecipes(searchQuery, filterBy);
+        } else if (searchQuery) {
+            axiosInstance.get(`/search?query=${searchQuery}`)
             .then(response => {
                 const recipes = filterBy ? response.data.filter(recipe => recipe.category === filterBy) : response.data;
                 this.setState({
                     recipes
                 });
             })
-            .catch(error => console.log(error))
+            .catch(error => console.log(error));
+        }
     }
 
     
 
     resetRecipes = () => {
         this.setState({
-            recipes: this.state.allRecipes
+            recipes: _.cloneDeep(this.state.allRecipes)
         })
     }
 
@@ -90,7 +93,8 @@ class RecipeList extends Component {
         if (this.props.recipes.length > 0) {
             const sortedRecipes = this.props.recipes.sort(this.sortByDate);
             this.setState({
-                recipes: sortedRecipes,
+                allRecipes: _.cloneDeep(sortedRecipes),
+                recipes: _.cloneDeep(sortedRecipes),
                 isLoading: false
             });
             return;

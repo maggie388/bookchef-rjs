@@ -19,7 +19,7 @@ class SearchBar extends Component {
             this.setState({
                 [e.target.name]: filterBy
             })
-            this.props.filterRecipes(filterBy, this.state.query);
+            this.props.filterRecipes(this.state.query, filterBy);
         }
     }
 
@@ -29,6 +29,7 @@ class SearchBar extends Component {
             query: '',
             filter: ''
         })
+        this.props.search('', '');
     }
 
 
