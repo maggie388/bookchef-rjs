@@ -130,14 +130,14 @@ router.post('/activate/:activeToken', (req, res) => {
         .where({active_token: activeToken})
         .fetch({require: false})
         .then(user => {
+            if (!user) {
+                return res.status(200).json({ message: 'This activation link is not valid. Please register again.'});
+            }
             if (user.attributes.active === 1) {
                 return res.status(200).json({ message: 'This account has already been activated.'});
             }
             if (user.attributes.active_expires < new Date()) {
                 user.destroy();
-                return res.status(200).json({ message: 'Your activation link has expired. Please register again.'});
-            }
-            if (!user) {
                 return res.status(200).json({ message: 'Your activation link has expired. Please register again.'});
             }
             user.save({
