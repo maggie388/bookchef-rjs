@@ -18,7 +18,12 @@ class ActivationPage extends Component {
                     message: response.data.message
                 })
             })
-            .catch(error => console.log('error ::', error));
+            .catch(error => {
+                console.log('error ::', error)
+                this.setState({
+                    message: '404 Page Not Found'
+                })
+            });
     }
 
     render() {
