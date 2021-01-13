@@ -23,7 +23,7 @@ const ShareModal = ({ recipeId, toggleShare, shareRecipe }) => {
                 <input className='share-modal__input' id='email' name='email' type='text' required />
                 <label className='share-modal__label'>
                     <input className='share-modal__select' name='notes' type='checkbox' />
-                    Do you want to share your notes?
+                    Include Notes
                 </label>
                 <button className='share-modal__button' type='submit'>Share</button>
             </form>

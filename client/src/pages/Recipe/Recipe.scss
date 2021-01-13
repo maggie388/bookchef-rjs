@@ -4,6 +4,7 @@
 
 .recipe {
    position: relative;
+   padding-bottom: 5rem;
    
      &__top {
          @include top-pic-container;
