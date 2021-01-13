@@ -42,7 +42,32 @@ class RecipeList extends Component {
             .catch(error => console.log(error));
     }
 
+    filterRecipes = (filterBy, query) => {
+        const recipes = this.state.allRecipes;
+        if (filterBy && query === '') {
+            const recipes = this.state.allRecipes;
+            const filteredRecipes = recipes.filter(recipe => recipe.category === filterBy);
+            this.setState({
+                recipes: filteredRecipes
+            })
+        } else if (filterBy && query) {
+            const recipes = this.state.recipes;
+            const filteredRecipes = recipes.filter(recipe => recipe.category === filterBy);
+            this.setState({
+                recipes: filteredRecipes
+            })
+        } else {
+            this.setState({
+                recipes: recipes
+            })
+        }
+    }
+
     search = (query, filterBy) => {
+        if (query === '' && filterBy) {
+            this.filterRecipes(filterBy, query);
+            return;
+        }
         axiosInstance.get(`/search?query=${query}`)
             .then(response => {
                 const recipes = filterBy ? response.data.filter(recipe => recipe.category === filterBy) : response.data;
@@ -53,26 +78,7 @@ class RecipeList extends Component {
             .catch(error => console.log(error))
     }
 
-    filter = (e, query) => {
-        const recipes = this.state.allRecipes;
-        if (e.target.value && query === '') {
-            const recipes = this.state.allRecipes;
-            const filteredRecipes = recipes.filter(recipe => recipe.category === e.target.value);
-            this.setState({
-                recipes: filteredRecipes
-            })
-        } else if (e.target.value && query) {
-            const recipes = this.state.recipes;
-            const filteredRecipes = recipes.filter(recipe => recipe.category === e.target.value);
-            this.setState({
-                recipes: filteredRecipes
-            })
-        } else {
-            this.setState({
-                recipes: recipes
-            })
-        }
-    }
+    
 
     resetRecipes = () => {
         this.setState({
@@ -102,7 +108,7 @@ class RecipeList extends Component {
                 <div className='recipe-list__title-group'>
                     <h1 className='recipe-list__title'>Recent Recipes</h1>
                     <AddRecipeButton />
-                    <SearchBar search={this.search} filter={this.filter} reset={this.resetRecipes} />
+                    <SearchBar search={this.search} filterRecipes={this.filterRecipes} reset={this.resetRecipes} />
                 </div>
                 <RecipeListContainer recipes={this.state.recipes} deleteRecipe={this.deleteRecipe} />
             </main>

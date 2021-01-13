@@ -15,10 +15,11 @@ class SearchBar extends Component {
                 this.props.search(this.state.query, this.state.filter);
             });
         } else {
+            const filterBy = e.target.value;
             this.setState({
-                [e.target.name]: e.target.value
+                [e.target.name]: filterBy
             })
-            this.props.filter(e, this.state.query);
+            this.props.filterRecipes(filterBy, this.state.query);
         }
     }
 
