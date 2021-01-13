@@ -13,5 +13,5 @@ Instructions for running this project:
     Example: export GOOGLE_APPLICATION_CREDENTIALS=/home/user/Downloads/my-key.json
 
 9. Use one or both of these mock user credentials to log in and use the application:
-    --> username: Jane, password: password3
-    --> username: Jim, password: password33
+    --> username: jane@hello.ca, password: password3
+    --> username: jim@hello.ca, password: password33
