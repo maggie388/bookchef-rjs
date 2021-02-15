@@ -23,7 +23,7 @@ const upload = multer({ storage: storage });
 const client = new vision.ImageAnnotatorClient();
 
 // doesn't pick up all fractions 
-// try documentTextDetection https://cloud.google.com/vision/docs/pdf
+// TO DO: try documentTextDetection https://cloud.google.com/vision/docs/pdf
 router.post('/', authorize, upload.single('file'), async (req, res) => {
     const filename = req.file.filename;
     const [ result ] = await client.textDetection(`./uploads/temp/${filename}`);

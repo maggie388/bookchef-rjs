@@ -4,7 +4,6 @@ const authorize = require('../utils/authorize');
 
 const Notes = require('../models/notes');
 
-
 // ROUTES
 router.post('/', authorize, (req, res) => {
     new Notes({
