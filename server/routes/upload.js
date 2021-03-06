@@ -1,28 +1,15 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const vision = require('@google-cloud/vision');
 const fs = require('fs');
+
+// UTILS
 const authorize = require('../utils/authorize');
-
-
-// MULTER CONFIG
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-    destination: function (_req, _file, cb) {
-        cb(null, './uploads/temp')
-    }, 
-    filename: function (_req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
+const { upload } = require('../utils/multer');
 
 // GOOGLE VISION API CONFIG
 const client = new vision.ImageAnnotatorClient();
 
-// doesn't pick up all fractions 
+// API doesn't pick up all fractions 
 // TO DO: try documentTextDetection https://cloud.google.com/vision/docs/pdf
 router.post('/', authorize, upload.single('file'), async (req, res) => {
     const filename = req.file.filename;

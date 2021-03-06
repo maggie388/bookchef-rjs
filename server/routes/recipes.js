@@ -1,25 +1,14 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const fs = require('fs');
+
+// UTILS
 const authorize = require('../utils/authorize');
 const mailer = require('../utils/mailer');
 const { shareRecipe } = require('../utils/email');
+const { upload } = require('../utils/multer');
 
+// DATA
 const Recipes = require('../models/recipes');
-
-// MULTER CONFIG
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-    destination: function (_req, _file, cb) {
-        cb(null, './uploads/images')
-    }, 
-    filename: function (_req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
 
 // ROUTES
 router.get('/', authorize, (req, res) => {
