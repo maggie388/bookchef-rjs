@@ -26,6 +26,6 @@ module.exports = function(mail) {
     // send email
     transporter.sendMail(mail, (error, info) => {
         if (error) return console.log(error);
-        console.log('mail sent: ', info.response);
+        // console.log('mail sent: ', info.response);
     });
 };
