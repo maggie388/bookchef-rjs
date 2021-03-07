@@ -1,0 +1,19 @@
+{
+  "name": "bookchef",
+  "version": "1.0.0",
+  "description": "Capstone project from BrainStaton diploma program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maggie388/bookchef-rjs.git"
+  },
+  "author": "Maggie Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maggie388/bookchef-rjs/issues"
+  },
+  "homepage": "https://github.com/maggie388/bookchef-rjs#readme"
+}
