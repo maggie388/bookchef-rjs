@@ -1,3 +1,16 @@
+const activationEmail = (link) => {
+    return (
+        `Please click on <a href='${link}'>this link</a> to activate your account.`
+    )
+}
+
+const alreadyRegistered = (username) => {
+    return (
+        `<p>Hi ${username},<p>
+        <p>You already have an active account. Please visit the home page to login.<p>`
+    )
+}
+
 const shareRecipe = (username, recipe, notes) => {
     const renderNotes = () => {
         if (notes) {
@@ -30,5 +43,7 @@ const shareRecipe = (username, recipe, notes) => {
 }
 
 module.exports = {
+    activationEmail,
+    alreadyRegistered,
     shareRecipe
 }
