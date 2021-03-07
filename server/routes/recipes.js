@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 // UTILS
 const authorize = require('../utils/authorize');
-const { upload } = require('../utils/multer');
+const { uploadImage } = require('../utils/multer');
 
 // CONTROLLER
 const recipesController = require('../controllers/recipesController');
@@ -12,11 +12,11 @@ router.get('/', authorize, recipesController.getUserRecipes);
 
 router.get('/:recipeId', authorize, recipesController.getSingleRecipe);
 
-router.post('/', authorize, upload.single('image'), recipesController.postNewRecipe);
+router.post('/', authorize, uploadImage.single('image'), recipesController.postNewRecipe);
 
 router.post('/:recipeId/share', authorize, recipesController.shareRecipeByEmail);
 
-router.put('/:recipeId', authorize, upload.single('file'), recipesController.updateRecipe);
+router.put('/:recipeId', authorize, uploadImage.single('file'), recipesController.updateRecipe);
 
 router.delete('/:recipeId', authorize, recipesController.deleteRecipe);
 
