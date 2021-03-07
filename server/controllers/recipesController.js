@@ -2,7 +2,7 @@
 const mailer = require('../utils/mailer');
 const { shareRecipe } = require('../utils/email');
 
-// MODEL
+// MODEL FUNCTIONS
 const recipesModel = require('../models/recipesModel');
 
 // CONTROLLER FUNCTIONS
