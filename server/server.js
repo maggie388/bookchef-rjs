@@ -4,6 +4,8 @@ const app = express();
 // OTHER PACKAGE IMPORTS
 require('dotenv').config();
 const path = require('path');
+const mysql = require('mysql');
+const knex = require('./knexfile');
 
 // ROUTERS
 const accountRouter = require('./routes/account');
@@ -35,6 +37,13 @@ app.use('/search', searchRouter);
 
 app.use(express.static('uploads/images'));
 
+let connection;
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection(knex.development);
+}
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('../client/build'));
 
@@ -49,3 +58,9 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
 })
+
+connection.connect(err => {
+    console.log("connected as id " + connection.threadId);
+  });
+
+module.exports = connection;
