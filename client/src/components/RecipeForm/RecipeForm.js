@@ -16,7 +16,7 @@ import closeIcon from '../../assets/icons/close-sharp.svg';
 import eraseIcon from '../../assets/icons/erase.svg';
 
 // VARIABLES
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from '../../App';
 
 class RecipeForm extends Component {
     constructor() {

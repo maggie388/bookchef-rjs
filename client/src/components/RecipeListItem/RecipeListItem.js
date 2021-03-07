@@ -7,7 +7,7 @@ import trashIcon from '../../assets/icons/trash-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
 
 // VARIABLES
-const API_URL = process.env.REACT_APP_API_URL
+import { API_URL } from '../../App';
 
 const RecipeListItem = ({ recipe, deleteRecipe }) => {
 

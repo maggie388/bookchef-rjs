@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // COMPONENTS
 import Header from './components/Header/Header';
+const Profile = () => 'Profile page is under construction';
 
 // PAGES
 import Home from './pages/Home/Home';
@@ -10,10 +11,12 @@ import AddRecipe from './pages/AddRecipe/AddRecipe';
 import EditRecipe from './pages/EditRecipe/EditRecipe';
 import Recipe from './pages/Recipe/Recipe';
 import ActivationPage from './pages/ActivationPage/ActivationPage';
-
 import SignUp from './pages/SignUp/SignUp';
 
-const Profile = () => 'this is the profile page';
+// VARIABLES 
+export const API_URL = process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_API_URL_PRODUCTION
+    : process.env.REACT_APP_API_URL_DEVELOPMENT;
 
 function App() {
   return (
