@@ -1,17 +1,9 @@
-Instructions for running this project:
-1. Run npm install in the client folder and server folder
+## BRAINSTATION WEB DEV CAPSTONE
+Bookchef was design to help home cooks digitally bookmark recipes from their cookbook collection. Take a picture of the cookbook page, and the Google Cloud Vision API detects the text for you!
 
-5. Create a MySQL database called bookchef locally and make sure ./server/knexfile.js points to the database.
+### RUN THIS PROJECT
+1. The project is deployed at https://young-cliffs-53948.herokuapp.com/
 
-6. In ./server run knex migrate:latest and then knex seed:run
-
-6. Follow these instructions to get a private key for the Vision API https://cloud.google.com/vision/docs/setup
-
-7. Download the JSON file that contains your API service account key 
-
-8. Set an environment variable called GOOGLE_APPLICATION_CREDENTIALS and point it to where you have saved the file
-    Example: export GOOGLE_APPLICATION_CREDENTIALS=/home/user/Downloads/my-key.json
-
-9. Use one or both of these mock user credentials to log in and use the application:
+2. Create your own account, or use one of these following mock user credentials:
     --> username: jane@hello.ca, password: password3
     --> username: jim@hello.ca, password: password33
