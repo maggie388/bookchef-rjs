@@ -27,7 +27,7 @@ class Header extends Component {
                 <Link to='/'>
                     <img className='header__logo' src={bookchefLogo} alt='Bookchef logo' />
                 </Link>
-                <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
+                {this.props.isLoggedIn && <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />}
             </header>
             {this.state.expandMenu && <ExpandedMenu isLoggedIn={this.props.isLoggedIn} toggleMenu={this.toggleMenu} />}
             </>
