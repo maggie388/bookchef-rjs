@@ -8,7 +8,6 @@ import Login from '../../components/Login/Login';
 
 class Home extends Component {
     state = {
-        isLoggedIn: false,
         isLoginError: false,
         errorMessage: '',
         recipes: []
@@ -18,6 +17,7 @@ class Home extends Component {
         axiosInstance.post(`/account/login`, { email, password })
             .then(({data : { token }}) => {
                 sessionStorage.setItem('authToken', token);
+                this.props.toggleIsLoggedIn(true);
                 this.setState({
                     isLoginError: false, 
                     errorMessage: ''
@@ -25,7 +25,6 @@ class Home extends Component {
                 axiosInstance.get(`/recipes`)
                 .then(response => {
                     this.setState({
-                        isLoggedIn: true,
                         recipes: response.data
                     });
                 }) 
@@ -42,18 +41,14 @@ class Home extends Component {
     componentWillMount() {
         const token = sessionStorage.getItem('authToken');
         if (token) {
-            this.setState({
-                isLoggedIn: true
-            });
+            this.props.toggleIsLoggedIn(true);
         } else {
-            this.setState({
-                isLoggedIn: false
-            })
+            this.props.toggleIsLoggedIn(false);
         }
     }
 
     render() {
-        if (this.state.isLoggedIn) {
+        if (this.props.isLoggedIn) {
             return <RecipeList recipes={this.state.recipes} />;
         }
         return <Login login={this.login} />;
