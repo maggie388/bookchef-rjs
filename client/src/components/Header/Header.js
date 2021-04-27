@@ -29,7 +29,7 @@ class Header extends Component {
                 </Link>
                 <img className='header__menu' src={menuIcon} alt='Expand Menu' onClick={this.toggleMenu} />
             </header>
-            {this.state.expandMenu && <ExpandedMenu toggleMenu={this.toggleMenu} />}
+            {this.state.expandMenu && <ExpandedMenu isLoggedIn={this.props.isLoggedIn} toggleMenu={this.toggleMenu} />}
             </>
         );
     }
