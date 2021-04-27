@@ -37,7 +37,7 @@ const handleUserRegistration = (req) => {
                 mailer({
                     to: user.attributes.email,
                     subject: 'Activate your Account',
-                    html: activationEmail(link)
+                    html: activationEmail(link, user.attributes.name)
                 })
                 return { status: 'not activated' }
             }
