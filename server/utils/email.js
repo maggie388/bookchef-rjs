@@ -12,7 +12,10 @@ const activationEmail = (link, username) => {
 const alreadyRegistered = (username) => {
     return (`
         <p>Hi ${username},<p>
-        <p>You already have an active account. Please visit the home page to login.<p>
+        <p>An account is already registered to this email address! Please visit <a href="${process.env.APP_URL}" >the website</a> to login.<p>
+        <p>Happy cooking! 👩🏽‍🍳<br>
+        <span style="color: #659A41"><strong>The Bookchef Team</strong><span><br>
+        <a href="mailto:info.bookchef@gmail.com" >info.bookchef@gmail.com</a></p>
     `)
 }
 
