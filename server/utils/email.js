@@ -21,7 +21,7 @@ const alreadyRegistered = (username) => {
 
 const shareRecipe = (username, recipe, notes) => {
     const renderNotes = () => {
-        if (notes) {
+        if (notes && notes.length > 0) {
             const notesHTML = notes.map(note => {
                 return `<li>${note.attributes.text}</li>`;
             });
