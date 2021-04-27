@@ -1,14 +1,19 @@
-const activationEmail = (link) => {
-    return (
-        `Please click on <a href='${link}'>this link</a> to activate your account.`
-    )
+const activationEmail = (link, name) => {
+    return (`
+        <p>Welcome to Bookchef ${name}!</p>
+        <p style="margin-bottom: 20px;">Before you get started, follow <a href='${link}'>this link</a> to activate your account.</p>
+        <p>Happy cooking! 👩🏽‍🍳<br>
+        <span style="color: #659A41"><strong>The Bookchef Team</strong><span><br>
+        <a href="mailto:info.bookchef@gmail.com" >info.bookchef@gmail.com</a></p>
+        
+    `)
 }
 
 const alreadyRegistered = (username) => {
-    return (
-        `<p>Hi ${username},<p>
-        <p>You already have an active account. Please visit the home page to login.<p>`
-    )
+    return (`
+        <p>Hi ${username},<p>
+        <p>You already have an active account. Please visit the home page to login.<p>
+    `)
 }
 
 const shareRecipe = (username, recipe, notes) => {
