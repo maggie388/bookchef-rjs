@@ -1,6 +1,6 @@
-const activationEmail = (link, name) => {
+const activationEmail = (link, username) => {
     return (`
-        <p>Welcome to Bookchef ${name}!</p>
+        <p>Welcome to Bookchef ${username}!</p>
         <p style="margin-bottom: 20px;">Before you get started, follow <a href='${link}'>this link</a> to activate your account.</p>
         <p>Happy cooking! 👩🏽‍🍳<br>
         <span style="color: #659A41"><strong>The Bookchef Team</strong><span><br>
