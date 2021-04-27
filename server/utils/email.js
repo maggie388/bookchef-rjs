@@ -1,7 +1,7 @@
 const activationEmail = (link, username) => {
     return (`
         <p>Welcome to Bookchef ${username}!</p>
-        <p style="margin-bottom: 20px;">Before you get started, follow <a href='${link}'>this link</a> to activate your account.</p>
+        <p>Before you get started, follow <a href='${link}'>this link</a> to activate your account.</p>
         <p>Happy cooking! 👩🏽‍🍳<br>
         <span style="color: #659A41"><strong>The Bookchef Team</strong><span><br>
         <a href="mailto:info.bookchef@gmail.com" >info.bookchef@gmail.com</a></p>
@@ -25,29 +25,37 @@ const shareRecipe = (username, recipe, notes) => {
             const notesHTML = notes.map(note => {
                 return `<li>${note.attributes.text}</li>`;
             });
-            return (
-                `<h3>${username}'s Notes About this Recipe</h3>
-                ${notesHTML.join('')}`
-            )
+            return (`
+                <u>Here are a couple of notes from ${username} about this recipe:</u>
+                <ul>
+                ${notesHTML.join('')}
+                </ul>
+            `)
         }
 
         return ``;
     }
-    return (
-        `<h1>Your friend ${username} has shared a recipe with you through Bookchef!</h1>
-        <h2> ${recipe.attributes.title}</h2>
-        <h3>Ingredients</h3>
+    return (`
+        <p style="font-weight: bold">Hey there 👋🏽, </p>
+        <p style="font-weight: bold">Your friend ${username} thought you might like this recipe from his <a href="${process.env.APP_URL}" style="color: #659A41">Bookchef</a> collection!</p>
+        <hr style="border-color: #659A41;">
+        <p style="white-space: nowrap; overflow: hidden">🥙 🥩 🥒 🌯 🥬 🍣 🧅 🥞 🧄 🍛 🥑 🌮 🍍 🍜 🍅 🥯 🥟 🧀 🍪 🍓 🥮 🫑 🥪 🌽 🍝 🥦 🍕 🥘 🍱 🧁 🍰 🫕 🥫 🫔 🧇 🍞 🌭 🍩 🥨 🫒 🍳 🍖 🫐 🥐 🍲</p>
+        <h3>${recipe.attributes.title}</h3>
+        <strong>Ingredients</strong>
         <ul>
         ${recipe.attributes.ingredients}
         </ul>
-        <h3>Instructions</h3>
-        <ul>
+        <strong>Instructions</strong>
+        <ol>
         ${recipe.attributes.instructions}
-        </ul>
+        </ol>
         ${renderNotes()}
-        Enjoy!!
-        `
-    )
+        <p style="white-space: nowrap; overflow: hidden">🥙 🥩 🥒 🌯 🥬 🍣 🧅 🥞 🧄 🍛 🥑 🌮 🍍 🍜 🍅 🥟 🧀 🍪 🍓 🥮 🫑 🥪 🌽 🍝 🥦 🍕 🥘 🍱 🧁 🍰 🫕 🥫 🫔 🧇 🍞 🌭 🍩 🥨 🫒 🍳 🍖 🫐 🥐 🍲</p>
+        <hr style="border-color: #659A41;">
+        <p>Happy cooking! 👩🏽‍🍳<br>
+        <span style="color: #659A41"><strong>The Bookchef Team</strong><span><br>
+        <a href="mailto:info.bookchef@gmail.com" >info.bookchef@gmail.com</a></p>
+    `)
 }
 
 module.exports = {
