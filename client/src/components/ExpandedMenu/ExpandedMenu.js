@@ -5,15 +5,8 @@ import './ExpandedMenu.scss';
 // ASSETS
 import closeIcon from '../../assets/icons/close-sharp.svg';
 
-const ExpendedMenu = ({ toggleMenu, isLoggedIn }) => {
+const ExpendedMenu = ({ toggleMenu }) => {
     const history = useHistory();
-
-    const loggedInMenuItems = () => {
-        const items = ['Profile', 'Settings'];
-        return items.map((item) => {
-            return <li className='expanded-menu__list-item'>{item}</li>
-        });
-    }
 
     const signOut = () => {
         sessionStorage.removeItem('authToken');
@@ -26,7 +19,8 @@ const ExpendedMenu = ({ toggleMenu, isLoggedIn }) => {
         <div className='expanded-menu'>
             <img className='expanded-menu__close' src={closeIcon} alt='close' onClick={toggleMenu} />
             <ul className='expanded-menu__list'>
-                {loggedInMenuItems()}
+                <li className='expanded-menu__list-item'>Profile</li>
+                <li className='expanded-menu__list-item'>Settings</li>
                 <li className='expanded-menu__list-item' onClick={signOut}>Sign out</li>
             </ul>
         </div>
