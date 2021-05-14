@@ -91,6 +91,7 @@
 
 @mixin input-field {
     padding: 0.5rem 0.75rem;
+    margin-top: 0.25rem;
     border: 1px solid color(accent);
     border-radius: 5px;
     outline: none;
@@ -109,37 +110,6 @@
     text-transform: uppercase;
     cursor: auto;
 }
-
-// @mixin block-button {
-//     width: fit-content;
-//     padding: .75rem 1.5rem;
-//     border: none;
-//     border-radius: 5px;
-//     color: #FFF;
-//     background-color: color(accent);
-//     font-weight: bold;
-//     text-transform: uppercase;
-//     cursor: pointer;
-//     transition: filter .5s ease;
-
-//     &:hover {
-//         filter: hue-rotate(90deg);
-//     }
-// }
-
-// @mixin icon-button-small {
-//     border: none;
-//     background-color: transparent;
-//     width: 1.75rem;
-//     cursor: pointer;
-//     outline: none;
-//     cursor: pointer;
-// }
-
-// @mixin icon-button-pic {
-//     width: 100%;
-//     opacity: 0.4;
-// }
 
 @mixin body-rounded-corners {
     position: relative;

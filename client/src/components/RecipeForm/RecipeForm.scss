@@ -103,12 +103,11 @@
     &__label-div {
         display: flex;
         align-items: center;
-        margin-bottom: .25rem;
-    }
 
-    &__label-icon {
-        width: 20px;
-        margin-left: 1rem;
+        // target IconButton (add)
+        > :nth-child(3) {
+            margin-left: 1rem;
+        }
     }
 
     &__dynamic {

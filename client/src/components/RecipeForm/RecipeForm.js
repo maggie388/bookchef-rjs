@@ -11,10 +11,7 @@ import ChooseButton from '../../components/ChooseButton/ChooseButton';
 
 // ASSETS
 import saveIcon from '../../assets/icons/save-sharp.svg';
-import addIcon from '../../assets/icons/add-sharp.svg';
-import cameraIcon from '../../assets/icons/camera-sharp.svg'
-import closeIcon from '../../assets/icons/close-sharp.svg';
-import eraseIcon from '../../assets/icons/erase.svg';
+import cameraIcon from '../../assets/icons/camera-sharp.svg';
 
 // VARIABLES
 import { API_URL } from '../../App';
@@ -323,18 +320,25 @@ class RecipeForm extends Component {
                                 </select>
                             </div>
                         </div>
+                        {/* INGREDIENTS */}
                         <div className='recipe-form__label-div'>
                             <label 
                                 className='recipe-form__label' 
                                 htmlFor='ingredients'>
                                     Ingredients
                             </label> 
-                            <div className='recipe-form__label-icon' onClick={this.handleClearIngredients}>
-                                <img className='recipe-form__label-icon-pic' src={eraseIcon} alt='Clear All Ingredients Text' />
-                            </div>
-                            <div  className='recipe-form__label-icon' onClick={this.toggleScanIngredientsModal}>
-                                <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Ingredients' />
-                            </div>
+                            <IconButton
+                                type='erase' 
+                                size='small' 
+                                alt='clear all ingredient text' 
+                                clickAction={this.handleClearIngredients} 
+                            />
+                            <IconButton
+                                type='add outline' 
+                                size='small' 
+                                alt='add ingredients from image' 
+                                clickAction={this.toggleScanIngredientsModal} 
+                            />
                         </div>
                         <ContentEditable 
                             className='recipe-form__dynamic recipe-form__dynamic--ingredients'
@@ -344,18 +348,25 @@ class RecipeForm extends Component {
                             onChange={this.handleIngredientsChange}
                             tagName='ul'
                         />
+                        {/* INSTRUCTIONS */}
                         <div className='recipe-form__label-div'>
                             <label 
                                 className='recipe-form__label' 
                                 htmlFor='instructions'>
                                     Instructions
                             </label> 
-                            <div className='recipe-form__label-icon' onClick={this.handleClearInstructions}>
-                                <img className='recipe-form__label-icon-pic' src={eraseIcon} alt='Clear All Instructions Text' />
-                            </div>
-                            <div className='recipe-form__label-icon' onClick={this.toggleScanInstructionsModal}>
-                                <img className='recipe-form__label-icon-pic' src={addIcon} alt='Add Instructions' />
-                            </div>
+                            <IconButton
+                                type='erase' 
+                                size='small' 
+                                alt='clear all instructions text' 
+                                clickAction={this.handleClearInstructions} 
+                            />
+                            <IconButton
+                                type='add outline' 
+                                size='small' 
+                                alt='add instructions from image' 
+                                clickAction={this.toggleScanInstructionsModal} 
+                            />
                         </div>
                         <ContentEditable 
                             className='recipe-form__dynamic recipe-form__dynamic--instructions'

@@ -7,6 +7,7 @@ import addFill from '../../assets/icons/add-circle-green.svg';
 import close from '../../assets/icons/close-sharp.svg';
 import edit from '../../assets/icons/pencil-sharp.svg';
 import save from '../../assets/icons/save-sharp.svg';
+import erase from '../../assets/icons/erase.svg';
 
 const IconButton = ({ type, size, alt, clickAction }) => {
 
@@ -26,6 +27,9 @@ const IconButton = ({ type, size, alt, clickAction }) => {
             break;
         case 'save':
             icon = save;
+            break;
+        case 'erase':
+            icon = erase;
     }
 
     return (
