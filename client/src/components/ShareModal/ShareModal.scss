@@ -19,16 +19,12 @@
         @include mini-form;
         position: relative;
         margin: 100px auto;
-    }
 
-    &__close {
-        @extend %icon-button-small;
-        align-self: flex-end;
+        // target IconButton (close)
+        > :first-child {
+            align-self: flex-end;
+        }
     }
-
-    // &__close-icon {
-    //     @include icon-button-pic;
-    // }
 
     &__label {
         @include form-label;

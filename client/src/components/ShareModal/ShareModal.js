@@ -1,8 +1,9 @@
 import React from 'react';
 import './ShareModal.scss';
 
-// ASSETS
-import closeIcon from '../../assets/icons/close-sharp.svg';
+
+// COMPONENTS
+import IconButton from '../../components/IconButton/IconButton';
 
 const ShareModal = ({ recipeId, toggleShare, shareRecipe }) => {
 
@@ -16,9 +17,12 @@ const ShareModal = ({ recipeId, toggleShare, shareRecipe }) => {
     return (
         <div className='share-modal'>
             <form className='share-modal__form' onSubmit={handleShare}>
-                <button className='share-modal__close'>
-                    <img className='share-modal__close-icon' src={closeIcon} alt='close share modal' onClick={toggleShare} />
-                </button>
+                <IconButton 
+                    type='close'
+                    size='small'
+                    alt='close share modal'
+                    clickAction={toggleShare}
+                />
                 <label className='share-modal__label' htmlFor='email'>Your Friend's Email</label>
                 <input className='share-modal__input' id='email' name='email' type='text' required />
                 <label className='share-modal__label'>
