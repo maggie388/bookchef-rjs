@@ -19,7 +19,7 @@ router.post('/', authorize, tempUpload.single('file'), async (req, res) => {
     // console.log(detections[0].description);
     fs.unlink(`./uploads/temp/${filename}`, (error) => {
         if (!error) {
-            console.log("Temporaty file deleted!");
+            console.log("Temporary file deleted!");
         }
     }) 
     res.status(200).send(detections[0].description);
