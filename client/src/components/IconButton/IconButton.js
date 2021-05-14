@@ -8,6 +8,7 @@ import close from '../../assets/icons/close-sharp.svg';
 import edit from '../../assets/icons/pencil-sharp.svg';
 import save from '../../assets/icons/save-sharp.svg';
 import erase from '../../assets/icons/erase.svg';
+import trash from '../../assets/icons/trash-sharp.svg';
 
 const IconButton = ({ type, size, alt, clickAction }) => {
 
@@ -30,6 +31,9 @@ const IconButton = ({ type, size, alt, clickAction }) => {
             break;
         case 'erase':
             icon = erase;
+            break;
+        case 'trash':
+            icon= trash;
     }
 
     return (

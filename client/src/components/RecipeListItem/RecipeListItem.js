@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './RecipeListItem.scss';
 
+// COMPONENTS
+import IconButton from '../../components/IconButton/IconButton';
+
 // ASSETS
-import trashIcon from '../../assets/icons/trash-sharp.svg';
 import editIcon from '../../assets/icons/pencil-sharp.svg';
 
 // VARIABLES
@@ -36,14 +38,12 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
                     <Link className='recipe-list-item__button' to={`/recipe/edit/${recipe.id}`}>
                         <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
                     </Link>
-                    <button className='recipe-list-item__button'>
-                        <img 
-                            className='recipe-list-item__icon'
-                            onClick={handleDelete}
-                            src={trashIcon} 
-                            alt='Delete' 
-                        />
-                    </button>
+                    <IconButton
+                        type='trash'
+                        size='small'
+                        alt='delete'
+                        clickAction={handleDelete}
+                    />
                 </div>
             </div>
         </div>
