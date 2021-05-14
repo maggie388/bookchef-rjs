@@ -229,13 +229,13 @@ class RecipeForm extends Component {
                 <div className='recipe-form__top'>
                     {this.state.image ?
                         <>
+                        <img className='recipe-form__pic' src={this.setImageSource()} alt='' />
                         <IconButton
                             type='close' 
                             size='large' 
                             alt='close' 
                             clickAction={this.deleteImage} 
                         />
-                        <img className='recipe-form__pic' src={this.setImageSource()} alt='' />
                         </> :
                         <ChooseButton 
                             icon={cameraIcon} 
@@ -249,11 +249,18 @@ class RecipeForm extends Component {
                     <div className='recipe-form__details-div'>
                         {/* contains stucture for the split view for desktop */}
                         <div className='recipe-form__side-by-side'>
-                            {/* left side is same as ".recipe-form__top" but only visible on larger screen with the top div is hidden */}
+                            {/* left side is same as ".recipe-form__top" but only visible on larger screen when the top div is hidden */}
                             <div className='recipe-form__side-pic-container'>
-                                <img className='recipe-form__delete-icon' src={closeIcon} alt='close' onClick={this.deleteImage} />
                                 {this.state.image ?
-                                    <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
+                                    <>
+                                    <img className='recipe-form__pic' src={this.setImageSource()} alt='' />
+                                    <IconButton
+                                        type='close' 
+                                        size='large' 
+                                        alt='close' 
+                                        clickAction={this.deleteImage} 
+                                    />
+                                    </> :
                                     <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
                             </div>
                             {/* will appear to the right of the picture on desktop view */}

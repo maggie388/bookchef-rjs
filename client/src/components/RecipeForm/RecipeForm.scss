@@ -11,7 +11,7 @@
         position: relative;
 
         // target the IconButton component
-        > :first-child {
+        > :nth-child(2) {
             position: absolute;
             right: 1rem;
             top: 1rem;
@@ -39,6 +39,13 @@
     &__side-pic-container {
         @include side-pic-container;
         position: relative;
+
+        // target the IconButton component
+        > :nth-child(2) {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
     }
 
     &__side-recipe-details {
