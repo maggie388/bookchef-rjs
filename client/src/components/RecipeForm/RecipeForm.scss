@@ -89,15 +89,16 @@
         @include category;
         width: fit-content;
         padding-right: 2rem;
-        font-size: 0.8rem;
         border: none;
         outline: none;
+        margin-bottom: 1.5rem;
+        margin-top: 0.25rem;
         appearance: none;
         background-image: url('../../assets/icons/chevron-down.svg');
         background-repeat: no-repeat;
         background-size: 1rem;
         background-position: 90% 50%;
-        margin-bottom: 1.5rem;
+        font-size: 0.8rem;
     }
 
     &__label-div {
