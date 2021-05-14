@@ -48,12 +48,14 @@ const BodyHeader = ({ goBack, h1Text, icon, recipeId, toggleShare }) => {
 
     return (
         <div className='body-header'>
-            <img 
-                className='body-header__go-back' 
-                onClick={goBack}
-                src={backIcon} 
-                alt='Go Back' 
-            />
+            <button className='body-header__go-back'>
+                <img 
+                    className='body-header__icon' 
+                    onClick={goBack}
+                    src={backIcon} 
+                    alt='Go Back' 
+                />
+            </button>
             <h1 className='body-header__title'>{h1Text}</h1>
             {rightSideIcons}
         </div>

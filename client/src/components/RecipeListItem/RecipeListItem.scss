@@ -1,4 +1,5 @@
 @use '../../partials/variables' as *;
+@use '../../partials/placeholders' as *;
 @import '../../partials/typography';
 @import '../../partials/mixins';
 
@@ -63,16 +64,17 @@
     &__category {
         @include category;
         margin-right: auto;
+        cursor: default;
+    }
+
+    &__button {
+        @extend %button-tag-resets;
     }
 
     &__icon {
-        width: 1.25rem;
+        @extend %icon-button-small;
         margin-left: 0.75rem;
         opacity: 0.4;
-
-        &--nudge {
-            margin-top: 0.2rem;
-        }
     }
 
     

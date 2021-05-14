@@ -1,3 +1,4 @@
+@use '../../partials/placeholders' as *;
 @import '../../partials/mixins';
 @import '../../partials/variables';
 
@@ -38,7 +39,7 @@
     }
 
     &__button {
-        @include block-button;
+        @extend %block-button;
         align-self: center;
     }
 }

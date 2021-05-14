@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.scss';
 
-
-
 const Login = ({ login }) => {
 
     const handleSubmit = (e) => {

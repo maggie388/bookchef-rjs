@@ -33,15 +33,17 @@ const RecipeListItem = ({ recipe, deleteRecipe }) => {
                 </Link>
                 <div className='recipe-list-item__icon-group'>
                     <h3 className='recipe-list-item__category'>{category}</h3>
-                    <Link to={`/recipe/edit/${recipe.id}`}>
-                        <img className='recipe-list-item__icon recipe-list-item__icon--nudge'src={editIcon} alt='Edit' />
+                    <Link className='recipe-list-item__button' to={`/recipe/edit/${recipe.id}`}>
+                        <img className='recipe-list-item__icon'src={editIcon} alt='Edit' />
                     </Link>
-                    <img 
-                        className='recipe-list-item__icon'
-                        onClick={handleDelete}
-                        src={trashIcon} 
-                        alt='Delete' 
-                    />
+                    <button className='recipe-list-item__button'>
+                        <img 
+                            className='recipe-list-item__icon'
+                            onClick={handleDelete}
+                            src={trashIcon} 
+                            alt='Delete' 
+                        />
+                    </button>
                 </div>
             </div>
         </div>

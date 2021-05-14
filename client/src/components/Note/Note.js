@@ -4,9 +4,7 @@ import axiosInstance from '../../utils/axios';
 import './Note.scss';
 
 // IMPORTED COMPONENTS
-import CloseButton from '../CloseButton/CloseButton';
-import EditButton from '../EditButton/EditButton';
-import SaveButton from '../SaveButton/SaveButton';
+import IconButton from '../IconButton/IconButton';
 
 class Note extends Component {
     constructor(props) {
@@ -100,8 +98,8 @@ class Note extends Component {
             <li className='note'>
                 {isEditable ? this.renderEditableText() : <p className='note__text'>{this.state.text}</p>}
                 {this.props.note &&  <p className='note__date'>{formatedDate}</p>}
-                {isEditable ? <SaveButton alt='Save Note' clickAction={this.handleSave} /> : <EditButton alt='Edit Note' clickAction={this.editNote} />}
-                <CloseButton alt='Delete Note' clickAction={this.handleClose} />
+                {isEditable ? <IconButton type='save' size='small' alt='Save Note' clickAction={this.handleSave} /> : <IconButton type='edit' size='small' alt='Edit Note' clickAction={this.editNote} />}
+                <IconButton type='close' size='small' alt='Delete Note' clickAction={this.handleClose} />
             </li>
         );
     }

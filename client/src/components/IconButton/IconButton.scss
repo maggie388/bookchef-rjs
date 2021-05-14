@@ -1,0 +1,10 @@
+@use '../../partials/placeholders' as *;
+
+.icon-button {
+    &--small {
+        @extend %icon-button-small;
+    }
+    &--large {
+        @extend %icon-button-large;
+    }
+}

@@ -1,0 +1,46 @@
+@use './variables' as *;
+
+// generic
+%flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// buttons
+%button-tag-resets {
+    @extend %flex-center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+%icon-button {
+    @extend %button-tag-resets;
+    opacity: 0.4;
+}
+
+%icon-button-large {
+    @extend %icon-button;
+    width: 2rem;
+}
+
+%icon-button-small {
+    @extend %icon-button;
+    width: 1.25rem;
+}
+
+%block-button {
+    @extend %button-tag-resets;
+    width: fit-content;
+    padding: .75rem 1.5rem;
+    border-radius: 5px;
+    color: #FFF;
+    background-color: color(accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: filter .5s ease;
+    &:hover {
+        filter: hue-rotate(90deg);
+    }
+}

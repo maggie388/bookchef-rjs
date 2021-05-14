@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import './NotesContainer.scss';
 
 // COMPONENTS
-import AddButton from '../AddButton/AddButton';
+import IconButton from '../IconButton/IconButton';
 import Note from '../Note/Note';
 import NotesList from '../NotesList/NotesList';
 
@@ -23,7 +23,7 @@ class NotesContainer extends Component {
             <main className='notes-container'>
                 <div className='notes-container__title-group'>
                     <h2 className='notes-container__title'>Notes</h2>
-                    <AddButton alt='Add Note' clickAction={this.toggleAddNote} />
+                    <IconButton type='add outline' size='small' alt='Add Note' clickAction={this.toggleAddNote} />
                 </div>
                 {this.state.addNote && <Note recipeId={recipeId} toggleAddNote={this.toggleAddNote} updateNotes={updateNotes} isEditable />}
                 <NotesList notes={notes} updateNotes={updateNotes} />

@@ -1,3 +1,5 @@
+@use '../../partials/placeholders' as *;
+@use '../../partials/placeholders' as *;
 @import '../../partials/mixins';
 @import '../../partials/typography';
 @import '../../partials/variables';
@@ -8,7 +10,8 @@
     margin-bottom: 1rem;
 
     &__go-back {
-        @include back-icon;
+        @extend %button-tag-resets;
+        margin-right: 0.5rem;
     }
 
     &__title {
@@ -17,14 +20,12 @@
     }
 
     &__button {
-        border: none;
-        background-color: transparent;
+        @extend %button-tag-resets;
         margin-left: 1rem;
     }
 
     &__icon {
-        height: 2rem;
-        margin-top: 0.25rem;
+        @extend %icon-button-large;
         opacity: .4;
     }
 }

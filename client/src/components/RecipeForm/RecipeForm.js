@@ -4,6 +4,7 @@ import axiosInstance from '../../utils/axios';
 import './RecipeForm.scss';
 
 // COMPONENTS
+import IconButton from '../../components/IconButton/IconButton';
 import ScanModal from '../../components/ScanModal/ScanModal';
 import BodyHeader from '../../components/BodyHeader/BodyHeader';
 import ChooseButton from '../../components/ChooseButton/ChooseButton';
@@ -226,10 +227,21 @@ class RecipeForm extends Component {
             <form className='recipe-form' onSubmit={this.handleSubmit}>
                 {/* Display ChooseButton to add a picture or display current recipe picture with option to remove */}
                 <div className='recipe-form__top'>
-                    <img className='recipe-form__delete-icon' src={closeIcon} alt='close' onClick={this.deleteImage} />
                     {this.state.image ?
-                        <img className='recipe-form__pic' src={this.setImageSource()} alt='' /> :
-                        <ChooseButton icon={cameraIcon} handleFileUpload={this.handleFileUpload} />} 
+                        <>
+                        <IconButton
+                            type='close' 
+                            size='large' 
+                            alt='close' 
+                            clickAction={this.deleteImage} 
+                        />
+                        <img className='recipe-form__pic' src={this.setImageSource()} alt='' />
+                        </> :
+                        <ChooseButton 
+                            icon={cameraIcon} 
+                            handleFileUpload={this.handleFileUpload} 
+                        />
+                    } 
                 </div>
                 {/* bottom on form that overlaps the image div */}
                 <div className='recipe-form__bottom'>

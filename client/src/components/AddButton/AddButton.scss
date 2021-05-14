@@ -1,9 +1,0 @@
-@import '../../partials/mixins';
-
-.add-button {
-    @include icon-button-small;
-    
-    &__pic {
-        @include icon-button-pic;
-    }
-}
