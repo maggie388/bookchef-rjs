@@ -4,11 +4,10 @@ import 'react-image-crop/dist/ReactCrop.css';
 import './ScanModal.scss';
 
 // ASSETS
-import closeIcon from '../../assets/icons/close-sharp.svg';
-import forwardIcon from '../../assets/icons/arrow-forward-sharp.svg';
 import scanIcon from '../../assets/icons/scan-outline.svg';
 
 // COMPONENTS
+import IconButton from '../../components/IconButton/IconButton';
 import ChooseButton from '../../components/ChooseButton/ChooseButton';
 
 class ScanModal extends PureComponent {
@@ -126,9 +125,11 @@ class ScanModal extends PureComponent {
                 /> 
                 </div>
                 <div className='scan-modal__bottom'>
-                    <button className='scan-modal__button' type='submit'>
-                        <img className='scan-modal__continue' src={forwardIcon} alt='Continue' />
-                    </button>
+                    <IconButton 
+                        type='right arrow'
+                        size='large'
+                        alt='continue'
+                    />
                 </div>
             </>
         );
@@ -139,7 +140,12 @@ class ScanModal extends PureComponent {
             <form className='scan-modal' onSubmit={this.handleFormSubmit}>
                 <div className='scan-modal__top'>
                     <p>Crop your image for best results.</p>
-                    <img className='scan-modal__close' onClick={this.handleClose} src={closeIcon} alt='Close' />
+                    <IconButton 
+                        type='close'
+                        size='large'
+                        alt='close'
+                        clickAction={this.handleClose}
+                    />
                 </div>
                 {this.state.src ? this.renderCropView() : <ChooseButton icon={scanIcon} handleFileUpload={this.handleFileUpload} />}
             </form>

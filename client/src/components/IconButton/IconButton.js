@@ -9,6 +9,7 @@ import edit from '../../assets/icons/pencil-sharp.svg';
 import save from '../../assets/icons/save-sharp.svg';
 import erase from '../../assets/icons/erase.svg';
 import trash from '../../assets/icons/trash-sharp.svg';
+import rightArrow from '../../assets/icons/arrow-forward-sharp.svg';
 
 const IconButton = ({ type, size, alt, clickAction }) => {
 
@@ -33,7 +34,10 @@ const IconButton = ({ type, size, alt, clickAction }) => {
             icon = erase;
             break;
         case 'trash':
-            icon= trash;
+            icon = trash;
+            break;
+        case 'right arrow':
+            icon = rightArrow;
     }
 
     return (
