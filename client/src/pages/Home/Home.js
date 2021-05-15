@@ -38,15 +38,6 @@ class Home extends Component {
             });
     }
 
-    componentWillMount() {
-        const token = sessionStorage.getItem('authToken');
-        if (token) {
-            this.props.toggleIsLoggedIn(true);
-        } else {
-            this.props.toggleIsLoggedIn(false);
-        }
-    }
-
     render() {
         if (this.props.isLoggedIn) {
             return <RecipeList recipes={this.state.recipes} />;

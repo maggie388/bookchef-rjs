@@ -20,6 +20,15 @@ class Header extends Component {
         });
     }
 
+    componentWillMount() {
+        const token = sessionStorage.getItem('authToken');
+        if (token) {
+            this.props.toggleIsLoggedIn(true);
+        } else {
+            this.props.toggleIsLoggedIn(false);
+        }
+    }
+
     render() {
         return (
             <>

@@ -34,10 +34,10 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Header isLoggedIn={this.state.isLoggedIn} />
+          <Header isLoggedIn={this.state.isLoggedIn} toggleIsLoggedIn={this.toggleIsLoggedIn} />
           <Switch>
             <Route exact path='/' render={(routeProps) => {
-                return <Home {...routeProps} isLoggedIn={this.state.isLoggedIn} toggleIsLoggedIn={this.toggleIsLoggedIn} />
+                return <Home {...routeProps} isLoggedIn={this.state.isLoggedIn} />
               }} />
             <Route path='/recipe/add' component={AddRecipe} />
             <Route path='/recipe/edit/:recipeId' component={EditRecipe} />
