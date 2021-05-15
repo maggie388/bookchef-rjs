@@ -96,8 +96,8 @@ class Note extends Component {
 
         return (
             <li className='note'>
+                {/* {this.props.note &&  <p className='note__date'>{formatedDate}</p>} */}
                 {isEditable ? this.renderEditableText() : <p className='note__text'>{this.state.text}</p>}
-                {this.props.note &&  <p className='note__date'>{formatedDate}</p>}
                 {isEditable ? <IconButton type='save' size='small' alt='Save Note' clickAction={this.handleSave} /> : <IconButton type='edit' size='small' alt='Edit Note' clickAction={this.editNote} />}
                 <IconButton type='close' size='small' alt='Delete Note' clickAction={this.handleClose} />
             </li>

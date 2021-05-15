@@ -1,5 +1,7 @@
 @use './variables' as *; 
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
 @mixin m-h1 {
     color: color(accent);
     font-size: 1.75rem;
@@ -26,4 +28,9 @@
     font-size: 0.9rem;
     line-height: 1rem;
     text-transform: uppercase;
+}
+
+%note-text {
+    font-family: Caveat;
+    font-size: 1.25rem;
 }

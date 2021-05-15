@@ -5,38 +5,28 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    align-items: center;
-    padding: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid lightgrey;
 
     &__text {
-        width: 100%;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        @extend %note-text;
+        width: 80%;
+        margin-right: auto;
 
         &--editable {
-            border: 2px solid #FFF;
+            background-color: rgba(0, 0, 0, 0.05);
             border-radius: 5px;
+            outline: none;
         }
     }
 
     &__date {
         @include book-details;
-        padding: 0.5rem;
         margin-right: auto;
     }
 
     > :last-child {
-        margin-left: 0.5rem;
-    }
-
-    &:nth-last-child(odd) {
-        background-color: rgba(color(body-text), .05);
-    }
-
-    &:nth-last-child(even) {
-        background-color: rgba(color(body-text), .15);
+        margin-left: 0.2rem;
     }
 }
